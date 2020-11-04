@@ -1,11 +1,14 @@
+--------------------------------------------------
+DB계정	
+--------------------------------------------------
 CREATE USER MDS IDENTIFIED BY MDS;
+GRANT CONNECT, RESOURCES TO MDS;
 
-GRANT CONNECT, RESOURCE TO MDS;
-
-DROP TABLE MEMBER;
- 
+--------------------------------------------------
+MEMBER(회원)
+--------------------------------------------------
 CREATE TABLE MEMBER(	
-    US_ID VARCHAR2(100),
+    US_ID VARCHAR2(100) PRIMARY KEY,
     US_PWD VARCHAR2(200),
     US_NAME VARCHAR2(100),
     US_SSN VARCHAR2(100),
@@ -19,4 +22,34 @@ CREATE TABLE MEMBER(
 );
 SELECT * FROM MEMBER;
 
-COMMIT;
+--------------------------------------------------
+ESTATEAGENT(중개사)
+--------------------------------------------------
+CREATE TABLE ESTATEAGENT(	
+    E_ID NUMBER,
+    E_NAME VARCHAR2(100),
+    E_PHONE VARCHAR2(100),
+    E_CONTENT VARCHAR2(300),
+    E_ADDR VARCHAR2(100),
+    E_PICTURE VARCHAR2(100),
+    E_FIELD VARCHAR2(100),
+    E_REG_NUM VARCHAR2(100),
+    E_COORD VARCHAR2(100) DEFAULT '0',
+    E_C_LAT VARCHAR2(100) DEFAULT '0',
+    E_C_LNG VARCHAR2(100) DEFAULT '0',
+    E_POINT VARCHAR2(30) DEFAULT '0',
+    E_REG_D DATE DEFAULT SYSDATE,
+    E_DEL_YN VARCHAR2(1) DEFAULT 'N'
+    
+);
+
+CREATE SEQUENCE SEQ_E_ID;
+
+ALTER TABLE ESTATEAGENT ADD(US_ID VARCHAR2(100));
+
+ALTER TABLE ESTATEAGENT
+ADD CONSTRAINT FK_E_US_ID
+  FOREIGN KEY (US_ID)
+  REFERENCES MEMBER(US_ID);
+
+SELECT * FROM ESTATEAGENT;
