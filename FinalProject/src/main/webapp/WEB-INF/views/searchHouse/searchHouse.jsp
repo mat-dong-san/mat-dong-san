@@ -44,6 +44,7 @@
 	    width: 450px;
 	    overflow: auto;
 	    background: lightgray;
+	    padding-top: 20px;
 	}
 	#map{
 		position: absolute;
@@ -51,6 +52,7 @@
 		top: 0;
 		right: 0;
 		bottom: 0;
+		border: 0;
 	}
 	#contentContainer{
 		position: fixed;
@@ -58,6 +60,14 @@
 	    bottom: 0;
 	    top: 134px;
 	    right: 0;
+	}
+	
+	.productContent{
+		display: inline-block;
+	    width: 180px;
+	    border: 1px solid black;
+	    height: 250px;
+	    margin: 15px;
 	}
 </style>
 <meta charset="UTF-8">
@@ -69,11 +79,13 @@
 	<!-- <div id="headDiv">헤더(방찾기,고객센터,로그인,회원가입 등)</div> -->
 	<div id="filterDiv">필터,검색 등</div>
 	<div id="contentContainer">
-		<div id="listHouseDiv">방 목록 조회<br>	방 목록 조회<br>
-		방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>방 목록 조회<br>
-		방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	
-		방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>
-		방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>	방 목록 조회<br>
+		<div id="listHouseDiv">
+			<div class="productContent">매물1</div>
+			<div class="productContent">매물1</div>
+			<div class="productContent">매물1</div>
+			<div class="productContent">매물1</div>
+			<div class="productContent">매물1</div>
+			<div class="productContent">매물1</div>
 		</div>
 		<div id="map" class="divBorder"></div>
 	</div>

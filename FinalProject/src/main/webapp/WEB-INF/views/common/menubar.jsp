@@ -26,10 +26,12 @@
 <body>
 	<div id="menubarDiv">
 		<span id="goSearchHouse" class="goMenuButton" onclick="location.href='gosSarchHouseMain.search'">방찾기</span>
-		<span id="goSearchHouse" class="goMenuButton" onclick="location.href='#'">관심목록</span>
-		<span id="goSearchHouse" class="goMenuButton" onclick="location.href='#'">중고장터</span>
-		<span id="goSearchHouse" class="goMenuButton" onclick="location.href='#'">고객센터</span>
-		<span id="goSearchHouse" class="goMenuButton" onclick="location.href='#'">마이페이지</span>
+		<span id="1" class="goMenuButton" onclick="location.href='#'">관심목록</span>
+		<span id="2" class="goMenuButton" onclick="location.href='#'">중고장터</span>
+		<span id="3" class="goMenuButton" onclick="location.href='#'">고객센터</span>
+		<span id="4" class="goMenuButton" onclick="location.href='#'">마이페이지</span>
+		<span id="5" class="goMenuButton" onclick="location.href='#'">로그인</span>
+		<span id="6" class="goMenuButton" onclick="location.href='#'">회원가입</span>
 	</div>
 </body>
 </html>
