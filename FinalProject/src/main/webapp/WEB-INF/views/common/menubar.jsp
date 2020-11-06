@@ -30,8 +30,8 @@
 		<span id="2" class="goMenuButton" onclick="location.href='#'">중고장터</span>
 		<span id="3" class="goMenuButton" onclick="location.href='#'">고객센터</span>
 		<span id="4" class="goMenuButton" onclick="location.href='#'">마이페이지</span>
-		<span id="5" class="goMenuButton" onclick="location.href='login.me'">로그인</span>
-		<span id="6" class="goMenuButton" onclick="location.href='memberJoin.me'">회원가입</span>
+		<span id="5" class="goMenuButton" onclick="location.href='#'">로그인</span>
+		<span id="6" class="goMenuButton" onclick="location.href='#'">회원가입</span>
 	</div>
 </body>
 </html>
