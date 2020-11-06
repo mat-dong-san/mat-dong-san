@@ -2,7 +2,7 @@
 DB계정	
 --------------------------------------------------
 CREATE USER MDS IDENTIFIED BY MDS;
-GRANT CONNECT, RESOURCES TO MDS;
+GRANT CONNECT, RESOURCE TO MDS;
 
 --------------------------------------------------
 MEMBER(회원)
