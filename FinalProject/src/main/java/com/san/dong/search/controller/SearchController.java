@@ -9,7 +9,7 @@ public class SearchController {
 	@RequestMapping("gosSarchHouseMain.search")
 	public String goSearchHouseMainPage() {
 		
-		return "test";
+		return "searchHouse";
 	}
 	
 }

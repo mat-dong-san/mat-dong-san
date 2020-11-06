@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,8 +32,9 @@
 	    height: 30px; */
 	    display:inline-block;
 	    width: 100%;
-	    height: 30px;
+	    height: 64px;
 	    background: skyblue;
+	    margin-top: 70px;
 	}
 	#listHouseDiv{
 		position: absolute;
@@ -54,7 +56,7 @@
 		position: fixed;
 	    left: 0;
 	    bottom: 0;
-	    top: 110px;
+	    top: 134px;
 	    right: 0;
 	}
 </style>
@@ -63,7 +65,8 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6575c609a2768f0806882eba14c4cb9&libraries=services,clusterer,drawing"></script>
 </head>
 <body>
-	<div id="headDiv">헤더(방찾기,고객센터,로그인,회원가입 등)</div>
+	<c:import url="../common/menubar.jsp"/>
+	<!-- <div id="headDiv">헤더(방찾기,고객센터,로그인,회원가입 등)</div> -->
 	<div id="filterDiv">필터,검색 등</div>
 	<div id="contentContainer">
 		<div id="listHouseDiv">방 목록 조회<br>	방 목록 조회<br>
@@ -89,7 +92,7 @@
 		var geocoder = new kakao.maps.services.Geocoder();
 		
 		// 주소로 좌표를 검색합니다
-		geocoder.addressSearch('서울', function(result, status) {
+		geocoder.addressSearch('강남구 테헤란로14길 6', function(result, status) {
 
 		    // 정상적으로 검색이 완료됐으면 
 		     if (status === kakao.maps.services.Status.OK) {

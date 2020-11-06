@@ -6,13 +6,17 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
+<%-- <h1>
 	Hello world!  
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
 
 <a href="gosSarchHouseMain.search">방찾기 테스트</a>
-
+ --%>
+ 
+ 	<c:import url="common/menubar.jsp" />
+ 
+ 
 </body>
 </html>
