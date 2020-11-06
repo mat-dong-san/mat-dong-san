@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class SearchController {
 	
-	@RequestMapping("searchHouseMain.search")
+	@RequestMapping("gosSarchHouseMain.search")
 	public String goSearchHouseMainPage() {
 		
-		return "test";
+		return "searchHouse";
 	}
 	
 }
