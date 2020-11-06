@@ -1,6 +1,7 @@
 package com.san.dong.member.model.vo;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 
 public class EstateAgent {

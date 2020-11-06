@@ -7,11 +7,10 @@
 	
 	<typeAliases>
 		<typeAlias type="com.san.dong.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.san.dong.member.model.vo.EstateAgent" alias="EstateAgent"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mapper/member-mapper.xml"/>
 	</mappers>
-	
-	
 </configuration>

@@ -21,9 +21,9 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.san.dong.member.model.exception.MemberException;
-import com.san.dong.member.model.service.MemberService;
 import com.san.dong.member.model.vo.EstateAgent;
 import com.san.dong.member.model.vo.Member;
+import com.san.dong.member.model.service.MemberService;
 
 @SessionAttributes("loginUser")
 @Controller
