@@ -22,6 +22,6 @@
  	<c:import url="common/menubar.jsp" />
  
  
->>>>>>> 374da8b04a31ed712ead0d51878b1b8d9a15bc1b
+<!-- >>>>>>> 374da8b04a31ed712ead0d51878b1b8d9a15bc1b -->
 </body>
 </html>
