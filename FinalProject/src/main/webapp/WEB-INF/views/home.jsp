@@ -13,6 +13,6 @@
 <P>  The time on the server is ${serverTime}. </P>
 
 <a href="searchHouseMain.search">방찾기 테스트</a>
-
+<a href="helpdesk.board">고객 센터</a>
 </body>
 </html>
