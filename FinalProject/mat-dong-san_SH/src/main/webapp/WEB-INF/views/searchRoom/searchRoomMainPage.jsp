@@ -100,7 +100,7 @@
   </select></div>
   <div id="contentContainer">
      <div id="listHouseDiv">
-        <div class="productContent">매물1</div>
+        <div class="productContent"><img alt="#" src=""></div>
         <div class="productContent">매물1</div>
         <div class="productContent">매물1</div>
         <div class="productContent">매물1</div>
