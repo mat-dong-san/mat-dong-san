@@ -6,68 +6,72 @@
 <head>
 <style>
    html, body{
-      height: 100%;
-      width: 100%;
-      margin: 0;
-      padding: 0;
+      	height: 100%;
+      	width: 100%;
+      	margin: 0;
+      	padding: 0;
    }
    .divBorder{border: 1px solid black;}
    
    #headDiv{
-      /* position: fixed;
-       left: 0;
-       right: 0;
-       top: 0;
-       height: 80px; */
-      display:inline-block;
-       width: 100%;
-       height: 80px;
-       background: orange;
+      	/* position: fixed;
+       	left: 0;
+       	right: 0;
+       	top: 0;
+       	height: 80px; */
+      	display:inline-block;
+       	width: 100%;
+       	height: 80px;
+       	background: orange;
    }
    #filterDiv{
-      /* position: fixed;
-       left: 0;
-       right: 0;
-       top: 80px;
-       height: 30px; */
-       display:inline-block;
-       width: 100%;
-       height: 64px;
-       background: skyblue;
-       margin-top: 70px;
+      	/* position: fixed;
+       	left: 0;
+       	right: 0;
+       	top: 80px;
+       	height: 30px; */
+       	display:inline-block;
+       	width: 100%;
+       	height: 64px;
+       	background: skyblue;
+       	margin-top: 70px;
    }
    #listHouseDiv{
-      position: absolute;
-       left: 0;
-       top: 0;
-       bottom: 0;
-       width: 450px;
-       overflow: auto;
-       background: lightgray;
-       padding-top: 20px;
+      	position: absolute;
+       	left: 0;
+       	top: 0;
+       	bottom: 0;
+       	width: 450px;
+       	overflow: auto;
+       	background: lightgray;
+       	padding-top: 20px;
    }
    #map{
-      position: absolute;
-      left: 450px;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      border: 0;
+      	position: absolute;
+      	left: 450px;
+      	top: 0;
+      	right: 0;
+      	bottom: 0;
+      	border: 0;
    }
    #contentContainer{
-      position: fixed;
-       left: 0;
-       bottom: 0;
-       top: 134px;
-       right: 0;
+      	position: fixed;
+       	left: 0;
+       	bottom: 0;
+       	top: 134px;
+       	right: 0;
    }
    
    .productContent{
-      display: inline-block;
-       width: 180px;
-       border: 1px solid black;
-       height: 250px;
-       margin: 15px;
+    	display: inline-flex;
+    	width: 180px;
+    	border: 1px solid black;
+     	height: 250px;
+     	margin: 15px;
+      	flex-direction: column;
+   }
+   .productContent:hover{
+   		cursor: pointer;
    }
 </style>
 <meta charset="UTF-8">
@@ -98,18 +102,21 @@
   	<option>3층</option>
   	<option>4층 이상</option>
   </select></div>
+  
+  <c:url var="goDetailPage" value="searchRoomDetailPage.search" />
   <div id="contentContainer">
      <div id="listHouseDiv">
-        <div class="productContent"><img alt="#" src=""></div>
-        <div class="productContent">매물1</div>
-        <div class="productContent">매물1</div>
-        <div class="productContent">매물1</div>
-        <div class="productContent">매물1</div>
-        <div class="productContent">매물1</div>
+        <div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>매매</span><span>27000</span><span>부가설명</span></div>
+        <div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>원룸</span><span>월세</span><span>500/20</span><span>부가설명</span></div>
+        <div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>투룸</span><span>월세</span><span>1000/40</span><span>부가설명</span></div>
+        <div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>전세</span><span>15000</span><span>부가설명</span></div>
+        <div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>투룸</span><span>전세</span><span>2000/50</span><span>부가설명</span></div>
+        <div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>월세</span><span>5000/60</span><span>부가설명</span></div>
      </div>
      <div id="map" class="divBorder"></div>
   </div>
-  <script>
+  <script>  
+  
      var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
      var options = { //지도를 생성할 때 필요한 기본 옵션
         //center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.

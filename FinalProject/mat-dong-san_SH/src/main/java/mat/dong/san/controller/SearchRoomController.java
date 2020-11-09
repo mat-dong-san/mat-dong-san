@@ -13,8 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class SearchRoomController {
 
 	@RequestMapping(value = "gosSarchHomeMain.search", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String goSearchRoomMainPage() {
 		
 		return "searchRoomMainPage";
+	}
+	
+	@RequestMapping(value = "searchRoomDetailPage.search", method = RequestMethod.GET)
+	public String goSearchRoomDetailPage() {
+		
+		return "searchRoomDetailPage";
 	}
 }
