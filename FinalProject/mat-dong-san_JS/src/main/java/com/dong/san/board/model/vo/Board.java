@@ -14,13 +14,11 @@ public class Board {
 	public Board() {}
 	
 	public Board(String bTitle, String bContent) {
-		super();
 		this.bTitle = bTitle;
 		this.bContent = bContent;
 	}
 
 	public Board(int bId, String bTitle, String bContent, String bType, Date bRegD, String bDelYN, String usId) {
-		super();
 		this.bId = bId;
 		this.bTitle = bTitle;
 		this.bContent = bContent;

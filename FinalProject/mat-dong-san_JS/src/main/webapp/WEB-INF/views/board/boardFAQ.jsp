@@ -62,7 +62,6 @@
 			<tr>
 				<td>자주묻는질문</td>
 			</tr>
-			<c:forEach var="b" items="${ list }">
 			<tr>
 				<td>
 					<div class="b_qb_div">
@@ -71,7 +70,63 @@
 					</div>
 				</td>
 			</tr>
-			</c:forEach>				
+			
+			<c:forEach var="FAQ" items="${ list  }">
+			<tr>
+				<td>
+					<div class="b_qb_div">
+						<div class="b_question">Q. ${ FAQ.bTitle }</div>
+						<div class="b_answer">A. ${ FAQ.bContent }</div>
+					</div>
+				</td>				
+			</tr>
+			</c:forEach>
+			
+			<!-- Paging Area -->
+			<tr>
+				<td>
+					<c:if test="${ pi.currentPage <= 1 }">
+						[이전] &nbsp;
+					</c:if>
+					<c:if test="${ pi.currentPage > 1 }">
+						<c:url var="before" value="boardFAQ.board">
+							<c:param name="page" value="${ pi.currentPage - 1 }"/>
+						</c:url>
+						<a href="${ before }">[이전]</a> &nbsp;
+					</c:if>
+					
+						<!-- 페이지 -->
+					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+						<c:if test="${ p eq pi.currentPage }">
+							<font color="red" size="4"><b>[${ p }]</b></font>
+						</c:if>
+						
+						<c:if test="${ p ne pi.currentPage }">
+							<c:url var="pagination" value="boardFAQ.board">
+								<c:param name="page" value="${ p }"/>
+							</c:url>
+							<a href="${ pagination }">${ p }</a> &nbsp;
+						</c:if>
+					</c:forEach>
+				
+					<!-- [다음] -->
+					<c:if test="${ pi.currentPage >= pi.maxPage }">
+						[다음]
+					</c:if>
+					<c:if test="${ pi.currentPage < pi.maxPage }">
+						<c:url var="after" value="boardFAQ.board">
+							<c:param name="page" value="${ pi.currentPage + 1 }"/>
+						</c:url> 
+						<a href="${ after }">[다음]</a>
+					</c:if>
+					
+					
+				</td>
+			</tr>
+			
+			
+			
+							
 		</table>
 	</div>	
 	
@@ -102,31 +157,35 @@
 	</div>
 	
 	<script>
-	document.getElementById("b_modal_btn").onclick = function(){
-        document.getElementById("bFAQModal_Wrapper").style.display="block";
-    }
-    document.getElementById("b_modal_submit").onclick = function(){
-        document.getElementById("bFAQModal_Wrapper").style.display="none";
-    }
+		// 모달창 display on/off
+		document.getElementById("b_modal_btn").onclick = function(){
+	        document.getElementById("bFAQModal_Wrapper").style.display="block";
+	    }
+	    document.getElementById("b_modal_submit").onclick = function(){
+	        document.getElementById("bFAQModal_Wrapper").style.display="none";
+	    }
+		
+	    // 모달창에서 데이터값 넘기기 
+	    $('#b_modal_submit').on('click',function(){
+	    	var rQuestion = $('#modal_Q').val();
+	    	var rAnswer = $('#modal_A').val();
+	    	
+	    	$.ajax({
+	    		url:'InsertFAQ.board',
+	    		data: {rQuestion:rQuestion, rAnswer:rAnswer},
+	    		type: 'post',
+	    		success: function(data){
+	    			console.log(data);
+	    			alert("등록완료",data);
+	    			
+	    		}
+	    	});
+	    });
 	
-    // 모달창에서 데이터값 넘기기 
-    $('#b_modal_submit').on('click',function(){
-    	var rQuestion = $('#modal_Q').val();
-    	var rAnswer = $('#modal_A').val();
-// 		console.log(rQuestion);
-// 		console.log(rAnswer);
-    	
-    	$.ajax({
-    		url:'bFAQ.board',
-    		data: {rQuestion:rQuestion, rAnswer:rAnswer},
-    		type: 'post',
-    		success: function(data){
-    			console.log(data);
-    			alert("등록완료",data);
-    			
-    		}
-    	});
-    });
+	    // FAQ리스트 업데이트
+	    
+	    
+	    
     
     
     
