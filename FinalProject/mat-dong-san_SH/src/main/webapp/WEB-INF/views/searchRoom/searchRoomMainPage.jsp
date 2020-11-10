@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6575c609a2768f0806882eba14c4cb9&libraries=services,clusterer,drawing"></script>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
    html, body{
       	height: 100%;
@@ -33,7 +35,6 @@
        	display:inline-block;
        	width: 100%;
        	height: 64px;
-       	background: skyblue;
        	margin-top: 70px;
    }
    #listHouseDiv{
@@ -61,7 +62,19 @@
        	top: 134px;
        	right: 0;
    }
-   
+   #searchAddr{
+   		height: 100%;
+    	width: 220px;
+    	border: 0;
+    	outline: none;
+    	font-size: 15px;
+   }
+   #searchBtn{
+   		height: 100%;
+   		width: 50px; 
+   		border: 0; 
+   		outline: none;
+   }
    .productContent{
     	display: inline-flex;
     	width: 180px;
@@ -73,35 +86,91 @@
    .productContent:hover{
    		cursor: pointer;
    }
+   .filter{
+   		border: 1px solid rgb(223, 223, 223);
+   		outline: none;
+   }
+   .filterDiv{
+   		position: fixed;
+   		display: none;
+   		z-index: 1;
+   		width: 200px;
+   		height: 200px;
+   		border: 1px solid rgb(212, 212, 212);
+   		background: white;
+   		flex-direction: column;
+   }
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6575c609a2768f0806882eba14c4cb9&libraries=services,clusterer,drawing"></script>
 </head>
 <body>
   <c:import url="../common/menubar.jsp"/>
   <!-- <div id="headDiv">헤더(방찾기,고객센터,로그인,회원가입 등)</div> -->
   <div id="filterDiv">
-  <input type="text"><input type="button" value="검색">
-  <select>
-  	<option>원룸</option> 
-  	<option>투룸</option> 
-  	<option>쓰리룸</option> 
-  </select>
-  <select>
-  	<option>월세</option>
-  	<option>전세</option>
-  	<option>매매</option>
-  </select>
-  관리비 : <input type="range">
-  방크기 : <input type="range">
-  가격대 : <input type="range">
-  <select>
-  	<option>1층</option>
-  	<option>2층</option>
-  	<option>3층</option>
-  	<option>4층 이상</option>
-  </select></div>
+  
+	  <input type="text" id="searchAddr"><input type="button" value="검색" id="searchBtn">
+	  <button id="roomFilter" class="filter">방 종류</button>
+	  <button id="productFilter" class="filter">매물 종류</button>
+	  <button id="rentFilter" class="filter">가격대</button>
+	  <button id="sizeFilter" class="filter">방 크기</button>
+	  <button id="manageExpenseFilter" class="filter">관리비</button>
+	  <button id="floorFilter" class="filter">층수</button>
+	  
+	  <div id="roomFilterDiv" class="filterDiv" style="left: 300px;">
+	  		방 종류
+	  		<label><input type="checkbox">원룸</label>
+	  		<label><input type="checkbox">투룸</label>
+	  		<label><input type="checkbox">쓰리룸</label>
+	  </div>
+	  <div id="productFilterDiv" class="filterDiv" style="left: 320px;">
+	  		매물 종류
+	  		<label><input type="checkbox">원룸</label>
+	  		<label><input type="checkbox">투룸</label>
+	  		<label><input type="checkbox">쓰리룸</label>
+	  </div>
+	  <div id="rentFilterDiv" class="filterDiv" style="left: 340px;">
+	  		가격대
+	  		<label><input type="checkbox">원룸</label>
+	  		<label><input type="checkbox">투룸</label>
+	  		<label><input type="checkbox">쓰리룸</label>
+	  </div>
+	  <div id="sizeFilterDiv" class="filterDiv" style="left: 360px;">
+	  		방크기
+	  		<label><input type="checkbox">원룸</label>
+	  		<label><input type="checkbox">투룸</label>
+	  		<label><input type="checkbox">쓰리룸</label>
+	  </div>
+	  <div id="manageExpenseFilterDiv" class="filterDiv" style="left: 380px;">
+	  		관리비
+	  		<label><input type="checkbox">원룸</label>
+	  		<label><input type="checkbox">투룸</label>
+	  		<label><input type="checkbox">쓰리룸</label>
+	  </div>
+	  <div id="floorFilterDiv" class="filterDiv" style="left: 400px;">
+	  		층수
+	  		<label><input type="checkbox">원룸</label>
+	  		<label><input type="checkbox">투룸</label>
+	  		<label><input type="checkbox">쓰리룸</label>
+	  </div>
+
+
+
+	  <script>
+		  	$('#filterDiv>button').click(function(){
+		  		
+		  		var btnId = $(this).attr('id');
+		  		var DivId = '#' + btnId + 'Div';
+		  		
+		  		if($(DivId).css('display') == 'flex'){
+		  			$(DivId).css('display','none');
+		  		} else {
+			  		$('#filterDiv>Div').css('display','none');
+			  		$(DivId).css('display','flex');
+		  		}
+		  	});
+	  </script>
+  </div>
   
   <c:url var="goDetailPage" value="searchRoomDetailPage.search" />
   <div id="contentContainer">
