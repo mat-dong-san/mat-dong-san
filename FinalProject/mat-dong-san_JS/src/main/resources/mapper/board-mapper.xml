@@ -16,8 +16,8 @@
 		<result column="B_DEL_YN" property="bDelYN"/>
 		<result column="US_ID" property="usId"/>
 	</resultMap>
-	<!-- 타입이 FAQ인것에 대해 count()적용 -->
-	<select id="boardFAQListCount" resultMap="boardResultSet">
+
+	<select id="boardFAQListCount" resultType="_int">
 		select count(*) 
 		from board
 		where B_DEL_YN='N' AND B_TYPE='FAQ'

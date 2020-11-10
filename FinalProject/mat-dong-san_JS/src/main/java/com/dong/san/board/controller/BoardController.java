@@ -24,7 +24,7 @@ public class BoardController {
 	private BoardService bService;
 	
 	
-	@RequestMapping("boardMain.board")
+	@RequestMapping("boardFAQ.board")
 	public ModelAndView goBoardMainPage(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
 		
 		int currentPage = 1;
@@ -48,7 +48,7 @@ public class BoardController {
 		
 		return mv;
 	}
-	@RequestMapping("bFAQ.board")
+	@RequestMapping("InsertFAQ.board")
 	public void insertFAQ(HttpServletResponse response, @RequestParam("rQuestion") String rQuestion, @RequestParam("rAnswer") String rAnswer) throws IOException {
 
 		
@@ -74,11 +74,13 @@ public class BoardController {
 	}
 	
 	
-	@RequestMapping("boardFAQ.board")
-	public String goBoardFAQPage() {
-	
-		return "boardFAQ";
+	@RequestMapping("boardMain.board")
+	public String goBoardMainPage() {
+		
+		return "boardMain";
 	}
+	
+
 	
 	
 	@RequestMapping("boardOneToOne.board")
