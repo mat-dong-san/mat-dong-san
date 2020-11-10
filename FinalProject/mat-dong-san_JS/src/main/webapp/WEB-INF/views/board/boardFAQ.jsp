@@ -53,6 +53,21 @@
 	 	padding:10px;
 	}
 	
+	
+	<!-- 임시 -->
+	#boardFAQ_Wrapper {
+		background-color: yellow;
+	}
+	table {
+		border : 1px solid black;
+		border-collapse: collapse;
+	}
+	td {
+		border : 1px solid black;
+	}
+	
+	
+	
 </style>
 </head>
 <body>
@@ -61,14 +76,6 @@
 		<table>
 			<tr>
 				<td>자주묻는질문</td>
-			</tr>
-			<tr>
-				<td>
-					<div class="b_qb_div">
-						<div class="b_question">Q. 질문1</div>
-						<div class="b_answer">A. 답변</div>
-					</div>
-				</td>
 			</tr>
 			
 			<c:forEach var="FAQ" items="${ list  }">
@@ -183,6 +190,17 @@
 	    });
 	
 	    // FAQ리스트 업데이트
+	    
+	    
+	    
+	    
+	    
+	    
+	    // FAQ bId넘기기
+	    $('.b_qb_div').on('click',function(){
+	    	var bId = $('') 
+	    	console.log(bId);
+	    });
 	    
 	    
 	    
