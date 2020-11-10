@@ -89,7 +89,7 @@
 						[이전] &nbsp;
 					</c:if>
 					<c:if test="${ pi.currentPage > 1 }">
-						<c:url var="before" value="bFAQ.board">
+						<c:url var="before" value="boardFAQ.board">
 							<c:param name="page" value="${ pi.currentPage - 1 }"/>
 						</c:url>
 						<a href="${ before }">[이전]</a> &nbsp;
@@ -102,7 +102,7 @@
 						</c:if>
 						
 						<c:if test="${ p ne pi.currentPage }">
-							<c:url var="pagination" value="bFAQ.board">
+							<c:url var="pagination" value="boardFAQ.board">
 								<c:param name="page" value="${ p }"/>
 							</c:url>
 							<a href="${ pagination }">${ p }</a> &nbsp;
@@ -114,7 +114,7 @@
 						[다음]
 					</c:if>
 					<c:if test="${ pi.currentPage < pi.maxPage }">
-						<c:url var="after" value="bFAQ.board">
+						<c:url var="after" value="boardFAQ.board">
 							<c:param name="page" value="${ pi.currentPage + 1 }"/>
 						</c:url> 
 						<a href="${ after }">[다음]</a>
