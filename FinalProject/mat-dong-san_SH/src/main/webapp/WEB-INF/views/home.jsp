@@ -42,6 +42,7 @@
 		margin: 0 auto;
 		width: 800px;
 		margin-top: 50px;
+		height: 47px;
 	}
 	#recommendationDiv{
 		width: 1180px;
@@ -61,6 +62,7 @@
 	#boardListContainer{
 		width: 1180px;
 		margin: 0 auto;
+		margin-top: 30px;
 		padding-top: 40px;
 		margin-bottom: 50px;
 		font-size: 15px;
@@ -119,8 +121,10 @@
 			<label id="searchLabel">어느 <span style="color: rgb(21, 100, 249);">동네</span>에서 살고싶으신가요?</label>
 			<br>
 			<div id="searchDiv">
-				<input id="searchInput" type="text" placeholder="찾고싶은 지역을 검색해주세요">
-				<input id="searchButton" type="button" value="검색">
+				<form action="SearchHomeMain.search" method="get">
+					<input id="searchInput" name="searchInput" type="text" placeholder="찾고싶은 지역을 검색해주세요">
+					<input id="searchButton" type="submit" value="검색">
+				</form>
 			</div>
 		</div>
 		<div id="recommendationDiv">
@@ -152,7 +156,7 @@
 			</div>
 		</div>
 		
-		<div style="border: 1px solid rgb(238, 238, 238); margin-top: 50px; margin-bottom: 30px;"></div>
+		<div style="border: 1px solid rgb(238, 238, 238); margin-top: 80px; margin-bottom: 30px;"></div>
 		
 		<div id="boardListContainer">
 			<div id="mainQnADiv" class="boardListClass">
