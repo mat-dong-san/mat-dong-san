@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="memberMapper">
+	<select id="memberLogin" resultMap="memberResultSet">
+		select *
+		from member
+		where US_ID=#{us_id}
+				and US_DEL_YN='N'
+	</select>
+	
+	<resultMap type="Member" id="memberResultSet">
+		<id column="US_ID" property="us_id"/>
+		<result column="US_PWD" property="us_pwd"/>
+		<result column="US_NAME" property="us_name"/>
+		<result column="US_SSN" property="us_ssn"/>
+		<result column="US_PHONE" property="us_phone"/>
+		<result column="US_EMAIL" property="us_email"/>
+		<result column="US_ADDR" property="us_addr"/>
+		<result column="US_TYPE" property="us_type"/>
+		<result column="US_REG_D" property="us_reg_d"/>
+		<result column="US_KAKAO" property="us_kakao"/>
+		<result column="US_DEL_YN" property="us_del_yn"/>
+	</resultMap>
+
+	
+	<insert id="insertMember" parameterType="Member">
+		insert into member
+		values(#{us_id}, #{us_pwd}, #{us_name}, #{us_ssn}, #{us_phone}, #{us_email},
+		#{us_addr}, #{us_type}, sysdate, default, default)
+	</insert>
+	
+	<select id="checkIdDup" resultType="_int">
+		select count(*)
+		from member
+		where US_ID=#{us_id}
+	</select>
+	
+	<select id="checkIdDup2" resultType="_int">
+		select count(*)
+		from member
+		where US_ID=#{us_id} and US_TYPE= '중개사'
+	</select>
+	
+	<select id="checkNameDup" resultType="_int">
+		select count(*)
+		from estateagent
+		where E_NAME=#{e_name}
+	</select>
+
+	<insert id="insertEstateAgent" parameterType="EstateAgent">
+		insert into estateagent
+		values(seq_e_id.nextval, #{e_name}, #{e_phone}, #{e_content}, #{e_addr}, #{e_picture}, #{e_field},
+		#{e_reg_num}, default, default, default, default, sysdate, default, #{us_id})
+	</insert>
+	
+
+</mapper>
