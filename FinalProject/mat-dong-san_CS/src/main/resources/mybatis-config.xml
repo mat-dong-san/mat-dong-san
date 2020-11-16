@@ -6,9 +6,9 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias type="com.san.dong.member.model.vo.Member" alias="Member"/>
-		<typeAlias type="com.san.dong.member.model.vo.EstateAgent" alias="EstateAgent"/>
-		<typeAlias type="com.san.dong.product.model.vo.Product" alias="Product"/>
+		<typeAlias type="mat.dong.san.member.vo.Member" alias="Member"/>
+		<typeAlias type="mat.dong.san.member.vo.EstateAgent" alias="EstateAgent"/>
+		<typeAlias type="mat.dong.san.product.vo.Product" alias="Product"/>
 	</typeAliases>
 	
 	<mappers>
