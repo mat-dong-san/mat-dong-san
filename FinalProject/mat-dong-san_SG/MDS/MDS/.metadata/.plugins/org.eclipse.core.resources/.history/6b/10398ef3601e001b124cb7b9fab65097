@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>salePost</title>
+    <style>
+    	.text{ font-size:100px; color:green; }
+    	#text{ font-size:1000px; color:green;}
+    </style>
+</head>
+
+<body>
+	<jsp:include page="../common/menubar.jsp"/>
+	<div style="text-align:center">
+	<h1 > 매물올리기</h1>
+	
+		<span id="text">당신은 집주인입니까?</span>
+		<input type="radio" id="text" class="text" name="chk_info" value="YES">네, 집주인입니다.
+		<input type="radio" class="text" name="chk_info" value="NO">아니요, 세입자입니다.
+	</div>
+</body>
+</html>
