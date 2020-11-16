@@ -134,6 +134,11 @@
    	.productContent:hover{
    		cursor: pointer;
    	}
+   	.goManage{
+   		width: 70px;
+   		background: red;
+   		color: white"
+   	}
 </style>
 </head>
 <body>
@@ -151,7 +156,7 @@
 					<th>54.22</th>
 				</tr>
 				<tr>
-					<td style="background: red;color: white">신고하기</td>
+					<td><div class="goManage">신고하기</div></td>
 					<td></td>
 					<td></td>
 				</tr>
@@ -265,36 +270,48 @@
 					<td>평점</td>
 					<td>●●●●●</td>
 				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td><span class="goManage">쪽지 보내기 버튼</span></td>
+					<td><span class="goManage">신고하기</span></td>
+				</tr>
 				<tr style="height: 300px;">
 					<td colspan="4"><img alt="중개사 사진" src=""></td>
 				</tr>
+			</table>
+			<table id="footTableDiv">
 				<tr>
-					<td>평점
+					<td style="width: 200px;">평점
 						<select>
-							<option>1점</option>
-							<option>2점</option>
-							<option>3점</option>
-							<option>4점</option>
-							<option>5점</option>
+							<option>●○○○○점</option>
+							<option>●●○○○점</option>
+							<option>●●●○○점</option>
+							<option>●●●●○점</option>
+							<option>●●●●●점</option>
 						</select>
 					</td>
-					<td colspan="2"><input type="text"></td>
+					<td><input type="text"></td>
 					<td><input type="button" value="등록"></td>
+					<td></td>
 				</tr>
 				<tr>
-					<td>2점</td>
-					<td colspan="2">불친절 합니다.</td>
+					<td>●●○○○점</td>
+					<td>불친절 합니다.</td>
 					<td>고라니</td>
+					<td><span class="goManage">신고하기</span></td>
 				</tr>
 				<tr>
-					<td>4점</td>
-					<td colspan="2">괜찮은 매물이 많네요.</td>
+					<td>●●●●○점</td>
+					<td>괜찮은 매물이 많네요.</td>
 					<td>토끼</td>
+					<td style="width: 100px;"><span class="goManage">신고하기</span></td>
 				</tr>
 				<tr>
-					<td>5점</td>
-					<td colspan="2">상담 잘 해주십니다.</td>
+					<td>●●●●●점</td>
+					<td>상담 잘 해주십니다.</td>
 					<td>고양이</td>
+					<td style="width: 100px;"><span class="goManage">신고하기</span></td>
 				</tr>
 			</table>
 		</div>
@@ -308,6 +325,12 @@
         	<div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>투룸</span><span>월세</span><span>1000/40</span><span>부가설명</span></div>
         	<div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>전세</span><span>15000</span><span>부가설명</span></div>
         	<div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>투룸</span><span>전세</span><span>2000/50</span><span>부가설명</span></div>
+        	<div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>월세</span><span>5000/60</span><span>부가설명</span></div>
+        	<div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>월세</span><span>5000/60</span><span>부가설명</span></div>
+        	<div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>월세</span><span>5000/60</span><span>부가설명</span></div>
+        	<div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>월세</span><span>5000/60</span><span>부가설명</span></div>
+        	<div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>월세</span><span>5000/60</span><span>부가설명</span></div>
+        	<div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>월세</span><span>5000/60</span><span>부가설명</span></div>
         	<div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>월세</span><span>5000/60</span><span>부가설명</span></div>
 		</div>
 		

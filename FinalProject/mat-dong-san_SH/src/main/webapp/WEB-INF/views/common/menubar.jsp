@@ -25,7 +25,8 @@
 </head>
 <body>
    <div id="menubarDiv">
-      <span id="goSearchHouse" class="goMenuButton" onclick="location.href='gosSarchHomeMain.search'">방찾기</span>
+      <span id="goMain" class="goMenuButton" onclick="location.href='${ pageContext.request.contextPath }'">메인으로(로고)</span>
+      <span id="goSearchHouse" class="goMenuButton" onclick="location.href='goSearchHomeMain.search'">방찾기</span>
       <span id="1" class="goMenuButton" onclick="location.href='#'">관심목록</span>
       <span id="2" class="goMenuButton" onclick="location.href='#'">중고장터</span>
       <span id="3" class="goMenuButton" onclick="location.href='#'">고객센터</span>
