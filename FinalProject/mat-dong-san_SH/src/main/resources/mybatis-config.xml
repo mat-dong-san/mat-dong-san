@@ -7,7 +7,7 @@
 	</settings>
 
 	<typeAliases>
-		<typeAlias type="mat.dong.san.product.vo.Product" alias="Product"/>
+		<typeAlias type="mat.dong.san.product.model.vo.Product" alias="Product"/>
 	</typeAliases>
 	
 	<mappers>

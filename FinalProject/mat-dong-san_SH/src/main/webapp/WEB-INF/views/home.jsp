@@ -121,7 +121,7 @@
 			<label id="searchLabel">어느 <span style="color: rgb(21, 100, 249);">동네</span>에서 살고싶으신가요?</label>
 			<br>
 			<div id="searchDiv">
-				<form action="SearchHomeMain.search" method="get">
+				<form action="goSearchHomeMain.search" method="get">
 					<input id="searchInput" name="searchInput" type="text" placeholder="찾고싶은 지역을 검색해주세요">
 					<input id="searchButton" type="submit" value="검색">
 				</form>

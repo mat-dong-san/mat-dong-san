@@ -32,10 +32,11 @@
        	right: 0;
        	top: 80px;
        	height: 30px; */
-       	display:inline-block;
+       	display:inline-flex;
        	width: 100%;
        	height: 64px;
        	margin-top: 70px;
+       	flex-direction: row;
    }
    #listHouseDiv{
       	position: absolute;
@@ -108,8 +109,10 @@
   <c:import url="../common/menubar.jsp"/>
   <!-- <div id="headDiv">헤더(방찾기,고객센터,로그인,회원가입 등)</div> -->
   <div id="filterDiv">
-  
-	  <input type="text" id="searchAddr"><input type="button" value="검색" id="searchBtn">
+	  <form action="goSearchHomeMain.search" method="get">
+		<input type="text" id="searchAddr" name="searchInput" value="${ searchInput }" placeholder="찾고싶은 지역을 입력해주세요.">
+		<input type="submit" value="검색" id="searchBtn">
+	  </form>
 	  <button id="roomFilter" class="filter">방 종류</button>
 	  <button id="productFilter" class="filter">매물 종류</button>
 	  <button id="rentFilter" class="filter">가격대</button>
@@ -175,12 +178,73 @@
   <c:url var="goDetailPage" value="searchRoomDetailPage.search" />
   <div id="contentContainer">
      <div id="listHouseDiv">
-        <div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>매매</span><span>27000</span><span>부가설명</span></div>
-        <div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>원룸</span><span>월세</span><span>500/20</span><span>부가설명</span></div>
-        <div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>투룸</span><span>월세</span><span>1000/40</span><span>부가설명</span></div>
-        <div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>전세</span><span>15000</span><span>부가설명</span></div>
-        <div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>투룸</span><span>전세</span><span>2000/50</span><span>부가설명</span></div>
-        <div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>월세</span><span>5000/60</span><span>부가설명</span></div>
+     	<div>전체 매물 수 : ${ pageInfo.listCount } </div>
+     	<c:forEach var="p" items="${ productList }">
+     		
+	        <div class="productContent" onclick="location.href='${ goDetailPage }'">
+	        <img alt="${ p.p_picture }" src="">
+	        <span>${ p.p_kind }</span>
+	        <span>${ p.p_deal }</span>
+	        <span>
+	        	<c:if test="${ p.p_deal == '전세' }">
+	        		${ p.p_charter }
+	        	</c:if>
+	        	<c:if test="${ p.p_deal == '월세' }">
+	        		${ p.p_deposit }/${ p.p_rent }
+	        	</c:if>
+	        </span>
+	        <span>${ p.p_content }</span>
+	        <span>${ p.p_addr }</span>
+	        </div>
+	        <%-- <div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>원룸</span><span>월세</span><span>500/20</span><span>부가설명</span></div>
+	        <div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>투룸</span><span>월세</span><span>1000/40</span><span>부가설명</span></div>
+	        <div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>전세</span><span>15000</span><span>부가설명</span></div>
+	        <div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>투룸</span><span>전세</span><span>2000/50</span><span>부가설명</span></div>
+	        <div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>월세</span><span>5000/60</span><span>부가설명</span></div> --%>
+     	</c:forEach>
+     	
+     	<!-- 페이징 -->
+     	<div>
+     		<!-- 이전 -->
+     		<c:if test="${ pageInfo.currentPage <= 1 }">
+     			[이전] &nbsp;
+     		</c:if>
+     		<c:if test="${ pageInfo.currentPage > 1 }">
+     			<c:url var="before" value="goSearchHomeMain.search">
+     				<c:param name="page" value="${ pageInfo.currentPage - 1 }" />
+     				<c:param name="searchInput" value="${ searchInput }" />
+     			</c:url>
+     			<a href="${ before }">[이전]</a> &nbsp;
+     		</c:if>
+     		
+     		<!-- 페이지 -->
+			<c:forEach var="p" begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }">
+					<c:if test="${ p eq pageInfo.currentPage }">
+						<font color="red" size="4"><b>[${ p }]</b></font>
+					</c:if>
+					
+					<c:if test="${ p ne pageInfo.currentPage }">
+						<c:url var="pagination" value="goSearchHomeMain.search">
+							<c:param name="page" value="${ p }"/>
+							<c:param name="searchInput" value="${ searchInput }" />
+						</c:url>
+						<a href="${ pagination }">${ p }</a> &nbsp;
+					</c:if>
+			</c:forEach>
+     		
+     		<!-- 다음 -->
+     		<c:if test="${ pageInfo.currentPage >= pageInfo.maxPage }">
+     			[다음] &nbsp;
+     		</c:if>
+     		<c:if test="${ pageInfo.currentPage < pageInfo.maxPage }">
+     			<c:url var="next" value="goSearchHomeMain.search">
+     				<c:param name="page" value="${ pageInfo.currentPage + 1 }" />
+     				<c:param name="searchInput" value="${ searchInput }" />
+     			</c:url>
+     			<a href="${ next }">[다음]</a> &nbsp;
+     		</c:if>
+     	</div>
+     	
      </div>
      <div id="map" class="divBorder"></div>
   </div>
