@@ -13,6 +13,15 @@ public class Board {
 	
 	public Board() {}
 	
+	
+	
+	public Board(int bId) {
+		super();
+		this.bId = bId;
+	}
+
+
+
 	public Board(String bTitle, String bContent) {
 		this.bTitle = bTitle;
 		this.bContent = bContent;

@@ -40,6 +40,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 
+	@Override
+	public int deleteFAQ(int bId) {
+		// TODO Auto-generated method stub
+		return bDAO.deleteFAQ(sqlSession, bId);
+	}
+
+
 	
 
 

@@ -13,5 +13,7 @@ public interface BoardService {
 
 	ArrayList<Board> selectList(PageInfo pi);
 
+	int deleteFAQ(int bId);
+
 	
 }
