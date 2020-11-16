@@ -1,0 +1,21 @@
+package com.san.dong.board.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+@SessionAttributes("loginUser")
+@Controller //@Component의 확장판(@Component + Controller의 성격 추가)
+public class BoardController {
+	
+	// 로그인이동
+	@RequestMapping("raiseRoom.me")
+	public String loginView() {
+		return "raisRoom";
+	}
+	
+//	@Autowired
+//	private BoardService bService;
+
+}
