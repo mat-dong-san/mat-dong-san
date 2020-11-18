@@ -3,13 +3,11 @@
 <mapper namespace="productMapper">
 	
 	<select id="selectEstateAgent" parameterType="EstateAgent">
-		select * 
-		from product
-        join estateagent on(p_id = p_id)
-        where P_ID=#{p_id}
-        order by p_id desc
-		
-		
+		SELECT *
+		FROM PRODUCT
+		JOIN PRODUCT_APPLICATION ON(PRODUCT.P_ID = PRODUCT_APPLICATION.P_ID)
+		JOIN ESTATEAGENT ON(ESTATEAGENT.E_ID = PRODUCT_APPLICATION.E_ID)
+		WHERE PRODUCT.P_ID=#{p_id}
 		
 	</select>
 	
