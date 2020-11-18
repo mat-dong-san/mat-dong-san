@@ -33,23 +33,24 @@ public class BoardController {
 		}
 		
 		int listCount = bService.boardFAQListCount();
-		System.out.println("listCount : " + listCount);
+//		System.out.println("listCount : " + listCount);
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
 		ArrayList<Board> list = bService.selectList(pi);
-		System.out.println(list);
+//		System.out.println(list);
 		if(list != null) {
 			mv.addObject("list", list);
 			mv.addObject("pi", pi);
-			mv.setViewName("boardFAQ");
+			mv.setViewName("/FAQ/boardFAQ");
 		}else {
 			throw new BoardException("게시글 전체 조회에 실패하였습니다.");
 		}
 		
 		return mv;
 	}
+	// FAQ 모달창 Insert
 	@RequestMapping("InsertFAQ.board")
-	public void insertFAQ(HttpServletResponse response, @RequestParam("rQuestion") String rQuestion, @RequestParam("rAnswer") String rAnswer) throws IOException {
+	public String insertFAQ(HttpServletResponse response, @RequestParam("rQuestion") String rQuestion, @RequestParam("rAnswer") String rAnswer) throws IOException {
 
 		
 		Board b = new Board(rQuestion, rAnswer);
@@ -59,25 +60,32 @@ public class BoardController {
 //		}else {
 //			throw new BoardException("게시글 등록에 실패하였습니다.");
 //		}
-		
 		int result = bService.insertFAQ(b);
-		
-		boolean isUsable;
 		if(result > 0) {
-			isUsable = true; 
-		}else {
-			isUsable = false; 
+			return "redirect:boardFAQ.board";
+		} else {
+			return "redirect:test";
 		}
 		
-		response.getWriter().print(isUsable);
+	}
+	// FAQ 선택 삭제
+	@RequestMapping("FAQDelete.board")
+	public String deleteFAQ(HttpServletResponse response, @RequestParam("FAQDeletebId") int bId) {
+		System.out.println("b의값이 넘어왔나? : " + bId);
+		int result = bService.deleteFAQ(bId);
 		
+		if(result > 0) {
+			return "redirect:boardFAQ.board";
+		} else {
+			return "redirect:test";
+		}
 	}
 	
 	
-	@RequestMapping("boardMain.board")
+	@RequestMapping("notice.board")
 	public String goBoardMainPage() {
 		
-		return "boardMain";
+		return "/notice/noticeList";
 	}
 	
 

@@ -1,4 +1,4 @@
-package mat.dong.san.search.vo;
+package mat.dong.san.search.model.vo;
 
 public class SearchRoomPageInfo {
 	private int currentPage;
@@ -8,6 +8,7 @@ public class SearchRoomPageInfo {
 	private int startPage;
 	private int endPage;
 	private int productLimit;
+	
 	public SearchRoomPageInfo(int currentPage, int listCount, int pageLimit, int maxPage, int startPage, int endPage,
 			int productLimit) {
 		super();
@@ -55,7 +56,7 @@ public class SearchRoomPageInfo {
 	public void setEndPage(int endPage) {
 		this.endPage = endPage;
 	}
-	public int getBoardLimit() {
+	public int getProductLimit() {
 		return productLimit;
 	}
 	public void setBoardLimit(int productLimit) {

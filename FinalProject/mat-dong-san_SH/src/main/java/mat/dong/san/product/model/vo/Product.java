@@ -1,4 +1,4 @@
-package mat.dong.san.product.vo;
+package mat.dong.san.product.model.vo;
 
 import java.sql.Date;
 

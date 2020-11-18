@@ -1,6 +1,6 @@
 package mat.dong.san.search.common;
 
-import mat.dong.san.search.vo.SearchRoomPageInfo;
+import mat.dong.san.search.model.vo.SearchRoomPageInfo;
 
 public class Pagenation {
 	public static SearchRoomPageInfo getPageInfo(int currentPage, int listCount) {

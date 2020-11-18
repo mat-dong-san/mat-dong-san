@@ -32,4 +32,9 @@ public class BoardDAO {
 		return (ArrayList)sqlSession.selectList("boardMapper.boardFAQList", null, rb);
 	}
 
+	public int deleteFAQ(SqlSessionTemplate sqlSession, int bId) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("boardMapper.deleteFAQ", bId);
+	}
+
 }

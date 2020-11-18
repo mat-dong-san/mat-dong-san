@@ -59,27 +59,33 @@
 		background-color: yellow;
 	}
 	table {
-		border : 1px solid black;
 		border-collapse: collapse;
 	}
-	td {
+	td:nth-child(2) {
 		border : 1px solid black;
 	}
-	
-	
-	
 </style>
 </head>
 <body>
-	<input type="button" value="모달창" id="b_modal_btn"/>
 	<div id="boardFAQ_Wrapper">
+		<input type="button" value="모달창" id="b_modal_btn"/>
 		<table>
 			<tr>
+				<td>
+					<input type="checkbox">
+				</td>
 				<td>자주묻는질문</td>
 			</tr>
-			
-			<c:forEach var="FAQ" items="${ list  }">
+			<form method="post" action="FAQDelete.board" >
+			<input type="submit" value="확인">
+			<c:forEach var="FAQ" items="${ list }">
 			<tr>
+				<td>
+					<input type="checkbox" name="FAQDeletebId" value="${ FAQ.bId }">
+<%-- 					<c:url var="bdelete" value="FAQDelete.board" > --%>
+<%-- 						<c:param name="bId" value="${ FAQ.bId }" /> --%>
+<%-- 					</c:url> --%>
+				</td>
 				<td>
 					<div class="b_qb_div">
 						<div class="b_question">Q. ${ FAQ.bTitle }</div>
@@ -87,10 +93,12 @@
 					</div>
 				</td>				
 			</tr>
+			
 			</c:forEach>
 			
-			<!-- Paging Area -->
+			<!-- 페이징 -->
 			<tr>
+				<td></td>
 				<td>
 					<c:if test="${ pi.currentPage <= 1 }">
 						[이전] &nbsp;
@@ -130,39 +138,38 @@
 					
 				</td>
 			</tr>
-			
-			
-			
 							
 		</table>
-	</div>	
+		</form>
+	</div>
 	
 	<!-- 모달창 -->
 	<div id="bFAQModal_Wrapper">
-		<div class="bFAQ_Content">
-			<table>
-				<tr>
-					<td class="b_modal_QA">
-						<div>Q.</div>
-					</td>
-					<td class="b_modal_QA b_model_QA_input">
-						<input type="text" class="b_modal_inputbox" id="modal_Q"/>
-					</td>
-				</tr>
-				<tr>
-					<td class="b_modal_QA">
-						<div>A.</div>
-					</td>
-					<td class="b_modal_QA b_model_QA_input">
-						<input type="text" class="b_modal_inputbox" id="modal_A"/>
-					</td>
-				</tr>
-			</table>		
-			<input type="submit" value="확인" id="b_modal_submit"/>
+		<div class="bFAQ_Content" >
+			<form action="InsertFAQ.board" method="post" >
+				<table>
+					<tr>
+						<td class="b_modal_QA">
+							<div>Q.</div>
+						</td>
+						<td class="b_modal_QA b_model_QA_input">
+							<input type="text" class="b_modal_inputbox" id="modal_Q" name="rQuestion"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="b_modal_QA">
+							<div>A.</div>
+						</td>
+						<td class="b_modal_QA b_model_QA_input">
+							<input type="text" class="b_modal_inputbox" id="modal_A" name="rAnswer"/>
+						</td>
+					</tr>
+				</table>		
+				<input type="submit" value="확인" id="b_modal_submit"/>
+			</form>
 		</div>
 		<div class="b_modal_layer"></div>
 	</div>
-	
 	<script>
 		// 모달창 display on/off
 		document.getElementById("b_modal_btn").onclick = function(){
@@ -171,44 +178,7 @@
 	    document.getElementById("b_modal_submit").onclick = function(){
 	        document.getElementById("bFAQModal_Wrapper").style.display="none";
 	    }
-		
-	    // 모달창에서 데이터값 넘기기 
-	    $('#b_modal_submit').on('click',function(){
-	    	var rQuestion = $('#modal_Q').val();
-	    	var rAnswer = $('#modal_A').val();
-	    	
-	    	$.ajax({
-	    		url:'InsertFAQ.board',
-	    		data: {rQuestion:rQuestion, rAnswer:rAnswer},
-	    		type: 'post',
-	    		success: function(data){
-	    			console.log(data);
-	    			alert("등록완료",data);
-	    			
-	    		}
-	    	});
-	    });
-	
-	    // FAQ리스트 업데이트
-	    
-	    
-	    
-	    
-	    
-	    
-	    // FAQ bId넘기기
-	    $('.b_qb_div').on('click',function(){
-	    	var bId = $('') 
-	    	console.log(bId);
-	    });
-	    
-	    
-	    
-    
-    
-    
 	</script>
-	
 	
 	
 </body>
