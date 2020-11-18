@@ -1,4 +1,3 @@
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
@@ -105,6 +104,7 @@ input[type="checkbox"] {
 	border-bottom: 1px solid black;
 	height: 200px;
 }
+
 </style>
 </head>
 <body>
@@ -143,107 +143,42 @@ input[type="checkbox"] {
 						</td>
 					</tr>
 				</tbody>
+				
 				</c:if>
 				<c:if test="${pSession != null}">
+				
 				<tbody>
 					
-					<tr>
-						<th scope="row"><input type="checkbox" class="chkbox" checked></th>
-						<td><img src="resources/images/productRoom.png"
-							style="height: 200px; width: 250px;" /></td>
-						<td colspan="2">
-							<ul style="text-align: left;">
-								<li>다세대주택/5층/124㎡/오픈형 원룸(욕실 1개)</li>
-								<li>원룸/505호/14.83m</li>
-								<li>월세:30/보증금:500/입주가능:20-11-15</li>
-								<li>관리비:10(인터넷,유선TV,수도세,전기)</li>
-								<li>한달단기가능 주차가능 장기가능</li>
-								<li>중앙난방,동향</li>
-								<li>주차:1대, 엘리베이터:없음, 애완동물:가능, 대출:불가능</li>
-								<li>옵션:에어컨,냉장고,세탁기,인덕션,전자레인지</li>
-
-							</ul>
-						</td>
-					</tr>
-					</c:if>
+					<c:forEach var="p" items="${sessionScope.pSession }">
+					<c:if test="${not empty p.p_id }">
+						<%-- <input type="hidden" id="p_id" value="${p.p_id}"> --%>
+						<tr>
+							<input type="hidden" value="${p.p_id}">
+							<th scope="row"><input type="checkbox" class="chkbox" p_id="${p.p_id}" checked></th>
+							<td><img src="resources/images/productRoom.png"
+								style="height: 200px; width: 250px;" /></td>
+							<td colspan="2">
+								<ul style="text-align: left;">
+									<li>${p.p_addr}</li>
+									<li>${p.p_field}/${p.p_floor}/${p.p_size}</li>
+									<li>${p.p_str}/${p.p_room}/공급면적: ${p.p_s_size}/전용면적: ${p.p_d_size}</li>
+									<li>월세: ${p.p_rent}/보증금: ${p.p_deposit}/입주가능:${p.p_en_d}</li>
+									<li>관리비: ${p.p_cost}(${p.p_cost_item})</li>
+									<li>${p.p_content}</li>
+									<li>${p.p_heat}, ${p.p_dir}</li>
+									<li>주차: ${p.p_park}, 엘리베이터: ${p.p_elevator}, 애완동물: ${p.p_pet}, 베란다: ${p.p_verander}, 빌트인: ${p.p_built_in}, 대출: ${p.p_loan}</li>
+									<li>옵션: ${p.p_option}</li>
+	
+								</ul>
+							</td>
+						</tr>
 					
-					<tr>
-						<th scope="row"><input type="checkbox" class="chkbox" checked></th>
-						<td><img src="resources/images/productRoom.png"
-							style="height: 200px; width: 250px;" /></td>
-						<td colspan="2">
-							<ul style="text-align: left;">
-								<li>다세대주택/5층/124㎡/오픈형 원룸(욕실 1개)</li>
-								<li>원룸/505호/14.83m</li>
-								<li>월세:30/보증금:500/입주가능:20-11-15</li>
-								<li>관리비:10(인터넷,유선TV,수도세,전기)</li>
-								<li>한달단기가능 주차가능 장기가능</li>
-								<li>중앙난방,동향</li>
-								<li>주차:1대, 엘리베이터:없음, 애완동물:가능, 대출:불가능</li>
-								<li>옵션:에어컨,냉장고,세탁기,인덕션,전자레인지</li>
-
-							</ul>
-
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><input type="checkbox" class="chkbox" checked></th>
-						<td><img src="resources/images/productRoom.png"
-							style="height: 200px; width: 250px;" /></td>
-						<td colspan="2">
-							<ul style="text-align: left;">
-								<li>다세대주택/5층/124㎡/오픈형 원룸(욕실 1개)</li>
-								<li>원룸/505호/14.83m</li>
-								<li>월세:30/보증금:500/입주가능:20-11-15</li>
-								<li>관리비:10(인터넷,유선TV,수도세,전기)</li>
-								<li>한달단기가능 주차가능 장기가능</li>
-								<li>중앙난방,동향</li>
-								<li>주차:1대, 엘리베이터:없음, 애완동물:가능, 대출:불가능</li>
-								<li>옵션:에어컨,냉장고,세탁기,인덕션,전자레인지</li>
-
-							</ul>
-
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><input type="checkbox" class="chkbox" checked></th>
-						<td><img src="resources/images/productRoom.png"
-							style="height: 200px; width: 250px;" /></td>
-						<td colspan="2">
-							<ul style="text-align: left;">
-								<li>다세대주택/5층/124㎡/오픈형 원룸(욕실 1개)</li>
-								<li>원룸/505호/14.83m</li>
-								<li>월세:30/보증금:500/입주가능:20-11-15</li>
-								<li>관리비:10(인터넷,유선TV,수도세,전기)</li>
-								<li>한달단기가능 주차가능 장기가능</li>
-								<li>중앙난방,동향</li>
-								<li>주차:1대, 엘리베이터:없음, 애완동물:가능, 대출:불가능</li>
-								<li>옵션:에어컨,냉장고,세탁기,인덕션,전자레인지</li>
-
-							</ul>
-
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><input type="checkbox" class="chkbox" checked></th>
-						<td><img src="resources/images/productRoom.png"
-							style="height: 200px; width: 250px;" /></td>
-						<td colspan="2">
-							<ul style="text-align: left;">
-								<li>다세대주택/5층/124㎡/오픈형 원룸(욕실 1개)</li>
-								<li>원룸/505호/14.83m</li>
-								<li>월세:30/보증금:500/입주가능:20-11-15</li>
-								<li>관리비:10(인터넷,유선TV,수도세,전기)</li>
-								<li>한달단기가능 주차가능 장기가능</li>
-								<li>중앙난방,동향</li>
-								<li>주차:1대, 엘리베이터:없음, 애완동물:가능, 대출:불가능</li>
-								<li>옵션:에어컨,냉장고,세탁기,인덕션,전자레인지</li>
-
-							</ul>
-
-						</td>
-					</tr>
-
+					</c:if>
+					</c:forEach>
+					
+					
+				</c:if>
+				
 				</tbody>
 			</table>
 			<div class="line"></div>
@@ -273,10 +208,12 @@ input[type="checkbox"] {
 	<input type="button" value="선택삭제" id="deleteBtn">
 	<br><br><br><br>
 
-	<script>
+	<script>	
    
       $("#recentList").children().children().click(function() {
-         $('.container-for-carousel').css('display','grid');
+    	  $('.container-for-carousel').css('display','grid');
+    	  var p_id = $(this).children('input').val();
+    	  
          
       });
 
@@ -294,8 +231,44 @@ input[type="checkbox"] {
 
       $(".chkbox").click(function() {
          $("#allCheck").prop("checked", false);
-
+         alert($(this).attr('p_id'));
+         
       });
+      
+      $("#deleteBtn").click(function(){
+          var selectedCheck = new Array();
+          $('.chkbox:checked').each(function() {
+              selectedCheck.push($(this).attr('p_id'));
+          });
+          // alert(selectedCheck + '\n개수 : '+selectedCheck.length);
+          if(selectedCheck.length < 1 ){
+              alert('1개이상 선택');
+              return false;
+          }
+          //document.form.submit();
+         
+          var confirm_val = confirm("정말 삭제하시겠습니까?");
+          if(confirm_val) {
+        	  alert('삭제완료');
+        	  $.ajax({
+  				url:'selectedCheck.pr',
+  				data:{selectedCheck:selectedCheck},
+  				success:function(data){
+  					console.log(data);
+  					if(data == "1"){
+  						location.reload();
+  					}else {
+  						
+  					}
+  					
+  				}
+  			});
+        	  
+          }
+         
+          
+      });
+
       
       var container = document.getElementById('map');
         var options = {

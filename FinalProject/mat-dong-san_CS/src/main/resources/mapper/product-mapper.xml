@@ -1,47 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="productMapper">
-	<select id="selectProductRoom" parameterType="Product" resultType="Product">
-		select *
-		from product
-		where P_ID=#{p_id}
-	</select>
 	
-	<resultMap type="Product" id="productResultSet">
-		<id column="P_ID" property="p_id"/>
-		<result column="P_ADDR" property="p_addr"/>
-		<result column="P_COORD" property="p_coord"/>
-		<result column="P_C_LAT" property="p_c_lat"/>
-		<result column="P_C_LNG" property="p_c_lng"/>
-		<result column="P_FIELD" property="p_field"/>
-		<result column="P_FLOOR" property="p_floor"/>
-		<result column="P_SIZE" property="p_size"/>
-		<result column="P_STR" property="p_str"/>
-		<result column="P_KIND" property="p_kind"/>
-		<result column="P_ROOM" property="p_room"/>
-		<result column="P_R_SIZE" property="p_r_size"/>
-		<result column="F_LAYER" property="f_layer"/>
-		<result column="P_DEAL" property="p_deal"/>
-		<result column="P_CHARTER" property="p_charter"/>
-		<result column="P_RENT" property="p_rent"/>
-		<result column="P_DEPOSIT" property="p_deposit"/>
-		<result column="P_COST" property="p_cost"/>
-		<result column="P_COST_ITEM" property="p_cost_item"/>
-		<result column="P_EN_D" property="p_en_d"/>
-		<result column="P_CONTENT" property="p_content"/>
-		<result column="P_HEAT" property="p_heat"/>
-		<result column="P_DIR" property="p_dir"/>
-		<result column="P_PARK" property="p_park"/>
-		<result column="P_ELEVATOR" property="p_elevator"/>
-		<result column="P_PET" property="p_pet"/>
-		<result column="P_LOAN" property="p_loan"/>
-		<result column="P_OPTION" property="p_option"/>
-		<result column="P_PICTURE" property="p_picture"/>
-		<result column="P_REG_D" property="p_reg_d"/>
-		<result column="P_REG_STATUS" property="p_reg_status"/>
-		<result column="P_DEL_YN" property="p_del_yn"/>
-		<result column="US_ID" property="us_id"/>
-	</resultMap>
 
 	
 

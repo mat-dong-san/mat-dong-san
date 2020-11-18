@@ -24,12 +24,7 @@
 				data: {p_id:p_id},
 				success: function(data){
 					console.log(data);
-					if(data == 'true') {
-						alert('전송성공');
-						
-					}else{
-						alert('전송실패');
-					}
+					alert('전송성공');
 				}
 			});
 		});

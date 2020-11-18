@@ -2,6 +2,7 @@ package mat.dong.san.product.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
 
 import mat.dong.san.member.exception.MemberException;
 import mat.dong.san.product.exception.ProductException;
@@ -26,66 +29,45 @@ public class ProductController {
 	@Autowired
 	private ProductService pService;
 	
-	
-	// 
-	@RequestMapping("selectProductRoom.search")
-	public void selectProductRoom(Product p, Model model, HttpSession session, HttpServletResponse response) throws IOException {
-		
-		boolean isUsable;
-		System.out.println("================================================================================");
-		System.out.println("1P_ID>"+p.getP_id());
-		
-		Product product = pService.selectProductRoom(p);
-		if (product == null) {
-			throw new ProductException("상품보기에 실패했습니다.");
-			
-		} else {
+	//체크박스삭제
+	@RequestMapping("selectedCheck.pr")
+	public void selectedCheck(@RequestParam("selectedCheck[]") List<Integer> selectedCheck , HttpSession session, HttpServletResponse response) throws IOException{
 
-			ArrayList<Product> view = (ArrayList<Product>)session.getAttribute("pSession");
-			if (view == null) {
-				view = new ArrayList<Product>();
-			}
-			
-			
-			
-			
-			
-			
-			for (int i = 0; i < view.size(); i++) {
-				  System.out.println("pID>>>>>>"+p.getP_id());
-				  System.out.println("배열>"+view.get(i).getP_id());
-				  
-				  if (p.getP_id() == view.get(i).getP_id()) {
-					  
-				  }
-			}
-			
-			view.add(product);
-			isUsable = true;
-			for (int i = 0; i < view.size(); i++) {
-				System.out.println(view.get(i));
-			}
-			
-			
-			session.setAttribute("pSession", view);
-			
-			model.addAttribute("product", product);
-			
-			response.getWriter().print(isUsable);
+		String result = "1";
+		
+		ArrayList<Product> view = (ArrayList<Product>)session.getAttribute("pSession");
+		if (view == null) {
+			view = new ArrayList<Product>();
 		}
 		
+		for (int i = 0; i < view.size(); i++) {
+			
+			
+			for (int j = 0; j < selectedCheck.size(); j++) {
+				if(view.get(i).getP_id() == selectedCheck.get(j)) {
+					view.remove(i);
+				}
+			}
+		}
+		
+		
+		session.setAttribute("pSession", view);
+		
+		response.getWriter().print(result);
+		
 	}
 	
-	// 방찾기테스트
-	@RequestMapping("gosSarchHouseMain.search")
-	public String gosSarchHouseMain() {
-		return "test";
-	}
 	
 	// 최근본방 이동
-	@RequestMapping("productRecentList.search")
+	@RequestMapping("productRecentList.pr")
 	public String productStorage() {
 		return "productRecentList";
 	}
-
+	
+	//테스트용도
+	@RequestMapping("test.pr")
+	public String mypageView() {
+		return "test";
+	}
+	
 }
