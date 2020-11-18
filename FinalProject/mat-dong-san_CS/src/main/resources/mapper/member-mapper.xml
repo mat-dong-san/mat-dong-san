@@ -16,6 +16,7 @@
 		<result column="US_PHONE" property="us_phone"/>
 		<result column="US_EMAIL" property="us_email"/>
 		<result column="US_ADDR" property="us_addr"/>
+		<result column="US_PICTURE" property="us_picture"/>
 		<result column="US_TYPE" property="us_type"/>
 		<result column="US_REG_D" property="us_reg_d"/>
 		<result column="US_KAKAO" property="us_kakao"/>
@@ -26,7 +27,7 @@
 	<insert id="insertMember" parameterType="Member">
 		insert into member
 		values(#{us_id}, #{us_pwd}, #{us_name}, #{us_ssn}, #{us_phone}, #{us_email},
-		#{us_addr}, #{us_type}, sysdate, default, default)
+		#{us_addr}, #{us_picture}, #{us_type}, sysdate, default, default)
 	</insert>
 	
 	<select id="checkIdDup" resultType="_int">

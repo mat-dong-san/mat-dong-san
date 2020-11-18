@@ -73,7 +73,6 @@ input[type="checkbox"] {
 	z-index:1;
 	right: 0;
 	width: 18%;
-	background-color: rgba(223, 232, 225, 10);
 	border: 2px solid black;
 	display: none;
 	grid-template-rows: 7% 1fr 55px;
@@ -151,10 +150,9 @@ input[type="checkbox"] {
 					
 					<c:forEach var="p" items="${sessionScope.pSession }">
 					<c:if test="${not empty p.p_id }">
-						<%-- <input type="hidden" id="p_id" value="${p.p_id}"> --%>
 						<tr>
-							<input type="hidden" value="${p.p_id}">
-							<th scope="row"><input type="checkbox" class="chkbox" p_id="${p.p_id}" checked></th>
+							
+							<th scope="row"><input type="hidden" value="${p.p_id}"><input type="checkbox" class="chkbox" p_id="${p.p_id}" checked></th>
 							<td><img src="resources/images/productRoom.png"
 								style="height: 200px; width: 250px;" /></td>
 							<td colspan="2">
@@ -162,7 +160,7 @@ input[type="checkbox"] {
 									<li>${p.p_addr}</li>
 									<li>${p.p_field}/${p.p_floor}/${p.p_size}</li>
 									<li>${p.p_str}/${p.p_room}/공급면적: ${p.p_s_size}/전용면적: ${p.p_d_size}</li>
-									<li>월세: ${p.p_rent}/보증금: ${p.p_deposit}/입주가능:${p.p_en_d}</li>
+									<li>월세: ${p.p_rent}/보증금: ${p.p_deposit}/입주가능: ${p.p_en_d}</li>
 									<li>관리비: ${p.p_cost}(${p.p_cost_item})</li>
 									<li>${p.p_content}</li>
 									<li>${p.p_heat}, ${p.p_dir}</li>
@@ -209,10 +207,21 @@ input[type="checkbox"] {
 	<br><br><br><br>
 
 	<script>	
-   
+   		
       $("#recentList").children().children().click(function() {
     	  $('.container-for-carousel').css('display','grid');
-    	  var p_id = $(this).children('input').val();
+    	  var p_id = $(this).children().children('input').val();
+    	  
+    	  $.ajax({
+				url:'selectEstateAgent.pr',
+				data:{p_id:p_id},
+				success:function(data){
+					console.log(data);
+					
+					
+				}
+			});
+    	  
     	  
          
       });
@@ -231,7 +240,6 @@ input[type="checkbox"] {
 
       $(".chkbox").click(function() {
          $("#allCheck").prop("checked", false);
-         alert($(this).attr('p_id'));
          
       });
       

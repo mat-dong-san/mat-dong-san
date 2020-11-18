@@ -57,6 +57,16 @@ public class ProductController {
 		
 	}
 	
+	//매물중개사정보
+	@RequestMapping("selectEstateAgent.pr")
+	public void selectEstateAgent(@RequestParam("p_id") String p_id , HttpSession session, HttpServletResponse response) throws IOException{
+		String result = "";
+		
+		
+		
+		response.getWriter().print(result);
+		
+	}
 	
 	// 최근본방 이동
 	@RequestMapping("productRecentList.pr")
