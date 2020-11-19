@@ -112,8 +112,8 @@ input[type="checkbox"] {
 	border: 1px solid black;
 	width: 400px;
 	z-index: 1;
-	bottom: 230px;
-	left: 0px;
+	bottom: 200px;
+	transform: translate(-50%,-50%);
 	opacity: 0;
 }
 	
@@ -296,9 +296,18 @@ input[type="checkbox"] {
 	
 	  // 모달창 display on/off
 	  $(document).on('click', '#e_modal_btn', function(){
-		  $("#eModal_Wrapper").css({visibility:"visible", opacity: 1});
-		  $("#eModal_Wrapper").css("box-shadow","rgba(0,0,0,0.5) 0 0 0 9999px");
-		  $("#eModal_Wrapper").css("index","100");
+		  
+		  var id = $(this).attr('id');
+		  
+		  if(id == "e_modal_btn") {
+			  $("#eModal_Wrapper").css({visibility:"visible", opacity: 1});
+			  $("#eModal_Wrapper").css("box-shadow","rgba(0,0,0,0.5) 0 0 0 9999px");
+			  $("#eModal_Wrapper").css("index","100");
+		  }else if(id == "e_note_btn"){
+			  alert('1');
+			  
+		  }
+		  
 
 	  });
 	  
@@ -346,11 +355,11 @@ input[type="checkbox"] {
 					var testEval = "";
 					testEval += '<div><h2>공인중개사</h2><hr></div><div>';
 					testEval += '<div id="estateAgentContent"><img class="profile" align="left" vspace=1 src="./resources/images/profile.PNG"><h5>&nbsp;'+ data.e_name +'<br>&nbsp;별점: '+ e_point2 +'</h5></div>';
-					testEval += '<div id="estateAgentContent2"><h4>중개사소개</h4><hr>'+ e_content2 +'</div>';
-					testEval += '<div id="estateAgentContent3"><h4>위치</h4>'+ e_addr[1] +'<hr><div id="map"></div></div>';
+					testEval += '<div id="estateAgentContent2"><h4>☺중개인사말☺</h4><hr>'+ e_content2 +'</div>';
+					testEval += '<div id="estateAgentContent3"><h4>▽위치</h4>'+ e_addr[1] +'<hr><div id="map"></div></div>';
 					testEval += '<div id="tail">';
 					testEval += '<input type="button" id="e_modal_btn" value="문의하기" style="font-size: 1.96em;">';
-					testEval += '<input type="button" id="" value="쪽지하기" e_id="'+ data.e_id +'" e_name="'+ data.e_name +'" style="font-size: 1.96em;">';
+					testEval += '<input type="button" id="e_note_btn" value="쪽지하기" e_id="'+ data.e_id +'" e_name="'+ data.e_name +'" style="font-size: 1.96em;">';
 					testEval += '<div>';
 					
 					$('.e_model_info_name').val('');
