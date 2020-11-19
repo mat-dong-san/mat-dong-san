@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="productMapper">
 	
-	<select id="selectEstateAgent" parameterType="EstateAgent">
+	<select id="selectEstateAgent" resultMap="estateAgentInfoResultSet">
 		SELECT *
 		FROM PRODUCT
 		JOIN PRODUCT_APPLICATION ON(PRODUCT.P_ID = PRODUCT_APPLICATION.P_ID)
@@ -10,6 +10,25 @@
 		WHERE PRODUCT.P_ID=#{p_id}
 		
 	</select>
+
+
+	<resultMap type="EstateAgent" id="estateAgentInfoResultSet">
+		<id column="E_ID" property="e_id"/>
+		<result column="E_NAME" property="e_name"/>
+		<result column="E_PHONE" property="e_phone"/>
+		<result column="E_CONTENT" property="e_content"/>
+		<result column="E_ADDR" property="e_addr"/>
+		<result column="E_PICTURE" property="e_picture"/>
+		<result column="E_FIELD" property="e_field"/>
+		<result column="E_REG_NUM" property="e_reg_num"/>
+		<result column="E_COORD" property="e_coord"/>
+		<result column="E_C_LAT" property="e_c_lat"/>
+		<result column="E_C_LNG" property="e_c_lng"/>
+		<result column="E_POINT" property="e_point"/>
+		<result column="E_REG_D" property="e_reg_d"/>
+		<result column="E_DEL_YN" property="e_del_yn"/>
+		<result column="US_ID" property="us_id"/>
+	</resultMap>
 	
 	
 

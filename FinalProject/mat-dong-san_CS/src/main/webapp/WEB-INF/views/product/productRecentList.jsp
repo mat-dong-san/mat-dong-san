@@ -9,9 +9,11 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
 	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
 	crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=73b702bbc370391b33bcfbc18e36ee62&libraries=services,clusterer,drawing"></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
@@ -69,12 +71,12 @@ input[type="checkbox"] {
 .container-for-carousel {
 	/* position: fixed; */
 	position: absolute;
-	top: 80px;
-	z-index:1;
+	top: 70px;
+	z-index: 1;
 	right: 0;
 	width: 18%;
+	display:none;
 	border: 2px solid black;
-	display: none;
 	grid-template-rows: 7% 1fr 55px;
 }
 
@@ -91,16 +93,77 @@ input[type="checkbox"] {
 
 #estateAgentContent {
 	border-bottom: 1px solid black;
-	height: 100px;
+	height: 80px;
 }
 
 #estateAgentContent2 {
 	border-bottom: 1px solid black;
-	height: 330px;
+	height: 300px;
 }
 
 #estateAgentContent3 {
 	border-bottom: 1px solid black;
+	height: 300px;
+}
+
+#eModal_Wrapper{
+	visibility: hidden;
+	position: fixed;
+	border: 1px solid black;
+	width: 400px;
+	z-index: 1;
+	bottom: 230px;
+	left: 0px;
+	opacity: 0;
+}
+	
+.e_Content{
+	background: white;
+	padding: 10px;
+}
+
+.e_modal_info{
+	padding: 10px;
+	width: 10%;
+}
+
+
+.e_model_info_name{
+	width: 300px;
+	height: 50px;
+}
+
+.e_model_info_phone{
+	width: 300px;
+	height: 50px;
+}
+
+.e_model_info_regNum{
+	width: 300px;
+	height: 50px;
+}
+
+
+#modal_cancel {
+	width: 100%;
+	height: 50px;
+}
+
+.profile {
+	width: 75px;
+	height: 75px;
+	border-radius: 70%;
+	background: #BDBDBD;
+}
+
+.checked {
+  color: orange;
+}
+.check {
+  color: black;
+}
+#map {
+	width: 280px;
 	height: 200px;
 }
 
@@ -185,29 +248,74 @@ input[type="checkbox"] {
 		
 	</div>
 	<div class="container-for-carousel">
-			<div>
-				<h2>공인중개사</h2>
-			</div>
-			<div>
-				<div id="estateAgentContent">로고</div>
-				<div id="estateAgentContent2">중개사인사말</div>
-				<div id="estateAgentContent3">
-					위치<br>
-					<div id="map"></div>
-				</div>
-			</div>
-			<div id="tail">
-				<input type="button" id="" value="문의하기" style="font-size: 1.84em;">
-				<input type="button" id="" value="쪽지하기" style="font-size: 1.84em;">
-			</div>
-		</div>
-	<br>
-
+			
+	</div>
+	
+	
 	<input type="button" value="선택삭제" id="deleteBtn">
 	<br><br><br><br>
+	
+	<!-- 모달창 -->
+	<div id="eModal_Wrapper">
+		<div class="e_Content" >
+				<table>
+					<tr>
+						<td class="e_modal_info">
+							<div><h3>중개사</h3></div>
+							<input type="text" class="e_model_info_name" id="modal" readOnly/>
+						</td>
+					</tr>
+					<tr>
+						<td class="e_modal_info">
+							<div><h3>대표번호</h3></div>
+							<input type="text" class="e_model_info_phone" id="modal" readOnly/>
+						</td>
+					</tr>
+					<tr>
+						<td class="e_modal_info">
+							<div><h3>사업자등록번호</h3></div>
+							<input type="text" class="e_model_info_regNum" id="modal" readOnly/>
+						</td>
+					</tr>
+				</table>
+				<br>
+				<input type="button" value="뒤로가기" id="modal_cancel">
+		</div>
+	</div>
+	
+	<br>
 
-	<script>	
-   		
+	<script>
+	  
+	  window.onclick = function(e){
+		  if(e.target == modal) {
+			  $("#eModal_Wrapper").css({visibility:"hidden", opacity: 0});
+			  
+		  }
+	  }
+	
+	  // 모달창 display on/off
+	  $(document).on('click', '#e_modal_btn', function(){
+		  $("#eModal_Wrapper").css({visibility:"visible", opacity: 1});
+		  $("#eModal_Wrapper").css("box-shadow","rgba(0,0,0,0.5) 0 0 0 9999px");
+		  $("#eModal_Wrapper").css("index","100");
+
+	  });
+	  
+      
+      $("#modal_cancel").click(function() {
+    	  $("#eModal_Wrapper").css("visibility","hidden");
+      });
+    
+    
+      // 모달창 가운데로 위치
+      $('#eModal_Wrapper').css({
+        "top":(($(window).height()-$('#eModal_Wrapper').outerHeight())/2+$(window).scrollTop())+"px",
+        "left":(($( window ).width()-$('#eModal_Wrapper').outerWidth())/2+$(window).scrollLeft())+"px"
+       });
+      
+      
+      
       $("#recentList").children().children().click(function() {
     	  $('.container-for-carousel').css('display','grid');
     	  var p_id = $(this).children().children('input').val();
@@ -218,7 +326,66 @@ input[type="checkbox"] {
 				success:function(data){
 					console.log(data);
 					
+					var e_addr = data.e_addr.split('/');
+					var e_content = data.e_content.split('/');
+					var e_content2 = "";
+				    for ( var i in e_content ) {
+				    	e_content2 += '<p>' + e_content[i] + '</p>';
+				    }
+				    var e_point = parseInt(data.e_point);
+				    var e_point2 = "";
+				    
+				    for(var i = 0; i < e_point; i++) {
+				    	e_point2 += '<span class="fa fa-star checked">';
+				    }
+				    for(var i = 0; i < 5-e_point; i++) {
+				    	e_point2 += '<span class="fa fa-star check">';
+				    }
+				    
 					
+					var testEval = "";
+					testEval += '<div><h2>공인중개사</h2><hr></div><div>';
+					testEval += '<div id="estateAgentContent"><img class="profile" align="left" vspace=1 src="./resources/images/profile.PNG"><h5>&nbsp;'+ data.e_name +'<br>&nbsp;별점: '+ e_point2 +'</h5></div>';
+					testEval += '<div id="estateAgentContent2"><h4>중개사소개</h4><hr>'+ e_content2 +'</div>';
+					testEval += '<div id="estateAgentContent3"><h4>위치</h4>'+ e_addr[1] +'<hr><div id="map"></div></div>';
+					testEval += '<div id="tail">';
+					testEval += '<input type="button" id="e_modal_btn" value="문의하기" style="font-size: 1.96em;">';
+					testEval += '<input type="button" id="" value="쪽지하기" e_id="'+ data.e_id +'" e_name="'+ data.e_name +'" style="font-size: 1.96em;">';
+					testEval += '<div>';
+					
+					$('.e_model_info_name').val('');
+					$('.e_model_info_phone').val('');
+					$('.e_model_info_regNum').val('');
+					$('.e_model_info_name').val(data.e_name);
+					$('.e_model_info_phone').val(data.e_phone);
+					$('.e_model_info_regNum').val(data.e_reg_num);
+					
+					$('.container-for-carousel').html(testEval);
+					
+					var container = document.getElementById('map');
+			        var options = {
+			           center: new kakao.maps.LatLng(37.566826, 126.9786567),
+			           level: 4
+			        };
+			     
+			        var map = new kakao.maps.Map(container, options);
+			        
+			        var geocoder = new kakao.maps.services.Geocoder();
+			        
+			        geocoder.addressSearch(e_addr[1], function(result, status) {
+			             if (status === kakao.maps.services.Status.OK) {
+			                 var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+			                var marker = new kakao.maps.Marker({
+			                    map: map,
+			                    position: coords
+			                });
+			                var infowindow = new kakao.maps.InfoWindow({
+			                    content: '<div style="width:150px;text-align:center;padding:6px 0;">'+ data.e_name +'</div>'
+			                });
+			                infowindow.open(map, marker);
+			                map.setCenter(coords);
+			            }
+			        });
 				}
 			});
     	  
@@ -278,30 +445,7 @@ input[type="checkbox"] {
       });
 
       
-      var container = document.getElementById('map');
-        var options = {
-           center: new kakao.maps.LatLng(37.566826, 126.9786567),
-           level: 4
-        };
-     
-        var map = new kakao.maps.Map(container, options);
-        
-        var geocoder = new kakao.maps.services.Geocoder();
-        
-        geocoder.addressSearch('강남구 테헤란로14길 6', function(result, status) {
-             if (status === kakao.maps.services.Status.OK) {
-                 var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-                var marker = new kakao.maps.Marker({
-                    map: map,
-                    position: coords
-                });
-                var infowindow = new kakao.maps.InfoWindow({
-                    content: '<div style="width:150px;text-align:center;padding:6px 0;">맛동산</div>'
-                });
-                infowindow.open(map, marker);
-                map.setCenter(coords);
-            }
-        });
+      
    </script>
 </body>
 </html>

@@ -9,10 +9,10 @@
 </head>
 <body>
 
-	<input type="button" id="p_id" value="21">클릭
+	<input type="button" id="p_id" value="1">클릭
 	<input type="button" id="p_id1" value="22">클릭
-	<input type="button" id="p_id2" value="23">클릭
-	<input type="button" id="p_id3" value="24">클릭
+	<input type="button" id="p_id2" value="61">클릭
+	<input type="button" id="p_id3" value="128">클릭
 	
 	<script>
 	
