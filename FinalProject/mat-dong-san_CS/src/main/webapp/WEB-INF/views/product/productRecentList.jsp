@@ -23,7 +23,7 @@
 	display: grid;
 	padding-left: 10px;
 	grid-template-columns: 78% 25%;
-	padding-top: 50px;
+	padding-top: 40px;
 	text-align: center;
 }
 
@@ -38,29 +38,35 @@
 
 .wrap {
 	padding-top: 120px;
-	padding-right: 1000px;
 	background-color: rgba(223, 232, 220, 0.5);
+	
+}
+
+.nav{
+	
+	margin:10px;
 }
 
 .nav-item {
-	font-size: 1.2em;
+	font-size: 1.4em;
 	text-align: center;
 	font-weight: bold;
 	vertical-align: middle;
-	width: 300px;
+	width: 200px;
 	height: 50px;
-	display: table-cell;
 }
 
 .nav-item:hover {
-	color: orangered;
 	font-weight: bold;
 	cursor: pointer;
 	border-bottom: 2px solid black;
 }
+
 table {
 	font-size: 0.9em;
+	border: 1px solid lightgray;
 }
+
 th {
 	font-size: 1.2em;
 }
@@ -79,9 +85,9 @@ input[type="checkbox"] {
 	top: 70px;
 	z-index: 1;
 	right: 0;
-	width: 26%;
+	width: 25%;
 	display:none;
-	border: 2px solid lightgray;
+	border: 1px solid lightgray;
 	grid-template-rows: 7% 1fr 55px;
 }
 
@@ -91,11 +97,6 @@ input[type="checkbox"] {
 	}
 }
 
-.line {
-	border-bottom: 1px solid lightgray;
-	margin-top: 40px;
-}
-
 #estateAgentContent {
 	border-bottom: 1px solid lightgray;
 	height: 80px;
@@ -103,7 +104,7 @@ input[type="checkbox"] {
 
 #estateAgentContent2 {
 	border-bottom: 1px solid lightgray;
-	height: 370px;
+	height: 350px;
 }
 
 #estateAgentContent3 {
@@ -115,7 +116,7 @@ input[type="checkbox"] {
 	visibility: hidden;
 	position: fixed;
 	width: 400px;
-	top:200px;
+	top:240px;
 	left:650px;
 	z-index: 2;
 	bottom: 200px;
@@ -142,13 +143,6 @@ input[type="checkbox"] {
 }
 
 .e_model_info_phone{
-	font-size: 1.4em;
-	background-color: #FFFFFF;
-	width: 300px;
-	height: 50px;
-}
-
-.e_model_info_regNum{
 	font-size: 1.4em;
 	background-color: #FFFFFF;
 	width: 300px;
@@ -182,7 +176,7 @@ input[type="checkbox"] {
 }
 #map {
 	border: 1px solid lightgray;
-	width: 310px;
+	width: 299px;
 	height: 280px;
 }
 
@@ -191,19 +185,25 @@ input[type="checkbox"] {
 <body>
 
 	<jsp:include page="../common/menubar.jsp" />
-
+	
+	
+	
 	<div class="wrap">
-		<div class="nav-item" onclick="productRecentList();">최근본매물</div>
-		<div class="nav-item" onclick="roomRecentList();">찜한매물</div>
+		<div class="nav">
+			<div class="nav-item" onclick="productRecentList();">최근본매물</div>
+			<div class="nav-item" onclick="roomRecentList();">찜한매물</div>
+		</div>
 	</div>
-
+	
+	
+	
+	
 	<div id="content">
 		<div>
 			<table class="table table-hover" id="recentList">
 				<thead class="thead-dark">
 					<tr>
-						<th scope="col"><input type="checkbox" id="allCheck"
-							checked></th>
+						<th scope="col"><input type="checkbox" id="allCheck" checked></th>
 						<th scope="col">매물사진</th>
 						<th scope="col">매물정보</th>
 					</tr>
@@ -232,9 +232,9 @@ input[type="checkbox"] {
 					<c:if test="${not empty p.p_id }">
 						<tr>
 							
-							<th scope="row"><input type="hidden" value="${p.p_id}"><input type="checkbox" class="chkbox" checked></th>
+							<th scope="row"><input type="hidden" class="p" value="${p.p_id}"><input type="checkbox" class="chkbox" p_id="${p.p_id}" checked></th>
 							<td><img src="resources/images/productRoom.png"
-								style="height: 200px; width: 250px;" /></td>
+								style="height: 180px; width: 240px;" /></td>
 							<td colspan="2">
 								<ul style="text-align: left; list-style-type: square;">
 									<li>${p.p_addr}</li>
@@ -259,7 +259,6 @@ input[type="checkbox"] {
 				
 				</tbody>
 			</table>
-			<div class="line"></div>
 		</div>
 		
 		
@@ -267,8 +266,6 @@ input[type="checkbox"] {
 	<div class="container-for-carousel">
 			
 	</div>
-	<br>
-	
 	<input type="button" value="선택삭제" id="deleteBtn">
 	<br><br><br><br>
 	
@@ -292,12 +289,6 @@ input[type="checkbox"] {
 						<td class="e_modal_info">
 							<div><h3>⌂대표번호</h3></div>
 							<input type="text" class="e_model_info_phone" id="modal" readOnly/>
-						</td>
-					</tr>	
-					<tr>
-						<td class="e_modal_info">
-							<div><h3>⌂사업자등록번호</h3></div>
-							<input type="text" class="e_model_info_regNum" id="modal" readOnly/>
 						</td>
 					</tr>
 				</table>
@@ -348,11 +339,11 @@ input[type="checkbox"] {
 	  });
 	  
 	  
-      $("#recentList").children().children().click(function() {
+      $("#recentList").children().children().children('td').click(function() {
     	  $('.container-for-carousel').css('display','grid');
     	  $('.container-for-carousel').css('overflow','scroll');
     	  
-    	  var p_id = $(this).children().children('input').val();
+    	  var p_id = $(this).parent().children().children('input').val();
     	  
     	  $.ajax({
 				url:'selectEstateAgent.pr',
@@ -379,12 +370,12 @@ input[type="checkbox"] {
 					
 					var testEval = "";
 					testEval += '<div><h4>공인중개사</h4><hr></div><div>';
-					testEval += '<div class="contInner" id="estateAgentContent"><img class="profile" align="left" vspace=1 src="./resources/images/profile.PNG"><h6>&nbsp;'+ data.e_name +'<br>&nbsp;별점: '+ e_point2 +'</h6></div>';
-					testEval += '<div class="contInner" id="estateAgentContent2"><h5>중개사무소 인사말</h5><hr>'+ e_content2 +'</div>';
-					testEval += '<div class="contInner" id="estateAgentContent3"><h5>위치</h5><h6>▽'+ e_addr[1] +'</h6><hr><div id="map"></div></div>';
+					testEval += '<div class="contInner" id="estateAgentContent"><img class="profile" align="left" vspace=1 src="./resources/images/profile.PNG"><h5>&nbsp;'+ data.e_name +'<br>&nbsp;별점: '+ e_point2 +'</h5></div>';
+					testEval += '<div class="contInner" id="estateAgentContent2"><h5>중개사무소 인사말</h5><br>'+ e_content2 +'</div>';
+					testEval += '<div class="contInner" id="estateAgentContent3"><h5>중개사무소 위치</h5><br><h6>▽'+ e_addr[1] +'</h6><div id="map"></div></div>';
 					testEval += '<div id="tail">';
-					testEval += '<input type="button" id="e_modal_btn" value="문의하기" style="font-size: 2.38em;"> ';
-					testEval += '<input type="button" id="e_note_btn" value="쪽지하기" e_id="'+ data.e_id +'" e_name="'+ data.e_name +'" style="font-size: 2.38em;">';
+					testEval += '<input type="button" id="e_modal_btn" value="문의하기" style="font-size: 2.27em;"> ';
+					testEval += '<input type="button" id="e_note_btn" value="쪽지하기" e_id="'+ data.e_id +'" e_name="'+ data.e_name +'" style="font-size: 2.27em;">';
 					testEval += '<div>';
 					
 					$('#p_id').val(p_id);
@@ -393,7 +384,6 @@ input[type="checkbox"] {
 					
 					$('.e_model_info_name').val(data.e_name);
 					$('.e_model_info_phone').val(data.e_phone);
-					$('.e_model_info_regNum').val(data.e_reg_num);
 					$('.e_model_info_field').val(data.e_field);
 					
 					$('.container-for-carousel').html(testEval);
@@ -401,14 +391,9 @@ input[type="checkbox"] {
 					
 					$(function(){
 				        $(".container-for-carousel").height(640);
-				        $.aniOk=0;
 				    });
 				    $(document).on("mousewheel",function(e){
-				        e.preventDefault();
-				        if($.aniOk == 0){
-				            $.aniPage(e);
-				            $.aniOk = 1;
-				        }
+				        
 				    });
 					
 					var container = document.getElementById('map');
@@ -447,7 +432,6 @@ input[type="checkbox"] {
          var chk = $("#allCheck").prop("checked");
          if (chk) {
             $(".chkbox").prop("checked", true);
-            itemSum();
          } else {
             $(".chkbox").prop("checked", false);
 
@@ -458,18 +442,16 @@ input[type="checkbox"] {
          $("#allCheck").prop("checked", false);
          
       });
-      
+      	
       $("#deleteBtn").click(function(){
           var selectedCheck = new Array();
           $('.chkbox:checked').each(function() {
               selectedCheck.push($(this).attr('p_id'));
           });
-          // alert(selectedCheck + '\n개수 : '+selectedCheck.length);
           if(selectedCheck.length < 1 ){
               alert('1개이상 선택');
               return false;
           }
-          //document.form.submit();
          
           var confirm_val = confirm("정말 삭제하시겠습니까?");
           if(confirm_val) {
