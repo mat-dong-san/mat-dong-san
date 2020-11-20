@@ -3,11 +3,11 @@
 <mapper namespace="productMapper">
 	
 	<select id="selectEstateAgent" resultMap="estateAgentInfoResultSet">
-		SELECT *
-		FROM PRODUCT
-		JOIN PRODUCT_APPLICATION ON(PRODUCT.P_ID = PRODUCT_APPLICATION.P_ID)
-		JOIN ESTATEAGENT ON(ESTATEAGENT.E_ID = PRODUCT_APPLICATION.E_ID)
-		WHERE PRODUCT.P_ID=#{p_id}
+		select *
+		from product
+		join product_application on(product.p_id = product_application.p_id)
+		join estateagent on(estateagent.e_id = product_application.e_id)
+		where product.p_id=#{p_id}
 		
 	</select>
 
@@ -30,6 +30,10 @@
 		<result column="US_ID" property="us_id"/>
 	</resultMap>
 	
+	<insert id="insertMessage" parameterType="Note">
+		insert into user_note
+		values(seq_un_id.nextval, #{un_content}, sysdate, default, #{p_id}, null, #{e_id}, #{us_id})
+	</insert>
 	
 
 </mapper>

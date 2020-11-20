@@ -1,7 +1,6 @@
 package mat.dong.san.product.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +16,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
 
+import mat.dong.san.member.exception.MemberException;
 import mat.dong.san.member.vo.EstateAgent;
 import mat.dong.san.product.service.ProductService;
+import mat.dong.san.product.vo.Note;
 import mat.dong.san.product.vo.Product;
 
 @SessionAttributes("pSession")
@@ -86,16 +87,53 @@ public class ProductController {
 		
 	}
 	
+	//쪽지보내기
+	@RequestMapping("insertMessage.pr")
+	public void insertMessage(
+			@RequestParam("us_id") String us_id,
+			@RequestParam("p_id") int p_id,
+			@RequestParam("e_id") int e_id,
+			@RequestParam("un_content") String un_content, 
+			HttpSession session, HttpServletResponse response) throws IOException{
+
+		
+		Note note = new Note();
+		note.setE_id(e_id);
+		note.setP_id(p_id);
+		note.setUs_id(us_id);
+		note.setUn_content(un_content);
+		int result = pService.insertMessage(note);
+		
+		if(result > 0) {
+			response.getWriter().print("1");
+		}else {
+			response.getWriter().print("0");
+		}
+		
+	}
+	
 	// 최근본방 이동
 	@RequestMapping("productRecentList.pr")
 	public String productStorage() {
 		return "productRecentList";
 	}
 	
+	// 쪽지 이동
+	@RequestMapping("note.pr")
+	public String note() {
+		return "note";
+	}
+	
 	//테스트용도
 	@RequestMapping("test.pr")
-	public String mypageView() {
+	public String test() {
 		return "test";
+	}
+	
+	//테스트용도
+	@RequestMapping("test2.pr")
+	public String test2() {
+		return "test2";
 	}
 	
 }
