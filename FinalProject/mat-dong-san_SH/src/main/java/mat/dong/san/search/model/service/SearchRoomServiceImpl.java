@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import mat.dong.san.product.model.vo.Product;
 import mat.dong.san.search.model.dao.SearchRoomDAO;
+import mat.dong.san.search.model.vo.SearchRoomFilter;
 import mat.dong.san.search.model.vo.SearchRoomPageInfo;
 
 @Service("sService")
@@ -31,4 +32,15 @@ public class SearchRoomServiceImpl implements SearchRoomService{
 		return sDAO.selectAllProduct(sqlSession, pageInfo, searchInput);
 	}
 	
+	@Override
+	public int selectProductFilterCount(SearchRoomFilter sf) {
+
+		return sDAO.selectFilterCount(sqlSession, sf);
+	}
+	
+	@Override
+	public ArrayList<Product> selectFilterProduct(SearchRoomPageInfo pageInfo, SearchRoomFilter sf) {
+
+		return sDAO.selectFilterProduct(sqlSession, sf, pageInfo);
+	}
 }

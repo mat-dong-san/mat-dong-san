@@ -5,11 +5,28 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
-	<bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource" destroy-method="close">
+	<!-- <bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource" destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
 		<property name="username" value="MDS"/>
 		<property name="password" value="MDS"/>
+	</bean> -->
+	
+	<bean class="org.apache.commons.dbcp.BasicDataSource" id="realDataSource" destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="username" value="MDS"/>
+		<property name="password" value="MDS"/>
+	</bean>
+	
+	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+		<constructor-arg ref="realDataSource" />
+		<property name="logFormatter">
+			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+				<property name="loggingType" value="MULTI_LINE" />
+				<property name="sqlPrefix" value="[SQL]"/>
+			</bean>
+		</property>
 	</bean>
 	
 	<!-- sqlSession 빈 등록 -->

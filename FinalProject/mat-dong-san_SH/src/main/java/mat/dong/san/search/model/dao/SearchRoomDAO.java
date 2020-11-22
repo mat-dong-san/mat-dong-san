@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import mat.dong.san.product.model.vo.Product;
+import mat.dong.san.search.model.vo.SearchRoomFilter;
 import mat.dong.san.search.model.vo.SearchRoomPageInfo;
 
 @Repository("sDAO")
@@ -25,5 +26,18 @@ public class SearchRoomDAO {
 		return (ArrayList)sqlSession.selectList("SearchRoomMapper.selectProductList", searchInput, rowbounds);
 	}
 
+	public int selectFilterCount(SqlSessionTemplate sqlSession, SearchRoomFilter sf) {
+		
+		return sqlSession.selectOne("SearchRoomMapper.selectProductFilterCount", sf);
+	}
+
+	public ArrayList<Product> selectFilterProduct(SqlSessionTemplate sqlSession, SearchRoomFilter sf,
+			SearchRoomPageInfo pageInfo) {
+		
+		int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getProductLimit();
+		RowBounds rowbounds = new RowBounds(offset, pageInfo.getProductLimit());
+		
+		return (ArrayList)sqlSession.selectList("SearchRoomMapper.selectFilterList", sf, rowbounds);
+	}
 	
 }
