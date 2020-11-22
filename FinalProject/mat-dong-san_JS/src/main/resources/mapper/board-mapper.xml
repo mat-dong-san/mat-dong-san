@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="boardMapper">
-	
-	<insert id="insertFAQ">
-		insert into board
-		values(seq_bid.nextval, #{bTitle}, #{bContent}, 'FAQ' , sysdate, default,  
-				'admin')
-	</insert>
 	<resultMap type="Board" id="boardResultSet">
 		<id column="B_ID" property="bId"/>
 		<result column="B_TITLE" property="bTitle"/>
@@ -15,7 +9,14 @@
 		<result column="B_REG_D" property="bRegD"/>
 		<result column="B_DEL_YN" property="bDelYN"/>
 		<result column="US_ID" property="usId"/>
+		<result column="B_Count" property="bCount"/>
 	</resultMap>
+	
+	<insert id="insertFAQ">
+		insert into board
+		values(seq_faqId.nextval, #{bTitle}, #{bContent}, 'FAQ' , sysdate, default,  
+				'admin', default)
+	</insert>
 
 	<select id="boardFAQListCount" resultType="_int">
 		select count(*) 
@@ -26,8 +27,57 @@
 	<select id="boardFAQList" resultMap="boardResultSet">
 		select *
 		from board
-		where b_del_yn = 'N'
+		where b_del_yn='N'and b_type='FAQ'
 		order by b_id desc
 	</select>
+	
+	<delete id="deleteFAQ">
+		update board
+		set b_del_yn='Y'
+		where B_ID=#{bId}
+	</delete>
+	
+	<select id="selectNoticeList">
+		select count(*)
+		from board
+		where b_type='NOTICE' and b_del_yn ='N'
+	</select>
+	
+	<!-- FAQ업데이트 -->
+	<update id="updateFAQ" >
+		update board set b_title=#{ bTitle }, b_content=#{ bContent } ,b_reg_d=sysdate where b_id=#{ bId }
+	</update>
+	
+	
+	<!-- 공지사항  -->
+	<!-- 리스트카운트 -->
+	<select id="boardNoticeListCount" resultType="_int">
+		select count(*) 
+		from board
+		where B_DEL_YN='N' AND B_TYPE='NOTICE'
+	</select>
+	<!--  리스트 + 페이징 -->
+	<select id="boardNoticeList" resultMap="boardResultSet">
+		select *
+		from board
+		where b_del_yn='N'and b_type='NOTICE'
+		order by b_id desc
+	</select>
+	<!-- 조회수 +1 쿼리문 -->
+	<update id="noticeClickCount">
+		update board set b_count =  b_count + 1
+		where b_Id = #{bId}
+	</update>
+	<!-- 공지사항 디테일 select! -->	
+	<select id="noticeDetail" resultMap="boardResultSet">
+		select * from board 
+		where b_Id=#{bId} and b_type='NOTICE' and b_del_yn='N'
+	</select>
+	<!-- 공지사항 insert -->
+	<insert id="noticeInsert">
+		insert into board
+		values(seq_noticeId.nextval, #{bTitle}, #{bContent}, 'NOTICE' , sysdate, default,  
+				'admin', default)
+	</insert>
 	
 </mapper>

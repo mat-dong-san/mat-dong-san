@@ -6,11 +6,11 @@ public class Pagination {
 	public static PageInfo getPageInfo(int currentPage, int listCount) {
 		
 		PageInfo pi = null;
-		int pageLimit = 10;
+		int pageLimit = 5;
 		int maxPage;
 		int startPage;
 		int endPage;
-		int boardLimit = 5;
+		int boardLimit = 10;
 		
 		maxPage = (int)Math.ceil((double)listCount/boardLimit + 0.9);
 		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
@@ -19,8 +19,9 @@ public class Pagination {
 			endPage = maxPage;
 		}
 		
-		pi = new PageInfo(currentPage, listCount, pageLimit, maxPage, startPage, endPage, boardLimit);
 		
+		pi = new PageInfo(currentPage, listCount, pageLimit, maxPage, startPage, endPage, boardLimit);
+		System.out.println(pi);
 		return pi;
 	}
 	

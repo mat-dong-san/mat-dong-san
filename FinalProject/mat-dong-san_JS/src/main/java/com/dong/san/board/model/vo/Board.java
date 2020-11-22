@@ -10,15 +10,31 @@ public class Board {
 	private Date bRegD;
 	private String bDelYN;
 	private String usId;
+	private int bCount;
 	
 	public Board() {}
 	
+	
+	
+	public Board(int bId) {
+		super();
+		this.bId = bId;
+	}
+
+
+
 	public Board(String bTitle, String bContent) {
 		this.bTitle = bTitle;
 		this.bContent = bContent;
 	}
 
-	public Board(int bId, String bTitle, String bContent, String bType, Date bRegD, String bDelYN, String usId) {
+	public Board(int bId, String bTitle, String bContent) {
+		this.bId = bId;
+		this.bTitle = bTitle;
+		this.bContent = bContent;
+	}
+	
+	public Board(int bId, String bTitle, String bContent, String bType, Date bRegD, String bDelYN, int bCount, String usId) {
 		this.bId = bId;
 		this.bTitle = bTitle;
 		this.bContent = bContent;
@@ -26,6 +42,7 @@ public class Board {
 		this.bRegD = bRegD;
 		this.bDelYN = bDelYN;
 		this.usId = usId;
+		this.bCount = bCount;
 	}
 
 	public int getbId() {
@@ -75,6 +92,7 @@ public class Board {
 	public void setbDelYN(String bDelYN) {
 		this.bDelYN = bDelYN;
 	}
+	
 
 	public String getUsId() {
 		return usId;
@@ -84,12 +102,26 @@ public class Board {
 		this.usId = usId;
 	}
 
+	public int getbCount() {
+		return bCount;
+	}
+	
+	public void setbCount(int bCount) {
+		this.bCount = bCount;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Board [bId=" + bId + ", bTitle=" + bTitle + ", bContent=" + bContent + ", bType=" + bType + ", bRegD="
-				+ bRegD + ", bDelYN=" + bDelYN + ", usId=" + usId + "]";
+				+ bRegD + ", bDelYN=" + bDelYN + ", usId=" + usId + ", bCount=" + bCount + "]";
 	}
 
+
+	
+
+	
 	
 	
 	
