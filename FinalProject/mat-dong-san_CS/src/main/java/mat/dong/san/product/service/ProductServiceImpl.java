@@ -4,8 +4,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import mat.dong.san.member.vo.EstateAgent;
 import mat.dong.san.product.dao.ProductDAO;
-import mat.dong.san.product.vo.Product;
+import mat.dong.san.product.vo.Note;
 
 
 @Service("pService")
@@ -18,7 +19,14 @@ public class ProductServiceImpl implements ProductService{
 	private ProductDAO pDAO;
 
 	@Override
-	public Product selectProductRoom(Product p) {
-		return pDAO.selectProductRoom(sqlSession, p);
+	public EstateAgent selectEstateAgent(String p_id) {
+		return pDAO.selectEstateAgent(sqlSession, p_id);
 	}
+
+	@Override
+	public int insertMessage(Note note) {
+		return pDAO.insertMessage(sqlSession, note);
+	}
+
+	
 }

@@ -1,9 +1,13 @@
 package mat.dong.san.product.service;
 
-import mat.dong.san.product.vo.Product;
+import mat.dong.san.member.vo.EstateAgent;
+import mat.dong.san.product.vo.Note;
 
 public interface ProductService {
 
-	Product selectProductRoom(Product p);
+	EstateAgent selectEstateAgent(String p_id);
 
+	int insertMessage(Note note);
+
+	
 }

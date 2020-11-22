@@ -30,7 +30,7 @@
 		
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>*.do</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
 	<!--회원 관련 -->
@@ -59,11 +59,26 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>productServlet</servlet-name>
-		<url-pattern>*.search</url-pattern>
+		<url-pattern>*.pr</url-pattern>
 	
 	</servlet-mapping>
 	
-
+	<!-- 방찾기 -->
+	<servlet>
+		<servlet-name>searchRoomServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/searchRoom-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>searchRoomServlet</servlet-name>
+		<url-pattern>*.search</url-pattern>
+	</servlet-mapping>
+	
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

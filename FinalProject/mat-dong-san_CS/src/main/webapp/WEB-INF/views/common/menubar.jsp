@@ -30,28 +30,30 @@
 	
 	<div id="menubarDiv">
 		<span id="goSearchHouse" class="goMenuButton" onclick="location.href='gosSarchHouseMain.search'">방찾기</span>
-		<span id="goSearchHouse" class="goMenuButton" onclick="location.href='productRecentList.search'">관심목록</span>
+		<span id="goSearchHouse" class="goMenuButton" onclick="location.href='productRecentList.pr'">관심목록</span>
 		<span id="goSearchHouse" class="goMenuButton" onclick="location.href='#'">중고장터</span>
 		<span id="goSearchHouse" class="goMenuButton" onclick="location.href='#'">고객센터</span>
 		<span id="goSearchHouse" class="goMenuButton" onclick="location.href='mypageView.me'">마이페이지</span>
-	
+		<span id="goSearchHouse" class="goMenuButton" onclick="location.href='test.pr'">테스트</span>
+		<span id="goSearchHouse" class="goMenuButton" onclick="location.href='test2.pr'">테스트2</span>
 	
 		<div class="loginArea" align="right">
 			<c:if test="${ empty sessionScope.loginUser }">
 				
-				<button type="button" class="goMenuButton" onclick="location.href='loginView.me'">로그인</button>
-				<button type="button" class="goMenuButton" onclick="location.href='enrollView.me'">회원가입</button>
+				<span id="" class="goMenuButton" onclick="location.href='loginView.me'">로그인</span>
+				<span id="" class="goMenuButton" onclick="location.href='enrollView.me'">회원가입</span>
 				
 			</c:if>
 			<c:if test="${ !empty sessionScope.loginUser }">
 			
 				<c:url var="storage" value="productStorage.pr"/>
 				
-				<h3 align="right">
+				<h5 align="right">
 					<c:out value="${ loginUser.us_name }님 환영합니다."/> <!-- c:out 활용 -->
 					<c:url var="logout" value="logout.me"/>
-					<button onclick="location.href='${logout}'">로그아웃</button>
-				</h3>
+					<span id="" class="goMenuButton" onclick="location.href='${logout}'">로그아웃</span>
+					
+				</h5>
 			</c:if>
 		</div>
 	</div>

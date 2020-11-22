@@ -9,10 +9,12 @@
 		<typeAlias type="mat.dong.san.member.vo.Member" alias="Member"/>
 		<typeAlias type="mat.dong.san.member.vo.EstateAgent" alias="EstateAgent"/>
 		<typeAlias type="mat.dong.san.product.vo.Product" alias="Product"/>
+		<typeAlias type="mat.dong.san.product.vo.Note" alias="Note"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mapper/member-mapper.xml"/>
 		<mapper resource="mapper/product-mapper.xml"/>
+		<mapper resource="mapper/searchRoom-mapper.xml"/>
 	</mappers>
 </configuration>

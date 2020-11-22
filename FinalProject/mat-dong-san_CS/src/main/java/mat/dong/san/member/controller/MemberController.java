@@ -51,7 +51,7 @@ public class MemberController {
 	@RequestMapping("logout.me")
 	public String logout(SessionStatus session) {
 		session.setComplete();
-		return "redirect:home.do";
+		return "redirect:/";
 	}
 	
 	// 회원선택페이지이동
@@ -92,7 +92,7 @@ public class MemberController {
 		int result = mService.insertMember(m);
 		
 		if(result > 0) {
-			return "redirect:home.do";
+			return "redirect:/";
 		}else {
 			throw new MemberException("회원가입에 실패했습니다.");
 		}
@@ -138,7 +138,7 @@ public class MemberController {
 		int result = mService.insertEstateAgent(e);
 			
 		if(result > 0) {
-			return "redirect:home.do";
+			return "redirect:/";
 		}else {
 			throw new MemberException("중개사 등록에 실패했습니다.");
 		}
@@ -185,7 +185,7 @@ public class MemberController {
 			throw new MemberException("로그인에 실패했습니다.");
 		}
 		
-		return "redirect:home.do";
+		return "redirect:/";
 	}
 	
 	// 아이디중복확인
