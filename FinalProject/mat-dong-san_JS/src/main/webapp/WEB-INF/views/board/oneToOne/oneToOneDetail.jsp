@@ -92,8 +92,7 @@
 </head>
 <body>
     <div id="oneToOneView_Wrapper">
-        <div id="menubar">
-        </div>
+        <c:import url="../../common/menubar.jsp"/>
         
         <div id="loaded">
         </div>
@@ -145,6 +144,7 @@
                 </div>
             </div>
         </div>
+    </div>
     <script>
         $(document).ready(function(){
             $("#loaded").load("../helpdeskSidebar.html");

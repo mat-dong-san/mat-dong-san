@@ -32,7 +32,7 @@ public class BoardServiceImpl implements BoardService {
 		return bDAO.boardFAQListCount(sqlSession);
 	}
 
-
+	
 	@Override
 	public ArrayList<Board> selectList(PageInfo pi) {
 		// TODO Auto-generated method stub
@@ -47,6 +47,48 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 
+
+
+	@Override
+	public int updateFAQ(Board board) {
+		return bDAO.updateFAQ(sqlSession, board);
+	}
+
+	// 공지사항
+	@Override
+	public int boardNoticeListCount() {
+		// TODO Auto-generated method stub
+		return bDAO.boardNoticeListCount(sqlSession);
+	}
+
+
+	@Override
+	public ArrayList<Board> selectNoticeList(PageInfo pi) {
+		return bDAO.selectNoticeList(sqlSession, pi);
+	}
+
+
+	@Override
+	public Board noticeDetail(int noticeId) {
+		// TODO Auto-generated method stub
+		
+		Board board = null;
+		// 클릭시 조회수 + 1
+		int result = bDAO.noticeClickCount(sqlSession, noticeId);
+		
+		if(result > 0) {
+			board =  bDAO.noticeDetail(sqlSession, noticeId);
+		}
+		
+		return board;
+	}
+
+
+	@Override
+	public int noticeInsert(Board b) {
+		// TODO Auto-generated method stub
+		return bDAO.noticeInsert(sqlSession,b)	;
+	}
 	
 
 

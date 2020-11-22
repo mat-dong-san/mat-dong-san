@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,11 +69,8 @@
 </head>
 <body>
     <div id="oneToOneView_Wrapper">
-        <div id="menubar">
-        </div>
-        
-        <div id="loaded">
-        </div>
+        <c:import url="../../common/menubar.jsp"/>
+		<c:import url="../../common/helpdeskSidebar.jsp"/>
         <div id="oneToOneView_innerWrapper">
             <!-- head-->
             <div id="oneToOneView_head">
@@ -145,12 +143,7 @@
         </div>
     </div>
     <script>
-        $(document).ready(function(){
-            $("#loaded").load("../helpdeskSidebar.html");
-        });
-        $(document).ready(function(){
-            $("#menubar").load("../menubar.html");
-        });
+       
 
         // 카테고리 클릭시 이벤트 처리 
 

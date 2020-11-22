@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -92,11 +94,9 @@
 </head>
 <body>
     <div id="oneToOneView_Wrapper">
-        <div id="menubar">
-        </div>
         
-        <div id="loaded">
-        </div>
+         <c:import url="../../common/menubar.jsp"/>
+        <c:import url="../../common/helpdeskSidebar.jsp"/>
         <div id="oneToOneView_innerWrapper">
             <!-- head-->
             <div id="oneToOneView_head">
@@ -105,12 +105,12 @@
                 </div>
                 <div class="oneToOne_mid">
                     <div>
-                        <h2>제목</h2>
+                        <h2>${ notice.bTitle }</h2>
                     </div>
                     <div id="mid_flex_div"> 
                         <div class="oneToOneListMid_left">
-                            <span>아이디</span>
-                            <span>날짜</span>
+                            <span>관리자</span>
+                            <span>${ notice.bRegD }</span>
                         </div>
                         <div class="oneToOneListMid_right">
                             <button id="oneToOne_goDetail">수정</button>
@@ -121,19 +121,13 @@
             </div>
             <div id="oneToOneView_body">
                 <div class="oneToOneDetail_Content">
-
+					${ notice.bContent }
                 </div>
             </div>
             
         </div>
+   </div>    
     <script>
-        $(document).ready(function(){
-            $("#loaded").load("../helpdeskSidebar.html");
-        });
-         // menubar
-         $(document).ready(function(){
-            $("#menubar").load("../menubar.html");
-        });
     </script>
 </body>
 </html>
