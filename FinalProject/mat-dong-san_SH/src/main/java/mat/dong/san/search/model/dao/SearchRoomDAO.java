@@ -39,5 +39,10 @@ public class SearchRoomDAO {
 		
 		return (ArrayList)sqlSession.selectList("SearchRoomMapper.selectFilterList", sf, rowbounds);
 	}
+
+	public Product selectProductDetail(SqlSessionTemplate sqlSession, Integer p_id) {
+
+		return sqlSession.selectOne("SearchRoomMapper.selectProductDetail", p_id);
+	}
 	
 }

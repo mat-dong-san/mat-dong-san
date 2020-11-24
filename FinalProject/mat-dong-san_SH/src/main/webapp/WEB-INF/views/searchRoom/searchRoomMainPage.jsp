@@ -121,7 +121,6 @@
 	  <button id="rentFilter" class="filter">건물 유형</button>
 	  <button id="otherFilter" class="filter">기타 옵션</button>
 	  
-	  <c:url var="goDetailPage" value="searchRoomDetailPage.search" />
 	  <div id="roomFilterDiv" class="filterDiv" style="left: 280px;">
 	  		방 종류
 	  		<label><input type="checkbox" id="roomTypeOne" name="roomType" onclick="checkFilterFun(); checkOneForce(this);" value="원룸">원룸</label>
@@ -272,10 +271,6 @@
 					dataType: 'json',
 					success: function(data){
 						
-						console.log(data);
-						console.log(data[0]);
-						console.log(data[1]);
-						
 					 	var $listHouseDiv = $("#listHouseDiv"); 
 						$listHouseDiv.html(""); 
 						
@@ -288,7 +283,7 @@
 					 	for(var i = 0; i < data[1].length; i++){
 							
 							var $div2 = $("<div class='productContent'>");
-							$div2.attr('onclick','location.href="${ goDetailPage }"');
+							$div2.attr('onclick','goDetailPage(this)');
 							var $img = $("<img alt="+data[1][i].p_picture+" src=''>");
 							var $span1 = $("<span>").text(data[1][i].p_kind);
 							var $span2 = $("<span>").text(data[1][i].p_deal);
@@ -299,7 +294,7 @@
 								$span3.text(data[1][i].p_deposit+"/"+data[1][i].p_rent);
 							}
 							var $span4 = $("<span>").text(data[1][i].p_content);
-							var $span5 = $("<span>").text(data[1][i].p_addr);
+							var $span5 = $("<span id='addSpan'>").text(data[1][i].p_addr);
 							
 							$div2.append($img);
 							$div2.append($span1);
@@ -411,10 +406,8 @@
 				var searchInput = $('#searchAddr').val();
 				
 				if(cP == 'p'){
-					console.log('이전');
 					var page = Number("<c:out value='${pageInfo.currentPage}' />") - 1;
 				} else if (cP == 'n'){
-					console.log('다음');
 					var page = Number("<c:out value='${pageInfo.currentPage}' />") + 1;
 				} else {
 					var page = Number(cP);
@@ -532,10 +525,8 @@
 	  			var jQueryDivUseId = '#'+divId;
 	  			
 	  			if($(jQueryUseId).prop('checked')){
-	  				console.log('체크됨');
 	  				$(jQueryDivUseId).css('display','block');
 	  			} else {
-	  				console.log('체크안됨');
 	  				$(jQueryDivUseId).css('display','none');
 	  			}
 	  			
@@ -560,22 +551,23 @@
   <div id="contentContainer">
      <div id="listHouseDiv">
      	<div>전체 매물 수 : ${ pageInfo.listCount } </div>
-     	<c:forEach var="p" items="${ productList }">
+     	<c:forEach var="p" items="${ productList }" varStatus="status">
      		
-	        <div class="productContent" onclick="location.href='${ goDetailPage }'">
-	        <img alt="${ p.p_picture }" src="">
-	        <span>${ p.p_kind }</span>
-	        <span>${ p.p_deal }</span>
-	        <span>
-	        	<c:if test="${ p.p_deal == '전세' }">
-	        		${ p.p_charter }
-	        	</c:if>
-	        	<c:if test="${ p.p_deal == '월세' }">
-	        		${ p.p_deposit }/${ p.p_rent }
-	        	</c:if>
-	        </span>
-	        <span>${ p.p_content }</span>
-	        <span>${ p.p_addr }</span>
+	        <div class="productContent" onclick="goDetailPage(this)">
+		        <img alt="${ p.p_picture }" src="">
+		        <span>${ p.p_kind }</span>
+		        <span>${ p.p_deal }</span>
+		        <span>
+		        	<c:if test="${ p.p_deal == '전세' }">
+		        		${ p.p_charter }
+		        	</c:if>
+		        	<c:if test="${ p.p_deal == '월세' }">
+		        		${ p.p_deposit }/${ p.p_rent }
+		        	</c:if>
+		        </span>
+		        <span>${ p.p_content }</span>
+		        <span id="addSpan" name="addSpan${ status.index }">${ p.p_addr }</span>
+		        <input type="hidden" value="${ p.p_id }">
 	        </div>
 	        
      	</c:forEach>
@@ -630,108 +622,164 @@
 <script>
 
 	/* 지도 관련 스크립트 */
+	function mapStart(){
 	
-	var geocoder = new kakao.maps.services.Geocoder();
-	var bounds = new kakao.maps.LatLngBounds();
-
-	var position = [];
-	var addr_s = [];
-	var point = [];
+		var geocoder = new kakao.maps.services.Geocoder();
+		var bounds = new kakao.maps.LatLngBounds();
 	
-	for(var i = 2; i < 12; i++){
-		var deposit = $('#listHouseDiv>div:nth-child('+i+')>span:nth-child(3)').text();
-		var rent = $('#listHouseDiv>div:nth-child('+i+')>span:nth-child(4)').text();
-		var address = $('#listHouseDiv>div:nth-child('+i+')>span:nth-child(6)').text();
+		var position = [];
+		var addr_s = [];
+		var point = [];
 		
-		// 주소를 담은 배열
-		addr_s.push({
-			ad: address,
-			re: address + "/" + rent
-		});
-	}
-	// 좌표를 담자
-	for(var i = 0; i < 10; i++){
-		geocoder.addressSearch(addr_s[i].re.substr(0,addr_s[i].re.indexOf("/")), callback);
-	}
+		for(var i = 2; i < 12; i++){
+			var deposit = $('#listHouseDiv>div:nth-child('+i+')>span:nth-child(3)').text();
+			var rent = $('#listHouseDiv>div:nth-child('+i+')>span:nth-child(4)').text();
+			var address = $('#listHouseDiv>div:nth-child('+i+')>span:nth-child(6)').text();
+			
+			// 주소를 담은 배열
+			addr_s.push({
+				ad: address,
+				re: address + "/" + rent
+			});
+		}
+		// 좌표를 담자
+		for(var i = 0; i < 10; i++){
+			geocoder.addressSearch(addr_s[i].re.substr(0,addr_s[i].re.indexOf("/")), callback);
+		}
+		
+		
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+		
+		mapOption = {
+		    center: new kakao.maps.LatLng(37.5888243531423, 127.020126449752), // 지도의 중심좌표
+		    level: 3 // 지도의 확대 레벨
+		};
+		
+		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+		
+		function callback(result, status) {
+		    if (status === kakao.maps.services.Status.OK) {
+		    	position.push(
+			    		{
+			    			content: "<div style='padding:5px; font-size:15px; width:240px;'>"+result[0].address_name+"</div>",
+			    			latlng: new kakao.maps.LatLng(result[0].y, result[0].x)
+			    		}
+		    	)
+		    	point.push(new kakao.maps.LatLng(result[0].y, result[0].x));
+		    	
+		    	for (i = 0; i < point.length; i++) {
+		    	    
+		    	    // LatLngBounds 객체에 좌표를 추가합니다
+		    	    bounds.extend(point[i]);
+		    	}
+		    	
+		    	function setBounds() {
+		    	    // LatLngBounds 객체에 추가된 좌표들을 기준으로 지도의 범위를 재설정합니다
+		    	    // 이때 지도의 중심좌표와 레벨이 변경될 수 있습니다
+		    	    map.setBounds(bounds);
+		    	}
+		    	setBounds();
+		    	
+		    	if(position.length == 9 || position.length == 10){
+		    		
+		    		for (var i = 0; i < position.length; i ++) {
+		    		    // 마커를 생성합니다
+		    		    
+		    		    var startIndex = position[i].content.indexOf('>') + 4;
+	    		  		var endIndex = position[i].content.indexOf('<',1);
+	    		  		var map_add = position[i].content.substring(startIndex, endIndex);
+	    		  		
+	    		  		for(var k = 0; k < 10; k++){
+	    		  			var spanIndex = 'span[name=addSpan'+k+']';
+	    		  			
+	    		  			if($(spanIndex).text().substring(6) == map_add){
+	    		  				var rent = $(spanIndex).prev().prev().text();
+	    		  			}
+	    		  		}
+	    		  		
+		    		    var marker = new kakao.maps.Marker({
+		    		        map: map, // 마커를 표시할 지도
+		    		        position: position[i].latlng // 마커의 위치
+		    		    });
 	
+		    		    // 마커에 표시할 인포윈도우를 생성합니다 
+		    		    var infowindow = new kakao.maps.InfoWindow({
+		    		        content: '<div>'+position[i].content+rent+'</div>' // 인포윈도우에 표시할 내용
+		    		    });
 	
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-	
-	mapOption = {
-	    center: new kakao.maps.LatLng(37.5888243531423, 127.020126449752), // 지도의 중심좌표
-	    level: 3 // 지도의 확대 레벨
-	};
-	
-	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-	
-	function callback(result, status) {
-	    if (status === kakao.maps.services.Status.OK) {
-	    	position.push(
-		    		{
-		    			content: "<div style='padding:5px; font-size:15px; width:240px;'>"+result[0].address_name+"</div>",
-		    			latlng: new kakao.maps.LatLng(result[0].y, result[0].x)
+		    		    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+		    		    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+		    		    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+		    		    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+		    		    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+ 		    		    kakao.maps.event.addListener(marker, 'click', goDetailInKakao(position[i].content));
 		    		}
-	    	)
-	    	point.push(new kakao.maps.LatLng(result[0].y, result[0].x));
-	    	
-	    	for (i = 0; i < point.length; i++) {
-	    	    
-	    	    // LatLngBounds 객체에 좌표를 추가합니다
-	    	    bounds.extend(point[i]);
-	    	}
-	    	
-	    	function setBounds() {
-	    	    // LatLngBounds 객체에 추가된 좌표들을 기준으로 지도의 범위를 재설정합니다
-	    	    // 이때 지도의 중심좌표와 레벨이 변경될 수 있습니다
-	    	    map.setBounds(bounds);
-	    	}
-	    	setBounds();
-	    	
-	    	if(position.length == 9 || position.length == 10){
-	    		
-	    		for (var i = 0; i < position.length; i ++) {
-	    		    // 마커를 생성합니다
-	    		    var marker = new kakao.maps.Marker({
-	    		        map: map, // 마커를 표시할 지도
-	    		        position: position[i].latlng // 마커의 위치
-	    		    });
-
-	    		    // 마커에 표시할 인포윈도우를 생성합니다 
-	    		    var infowindow = new kakao.maps.InfoWindow({
-	    		        content: position[i].content // 인포윈도우에 표시할 내용
-	    		    });
-
-	    		    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-	    		    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
-	    		    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-	    		    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-	    		    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-	    		    kakao.maps.event.addListener(marker, 'click', function() {
-						
-	    		    	// detail 페이지 이동
-	    		    	location.href="${ goDetailPage }"; 
-		    		});
-	    		}
-
-	    		// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
-	    		function makeOverListener(map, marker, infowindow) {
-	    		    return function() {
-	    		        infowindow.open(map, marker);
-	    		    };
-	    		}
-
-	    		// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
-	    		function makeOutListener(infowindow) {
-	    		    return function() {
-	    		        infowindow.close();
-	    		    };
-	    		}
-	    		
-	    	}
-	    }
+		    		
+		    		function goDetailInKakao(thisInfo){
+		    			return function(){
+		    				var startIndex = thisInfo.indexOf('>') + 4;
+		    		  		var endIndex = thisInfo.indexOf('<',1);
+		    		  		var map_add = thisInfo.substring(startIndex, endIndex);
+		    		  		
+		    		  		$('span[id=addSpan]').each(function(){
+		    		  			if(map_add == $(this).text().substring(6)){
+		    		  				var p_id = $(this).next().val();
+		    		  				location.href="searchRoomDetailPage.search?p_id="+p_id;
+		    		  			}
+		    		  		});
+		    			}
+		    		}
+		    		
+		    		function checkAddRent(thisInfo){
+	    		    	
+	    		    	var startIndex = thisInfo.indexOf('>') + 4;
+	    		  		var endIndex = thisInfo.indexOf('<',1);
+	    		  		var map_add = thisInfo.substring(startIndex, endIndex);
+	    		  		
+	    		  		$('span[id=addSpan]').each(function(){
+	    		  			if(map_add == $(this).text().substring(6)){
+	    		  				var rent = $(this).prev().prev().val();
+	    		  				
+	    		  			}
+	    		  		});
+	    		  		return rent;
+	    		    }
+	
+		    		// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+		    		function makeOverListener(map, marker, infowindow) {
+		    		    return function() {
+		    		        infowindow.open(map, marker);
+		    		    };
+		    		}
+	
+		    		// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+		    		function makeOutListener(infowindow) {
+		    		    return function() {
+		    		        infowindow.close();
+		    		    };
+		    		}
+		    		
+		    	}
+		    }
+		};
+	
 	};
 	
+	$(function(){
+		mapStart();
+	})
 	
+	
+	
+	$(document).ajaxSuccess(function(){
+		mapStart();
+	});
+	
+  	/* 디테일 페이지 이동하기 */
+  	function goDetailPage(thisInfo){
+  		var p_id = $(thisInfo).children(":last").val();
+  		location.href="searchRoomDetailPage.search?p_id="+p_id;
+  	}
   	
 </script>
  

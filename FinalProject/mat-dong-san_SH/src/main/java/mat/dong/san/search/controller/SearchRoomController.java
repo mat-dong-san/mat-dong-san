@@ -143,7 +143,7 @@ public class SearchRoomController {
 		sf.setEleType(eleType);
 		
 		if(searchInput != null){
-			if(searchInput.equals("")) {
+			if(!searchInput.equals("")) {
 				sf.setSearchInput(searchInput);
 			}
 		}
@@ -231,11 +231,14 @@ public class SearchRoomController {
 		sf.setPetType(petType);
 		sf.setEleType(eleType);
 		
+		System.out.println(searchInput);
+		
 		if(searchInput != null){
-			if(searchInput.equals("")) {
+			if(!searchInput.equals("")) {
 				sf.setSearchInput(searchInput);
 			}
 		}
+		
 		
 		int productListFilterCount = sService.selectProductFilterCount(sf);
 		
@@ -267,9 +270,15 @@ public class SearchRoomController {
 	}
 	
 	@RequestMapping(value = "searchRoomDetailPage.search", method = RequestMethod.GET)
-	public String goSearchRoomDetailPage() {
+	public ModelAndView goSearchRoomDetailPage(@RequestParam("p_id") Integer p_id, ModelAndView mv) {
 		
-		return "searchRoomDetailPage";
+		Product product = sService.selectProductDetail(p_id);
+		
+		if(product != null) {
+			mv.addObject("product", product);
+			mv.setViewName("searchRoomDetailPage");
+		}
+		return mv;
 	}
 	
 }

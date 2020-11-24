@@ -57,6 +57,8 @@
   			P_FIELD like '%' || #{item} || '%'
   		</foreach>
   	</if>
+  	and (P_CHARTER <![CDATA[>=]]> #{minCharter} and P_CHARTER <![CDATA[<=]]> #{maxCharter})
+  	and (P_RENT <![CDATA[>=]]> #{minMonthly} and P_RENT <![CDATA[<=]]> #{maxMonthly})
   </select>
   <select id="selectFilterList" resultType="Product">
   	select 
@@ -93,6 +95,15 @@
   			P_FIELD like '%' || #{item} || '%'
   		</foreach>
   	</if>
+  	and (P_CHARTER <![CDATA[>=]]> #{minCharter} and P_CHARTER <![CDATA[<=]]> #{maxCharter})
+  	and (P_RENT <![CDATA[>=]]> #{minMonthly} and P_RENT <![CDATA[<=]]> #{maxMonthly})
+  </select>
+  
+  <select id="selectProductDetail" resultType="Product">
+  	select
+  	*
+  	from PRODUCT
+  	where P_ID = #{p_id}  	
   </select>
  
 </mapper>

@@ -147,74 +147,80 @@
 		<div id="detailHeaderDiv" class="detailDiv">
 			<table id="headTable">
 				<tr>
-					<td>월세</td>
-					<td>쓰리룸</td>
-					<td>전용면적</td>
-				</tr>
-				<tr>
-					<th colspan="2">5000/60</th>
-					<th>54.22</th>
-				</tr>
-				<tr>
+					<td></td>
+					<td>${ product.p_addr }</td>
 					<td><div class="goManage">신고하기</div></td>
+				</tr>
+				<tr>
+					<th colspan="2" style="text-align:left">
+					<c:if test=""></c:if>
+					<c:if test="${ product.p_deal == '전세' }">
+		        		${ product.p_charter }
+		        	</c:if>
+		        	<c:if test="${ product.p_deal == '월세' }">
+		        		${ product.p_deposit }/${ product.p_rent }
+		        	</c:if>
+					</th>
+					<th></th>
+				</tr>
+				<tr>
 					<td></td>
 					<td></td>
 				</tr>
 			</table>
 		</div>
 		<div id="detailBodyDiv" class="detailDiv">
-			<table id="bodyTable">
+			<table id="bodyTable" style="text-align: left;">
 				<tr>
 					<td>해당층/건물층</td>
-					<td>3층/4층</td>
+					<td>${ product.p_layer }/${ product.p_floor }</td>
 					<td>전용/공급면적</td>
-					<td>54.22/59.5</td>
+					<td>${ product.p_d_size }/${ product.p_s_size }</td>
 					<td>방 수</td>
-					<td>3개</td>
+					<td>${ product.p_kind }</td>
 					<td>방향</td>
-					<td>남</td>
+					<td>${ product.p_dir }</td>
 				</tr>
 				<tr>
 					<td>난방종류</td>
-					<td>개별난방</td>
-					<td>주차여부</td>
-					<td>가능</td>
-					<td>엘레베이터</td>
-					<td>있음</td>
-					<td>베란다/발코니</td>
-					<td>있음</td>
-				</tr>
-				<tr>
-					<td>입주가능일</td>
-					<td>20.11.05</td>
-					<td>전세대출</td>
-					<td>가능</td>
+					<td>${ product.p_heat }</td>
 					<td>빌트인</td>
-					<td>있음</td>
-					<td>반려동물</td>
-					<td>가능</td>
+					<td>${ product.p_built_in }</td>
+					<td>주차여부</td>
+					<td>${ product.p_park }</td>
+					<td>베란다/발코니</td>
+					<td>${ product.p_verander }</td>
 				</tr>
 				<tr>
-					<td>관리비</td>
-					<td>20만</td>
+					<td>엘레베이터</td>
+					<td>${ product.p_elevator }</td>
+					<td>반려동물</td>
+					<td>${ product.p_pet }</td>
 					<td>건물유형</td>
-					<td>빌라</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td>${ product.p_field }</td>
+					<td>관리비</td>
+					<td>${ product.p_cost }만</td>
+				</tr>
+				<tr>
+					<td>구조</td>
+					<td>${ product.p_str }</td>
+					<td>전세대출</td>
+					<td>${ product.p_loan }</td>
+					<td>입주가능일</td>
+					<td>${ product.p_en_d }</td>
+					<td>최초등록일</td>
+					<td>${ product.p_reg_d }</td>
 				</tr>
 				<tr style="height: 100px;">
 					<td>옵션</td>
-					<td colspan="7" style="text-align: left;">에어컨, 세탁기, 냉장고</td>
+					<td colspan="7" style="text-align: left;">${ product.p_option }</td>
 				</tr>
 				<tr style="height: 350px;">
-					<td colspan="8"><img alt="집 사진" src=""></td>
+					<td colspan="8"><img alt="${ product.p_picture }" src="${ product.p_picture }"></td>
 				</tr>
 				<tr style="height: 200px;">
 					<td colspan="8">
-					간략한 소개간략한 소개간략한 소개간략한 소개간략한 소개간략한 소개간략한 소개간략한 소개간략한 소개간략한 소개간략한 소개간략한 소개
-					간략한 소개간략한 소개간략한 소개간략한 소개간략한 소개간략한 소개간략한 소개간략한 소개간략한 소개간략한 소개간략한 소개간략한 소개
+					${ product.p_content }
 					</td>
 				</tr>
 			</table>
@@ -237,16 +243,37 @@
 				<td>전세대출</td>
 			</tr>
 			<tr>
-				<td>500만 / 30만원</td>
-				<td>매월 5만원</td>
-				<td>매월 3만원</td>
-				<td>가능</td>
+				<td>
+					<c:if test="${ product.p_deal == '전세' }">
+		        		${ product.p_charter }만 원
+		        	</c:if>
+		        	<c:if test="${ product.p_deal == '월세' }">
+		        		${ product.p_deposit }만/${ product.p_rent }만원
+		        	</c:if>
+				</td>
+				<td>
+					<c:if test="${ product.p_cost == 0 }">
+		        		없음
+		        	</c:if>
+					<c:if test="${ product.p_cost != 0 }">
+		        		${ product.p_cost }만원
+		        	</c:if>
+		        </td>
+				<td>없음</td>
+				<td>${ product.p_loan }</td>
 			</tr>
 		</table>
 		<div id="monthRentInfo">
 			<label style="font-size: 20px; letter-spacing: -1px;">한달 예상 주거비용</label>
-			<label style="font-size: 30px; margin-left: 55px;">38만 원</label>
-			<label style="font-size: 15px; letter-spacing: -1px;">(월세 + 관리비 + 주차비)</label>
+			<label style="font-size: 30px; margin-left: 55px;">
+				<c:if test="${ product.p_deal == '월세' }">
+					${ product.p_cost + product.p_rent }만원
+		        </c:if>
+		        <c:if test="${ product.p_deal == '전세' }">
+		        	${ product.p_cost }만 원
+		        </c:if>
+			</label>
+			<label style="font-size: 15px; letter-spacing: -1px;">(월세 + 관리비)</label>
 		</div>
 		<div class="detailInfoIndexTitle" id="index2">
 			위치
@@ -372,7 +399,7 @@
      var geocoder = new kakao.maps.services.Geocoder();
      
      // 주소로 좌표를 검색합니다
-     geocoder.addressSearch('강남구 테헤란로14길 6', function(result, status) {
+     geocoder.addressSearch('${ product.p_addr }', function(result, status) {
           // 정상적으로 검색이 완료됐으면 
           if (status === kakao.maps.services.Status.OK) {
               var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
@@ -383,7 +410,7 @@
              });
               // 인포윈도우로 장소에 대한 설명을 표시합니다
              var infowindow = new kakao.maps.InfoWindow({
-                 content: '<div style="width:150px;text-align:center;padding:6px 0;">위치표시</div>'
+                 content: '<div style="width:150px;text-align:center;padding:6px 0;">${ product.p_addr }</div>'
              });
              infowindow.open(map, marker);
               // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다

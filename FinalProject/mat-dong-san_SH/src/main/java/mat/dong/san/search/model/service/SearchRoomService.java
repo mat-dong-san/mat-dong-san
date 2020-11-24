@@ -16,4 +16,6 @@ public interface SearchRoomService {
 
 	ArrayList<Product> selectFilterProduct(SearchRoomPageInfo pageInfo, SearchRoomFilter sf);
 
+	Product selectProductDetail(Integer p_id);
+
 }

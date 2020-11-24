@@ -43,4 +43,10 @@ public class SearchRoomServiceImpl implements SearchRoomService{
 
 		return sDAO.selectFilterProduct(sqlSession, sf, pageInfo);
 	}
+	
+	@Override
+	public Product selectProductDetail(Integer p_id) {
+
+		return sDAO.selectProductDetail(sqlSession, p_id);
+	}
 }
