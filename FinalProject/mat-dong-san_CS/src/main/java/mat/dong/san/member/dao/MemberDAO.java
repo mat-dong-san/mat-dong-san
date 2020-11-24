@@ -38,5 +38,13 @@ public class MemberDAO {
 		
 		return sqlSession.selectOne("memberMapper.checkNameDup", name);
 	}
+
+	public EstateAgent selectEstateAgentInfo(SqlSessionTemplate sqlSession, String us_id) {
+		return sqlSession.selectOne("memberMapper.selectEstateAgentInfo", us_id);
+	}
+
+	public int updateEstateAgent(SqlSessionTemplate sqlSession, EstateAgent e) {
+		return sqlSession.update("memberMapper.updateEstateAgent", e);
+	}
 	
 }

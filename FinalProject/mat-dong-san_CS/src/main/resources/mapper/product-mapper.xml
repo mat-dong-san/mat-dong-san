@@ -35,5 +35,64 @@
 		values(seq_un_id.nextval, #{un_content}, sysdate, default, #{p_id}, null, #{e_id}, #{us_id})
 	</insert>
 	
+	<select id="getReviewCount" resultType="_int">
+		select count(*)
+		from estateagent_review
+		where er_del_yn = 'N' and e_id = #{e_id}
+	</select>
+	
+	<select id="selectReviewList" resultMap="ReviewResultSet">
+		select * 
+		from(select rownum rnum, descreview.*
+		from (select er_id, er_content, er_point, er_reg_d, er_del_yn, e_id, m.us_id us_id, us_name, us_picture
+		        from estateagent_review er
+		        join member m on (m.us_id = er.us_id)
+		        where er_del_yn='N'
+		        and e_id=#{e_id}
+		        order by er_id desc) descreview)
+	</select>
+	
+	<resultMap type="Review" id="ReviewResultSet">
+		<id column="ER_ID" property="er_id"/>
+		<result column="ER_CONTENT" property="er_content"/>
+		<result column="ER_POINT" property="er_point"/>
+		<result column="ER_REG_D" property="er_reg_d"/>
+		<result column="ER_DEL_YN" property="er_del_yn"/>
+		<result column="E_ID" property="e_id"/>
+		<result column="US_ID" property="us_id"/>
+		<result column="US_NAME" property="us_name"/>
+		<result column="US_PICTURE" property="us_picture"/>
+	</resultMap>
+	
+	<select id="getTotalEstateAgentPoint" resultType="_int">
+		select 
+		nvl(sum(er_point),0)
+		from estateagent_review 
+		where e_id=#{e_id} and er_del_yn='N'
+	</select>
+	
+	<select id="reviewIdCheck" parameterType="map" resultType="_int">
+		select count(*)
+		from estateagent_review
+		where us_id = #{us_id} and e_id = #{e_id} and er_del_yn='N'
+	</select>
+	
+	<update id="updateEstateAgentPoint" parameterType="map">
+		update estateagent
+        set e_point=#{avg}
+        where e_id=#{e_id}
+	</update>
+	
+	<insert id="insertReview" parameterType="Review">
+		insert into estateagent_review
+		values(seq_er_id.nextval, #{er_content}, #{er_point}, sysdate, default, #{us_id}, #{e_id})
+	</insert>
+	
+	<update id="deleteReview">
+		update estateagent_review
+        set er_del_yn='Y'
+        where er_id=#{er_id}
+	</update>
+	
 
 </mapper>

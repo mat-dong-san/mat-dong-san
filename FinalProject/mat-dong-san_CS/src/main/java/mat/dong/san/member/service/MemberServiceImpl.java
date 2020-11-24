@@ -50,5 +50,15 @@ public class MemberServiceImpl implements MemberService{
 		
 		return mDAO.checkNameDup(sqlSession, name);
 	}
+
+	@Override
+	public EstateAgent selectEstateAgentInfo(String us_id) {
+		return mDAO.selectEstateAgentInfo(sqlSession, us_id);
+	}
+
+	@Override
+	public int updateEstateAgent(EstateAgent e) {
+		return mDAO.updateEstateAgent(sqlSession, e);
+	}
 	
 }

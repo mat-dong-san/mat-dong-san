@@ -10,6 +10,7 @@
 		<typeAlias type="mat.dong.san.member.vo.EstateAgent" alias="EstateAgent"/>
 		<typeAlias type="mat.dong.san.product.vo.Product" alias="Product"/>
 		<typeAlias type="mat.dong.san.product.vo.Note" alias="Note"/>
+		<typeAlias type="mat.dong.san.product.vo.Review" alias="Review"/>
 	</typeAliases>
 	
 	<mappers>

@@ -54,5 +54,38 @@
 		#{e_reg_num}, default, default, default, default, sysdate, default, #{us_id})
 	</insert>
 	
+	<!-- 중개사추가////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+	
+	<resultMap type="EstateAgent" id="estateAgentResultSet">
+		<id column="E_ID" property="us_id"/>
+		<result column="E_NAME" property="e_name"/>
+		<result column="E_PHONE" property="e_phone"/>
+		<result column="E_CONTENT" property="e_content"/>
+		<result column="E_ADDR" property="e_addr"/>
+		<result column="E_PICTURE" property="e_picture"/>
+		<result column="E_FIELD" property="e_field"/>
+		<result column="E_COORD" property="e_coord"/>
+		<result column="E_C_LAT" property="e_c_lat"/>
+		<result column="E_C_LNG" property="e_c_lng"/>
+		<result column="E_POINT" property="e_point"/>
+		<result column="E_REG_D" property="e_reg_d"/>
+		<result column="E_DEL_YN" property="e_del_yn"/>
+		<result column="US_ID" property="us_id"/>
+	</resultMap>
+	
+	<select id="selectEstateAgentInfo" resultMap="estateAgentResultSet">
+		select *
+		from estateagent
+		where US_ID=#{us_id}
+		and E_DEL_YN='N'
+	</select>
+	
+	<update id="updateEstateAgent">
+		update estateagent
+		set e_name=#{e_name}, e_phone=#{e_phone}, e_content=#{e_content}, e_addr=#{e_addr},
+		e_picture=#{e_picture}, e_field=#{e_field}, e_reg_num=#{e_reg_num}
+		where us_id=#{us_id}
+	</update>
+	
 
 </mapper>
