@@ -105,5 +105,37 @@
   	from PRODUCT
   	where P_ID = #{p_id}  	
   </select>
+  
+  <select id="selectAgent" resultType="EstateAgent">
+  	select
+  	E_ID, E_NAME, E_PHONE, E_CONTENT, E_ADDR, E_PICTURE, E_FIELD, E_REG_NUM,
+    E_COORD, E_C_LAT, E_C_LNG, E_POINT, E_REG_D, E_DEL_YN, US_ID
+  	from ESTATEAGENT
+  	join PRODUCT using(US_ID)
+  	where P_ID = #{p_id}
+  </select>
+  
+  <select id="selectReview" resultType="EstateAgentReview">
+  	select
+  	*
+  	from ESTATEAGENT_REVIEW
+  	where E_ID = #{e_id}
+  	order by er_id desc
+  </select>
+  
+  <insert id="insertReplay">
+  	insert into ESTATEAGENT_REVIEW
+  	values(SEQ_ER_ID.NEXTVAL, #{er_content}, #{er_point}, sysdate, 'N', #{us_id}, #{e_id})
+  </insert>
+  
+  <update id="updatePoint">
+  	update estateagent set e_point = (
+	select trunc(avg(er_point),1) from estateagent_review where e_id = #{e_id} group by e_id)
+	where e_id = #{e_id}
+  </update>
+  
+  <select id="selectProductEstate" resultType="Product">
+  	select * from product where US_ID = #{us_id}
+  </select>
  
 </mapper>

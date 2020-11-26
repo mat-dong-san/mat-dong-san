@@ -5,6 +5,7 @@
 <html>
 <head>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6575c609a2768f0806882eba14c4cb9&libraries=services,clusterer,drawing"></script>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -88,6 +89,9 @@
 		margin: 0px auto;
 		width: 1140px;
 		text-align: left;
+		height: 550px;
+    	overflow: hidden;
+   		max-height: 1130px;
 	}
 	#footInfoDiv{
 		left: 0;
@@ -287,15 +291,15 @@
 			<table id="footTableDiv">
 				<tr>
 					<td>중개사 이름</td>
-					<td>맛동산</td>
+					<td style="text-align:left;">${ EstateAgent.e_name }</td>
 					<td>중개사 번호</td>
-					<td>070-1148-4875</td>
+					<td>${ EstateAgent.e_phone }</td>
 				</tr>
 				<tr>
 					<td>위치 정보</td>
-					<td>서울시 강남구 역삼동</td>
+					<td style="text-align:left;">${ EstateAgent.e_addr }</td>
 					<td>평점</td>
-					<td>●●●●●</td>
+					<td>${ EstateAgent.e_point }</td>
 				</tr>
 				<tr>
 					<td></td>
@@ -304,61 +308,113 @@
 					<td><span class="goManage">신고하기</span></td>
 				</tr>
 				<tr style="height: 300px;">
-					<td colspan="4"><img alt="중개사 사진" src=""></td>
+					<td colspan="4"><img alt="${ EstateAgent.e_picture }" src="${ EstateAgent.e_picture }"></td>
 				</tr>
 			</table>
-			<table id="footTableDiv">
-				<tr>
-					<td style="width: 200px;">평점
-						<select>
-							<option>●○○○○점</option>
-							<option>●●○○○점</option>
-							<option>●●●○○점</option>
-							<option>●●●●○점</option>
-							<option>●●●●●점</option>
-						</select>
-					</td>
-					<td><input type="text"></td>
-					<td><input type="button" value="등록"></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>●●○○○점</td>
-					<td>불친절 합니다.</td>
-					<td>고라니</td>
-					<td><span class="goManage">신고하기</span></td>
-				</tr>
-				<tr>
-					<td>●●●●○점</td>
-					<td>괜찮은 매물이 많네요.</td>
-					<td>토끼</td>
-					<td style="width: 100px;"><span class="goManage">신고하기</span></td>
-				</tr>
-				<tr>
-					<td>●●●●●점</td>
-					<td>상담 잘 해주십니다.</td>
-					<td>고양이</td>
-					<td style="width: 100px;"><span class="goManage">신고하기</span></td>
-				</tr>
-			</table>
+			<div id="replyDiv" style="height: 400px; overflow: hidden;">
+				<table id="footTableDiv">
+					<tr>
+						<td style="width: 200px;">평점
+							<select id="point">
+								<option value='1'>1점</option>
+								<option value='2'>2점</option>
+								<option value='3'>3점</option>
+								<option value='4'>4점</option>
+								<option selected="selected" value='5'>5점</option>
+							</select>
+						</td>
+						<td><input id="RplyContent" type="text"></td>
+						<td><input id="addRply" type="button" value="등록"></td>
+						<td><button id="allReplyView">댓글 모두보기</button></td>
+					</tr>
+					<tbody id="replyTbody">
+						<c:forEach var="r" items="${ review }">
+							<tr>
+								<td>${ r.er_point }점</td>
+								<td>${ r.er_content }</td>
+								<td>${ r.us_id }</td>
+								<td style="width: 100px;"><span class="goManage">신고하기</span></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 		</div>
+		<script>
+			/* 댓글등록 */
+			$('#addRply').click(function(){
+				var point = $('#point').val();
+				var content = $('#RplyContent').val();
+				var estate_id = ${ EstateAgent.e_id };
+				var user = 'user5'; // ${ loginUser } 로 바꿔야함
+				
+				$.ajax({
+					url:"replyAdd.search",
+					data:{er_point:point, er_content:content, us_id:user, estate_id:estate_id},
+					type:"post",
+					datatype:"json",
+					success:function(data){
+						var $tbody = $('#replyTbody');
+						$tbody.html('');
+						for(var i = 0; i < data.length; i++){
+							var $tr = $('<tr>');
+							var $td1 = $('<td>').text(data[i].er_point +"점");
+							var $td2 = $('<td>').text(data[i].er_content);
+							var $td3 = $('<td>').text(data[i].us_id);
+							var $td4 = $('<td>').css('width','100px');
+							var $span = $('<span class="goManage">').text("신고하기");
+							
+							$td4.append($span);
+							$tr.append($td1);
+							$tr.append($td2);
+							$tr.append($td3);
+							$tr.append($td4);
+							$tbody.append($tr);
+						}
+					}
+				});
+			
+			});
+			
+			$('#allReplyView').click(function(){
+				if($('#replyDiv').css('height') == '400px'){
+					$('#replyDiv').css('height', 'auto');
+					$(this).text('댓글 적게보기');
+				} else {
+					$('#replyDiv').css('height', '400px');
+					$(this).text('댓글 모두보기');
+				}
+			});
+		</script>
 		
 		<div class="detailInfoIndexTitle" id="index4">
 			이 중개사의 다른방
 		</div>
+		<div style="text-align:right; margin: 10px auto; width: 1140px;">
+			<button id="moreRoomView" style="margin-right: 72px;">방 더보기</button>
+			<script>
+				$('#moreRoomView').click(function(){
+					$('#relativeOtherRoomInfo').css('height','auto');
+				});
+			</script>
+		</div>
 		<div id="relativeOtherRoomInfo">
-			<div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>매매</span><span>27000</span><span>부가설명</span></div>
-        	<div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>원룸</span><span>월세</span><span>500/20</span><span>부가설명</span></div>
-        	<div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>투룸</span><span>월세</span><span>1000/40</span><span>부가설명</span></div>
-        	<div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>전세</span><span>15000</span><span>부가설명</span></div>
-        	<div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>투룸</span><span>전세</span><span>2000/50</span><span>부가설명</span></div>
-        	<div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>월세</span><span>5000/60</span><span>부가설명</span></div>
-        	<div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>월세</span><span>5000/60</span><span>부가설명</span></div>
-        	<div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>월세</span><span>5000/60</span><span>부가설명</span></div>
-        	<div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>월세</span><span>5000/60</span><span>부가설명</span></div>
-        	<div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>월세</span><span>5000/60</span><span>부가설명</span></div>
-        	<div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>월세</span><span>5000/60</span><span>부가설명</span></div>
-        	<div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>쓰리룸</span><span>월세</span><span>5000/60</span><span>부가설명</span></div>
+			<c:forEach var="p" items="${ productList }">
+				<div class="productContent" onclick="location.href='${ goDetailPage }'">
+					<img alt="${ p.p_picture }" src="${ p.p_picture }">
+					<span>${ p.p_kind }</span>
+					<span>${ p.p_deal }</span>
+					<span>
+						<c:if test="${ p.p_deal == '전세' }">
+		        		${ p.p_charter }
+		        	</c:if>
+		        	<c:if test="${ p.p_deal == '월세' }">
+		        		${ p.p_deposit }/${ p.p_rent }
+		        	</c:if>
+					</span>
+					<span>${ p.p_content }</span>
+				</div>
+			</c:forEach>
 		</div>
 		
 		
@@ -397,9 +453,10 @@
      var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
      
      var geocoder = new kakao.maps.services.Geocoder();
-     
+     var p_Add = "${ product.p_addr }";
+     var rp_Addr = p_Add.substring(6);
      // 주소로 좌표를 검색합니다
-     geocoder.addressSearch('${ product.p_addr }', function(result, status) {
+     geocoder.addressSearch(rp_Addr, function(result, status) {
           // 정상적으로 검색이 완료됐으면 
           if (status === kakao.maps.services.Status.OK) {
               var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
@@ -409,6 +466,8 @@
                  position: coords
              });
               // 인포윈도우로 장소에 대한 설명을 표시합니다
+             
+             
              var infowindow = new kakao.maps.InfoWindow({
                  content: '<div style="width:150px;text-align:center;padding:6px 0;">${ product.p_addr }</div>'
              });

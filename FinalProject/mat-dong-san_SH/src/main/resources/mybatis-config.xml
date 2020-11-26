@@ -8,6 +8,8 @@
 
 	<typeAliases>
 		<typeAlias type="mat.dong.san.product.model.vo.Product" alias="Product"/>
+		<typeAlias type="mat.dong.san.member.model.vo.EstateAgent" alias="EstateAgent"/>
+		<typeAlias type="mat.dong.san.member.model.vo.EstateAgentReview" alias="EstateAgentReview"/>
 	</typeAliases>
 	
 	<mappers>

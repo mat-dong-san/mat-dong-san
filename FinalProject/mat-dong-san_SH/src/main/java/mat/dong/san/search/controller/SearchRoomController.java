@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 
+import mat.dong.san.member.model.vo.EstateAgent;
+import mat.dong.san.member.model.vo.EstateAgentReview;
 import mat.dong.san.product.model.vo.Product;
 import mat.dong.san.search.common.Pagenation;
 import mat.dong.san.search.model.exception.SearchRoomException;
@@ -272,13 +274,58 @@ public class SearchRoomController {
 	@RequestMapping(value = "searchRoomDetailPage.search", method = RequestMethod.GET)
 	public ModelAndView goSearchRoomDetailPage(@RequestParam("p_id") Integer p_id, ModelAndView mv) {
 		
+		// 매물 정보
 		Product product = sService.selectProductDetail(p_id);
-		
+		// 중개사 정보
+		EstateAgent ea = sService.selectAgent(p_id);
+		// 중개사의 댓글정보
+		ArrayList<EstateAgentReview> reviewList = sService.selectReview(ea.getE_id()); 
+		// 중개사보유 매물 리스트
+		ArrayList<Product> productList = sService.selectProductEstate(ea.getUs_id());
+
 		if(product != null) {
 			mv.addObject("product", product);
+			mv.addObject("EstateAgent", ea);
+			mv.addObject("review", reviewList);
+			mv.addObject("productList", productList);
 			mv.setViewName("searchRoomDetailPage");
 		}
 		return mv;
+	}
+	
+	@RequestMapping(value = "replyAdd.search")
+	public void addReply(
+			@RequestParam("er_point") Integer er_point, 
+			@RequestParam("er_content") String er_content,
+			@RequestParam("estate_id") Integer e_id,
+			@RequestParam("us_id") String us_id,
+			HttpServletResponse response){
+
+		EstateAgentReview er = new EstateAgentReview();
+		er.setEr_content(er_content);
+		er.setE_id(e_id);
+		er.setUs_id(us_id);
+		er.setEr_point(er_point);
+		int result = sService.insertReply(er);
+		
+		if(result > 0) {
+			int result2 = sService.updatePointAvg(er);
+			if(result2 > 0) {
+				try {
+					
+					ArrayList<EstateAgentReview> reviewList = sService.selectReview(e_id);
+					response.setContentType("application/json; charset=UTF-8");
+					new Gson().toJson(reviewList,response.getWriter());
+					
+				} catch (JsonIOException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+			}
+		}
+		
 	}
 	
 }
