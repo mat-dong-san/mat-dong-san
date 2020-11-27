@@ -1,6 +1,6 @@
-package com.dong.san.common;
+package mat.dong.san.common;
 
-import com.dong.san.board.model.vo.PageInfo;
+import mat.dong.san.board.model.vo.PageInfo;
 
 public class Pagination {
 	public static PageInfo getPageInfo(int currentPage, int listCount) {
@@ -21,7 +21,6 @@ public class Pagination {
 		
 		
 		pi = new PageInfo(currentPage, listCount, pageLimit, maxPage, startPage, endPage, boardLimit);
-		System.out.println(pi);
 		return pi;
 	}
 	

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,9 +94,25 @@
 <body>
     <div id="oneToOneView_Wrapper">
         <c:import url="../../common/menubar.jsp"/>
+        <c:import url="../../common/helpdeskSidebar.jsp"/>
         
-        <div id="loaded">
-        </div>
+        <!-- 업데이트 폼으로 -->
+        	<c:url var="oToUpdate" value="goOneToOneUpdate.board">
+				<c:param name="oTobId" value="${ oto.bId }"/>
+				<c:param name="page" value="${ page }"/>
+			</c:url>
+			<!-- 삭제하기 폼으로 -->
+			<c:url var="bdelete" value="boardOneToOneDelete.board">
+				<c:param name="deleteNoticebId" value="${ oto.bId }"/>
+			</c:url>
+			<!-- 목록으로 -->
+			<c:url var="blist" value="boardOneToOne.board">
+				<c:param name="page" value="${ page }"/>
+			</c:url>
+        
+        
+        
+        
         <div id="oneToOneView_innerWrapper">
             <!-- head-->
             <div id="oneToOneView_head">
@@ -104,23 +121,23 @@
                 </div>
                 <div class="oneToOne_mid">
                     <div>
-                        <h2>제목</h2>
+                        <h2>${oto.bTitle}</h2>
                     </div>
                     <div id="mid_flex_div"> 
                         <div class="oneToOneListMid_left">
-                            <span>아이디</span>
-                            <span>날짜</span>
+                            <span>${oto.usId}</span>
+                            <span>${oto.bRegD}</span>
                         </div>
                         <div class="oneToOneListMid_right">
-                            <button id="oneToOne_goDetail">수정</button>
-                            <button id="oneToOne_goDetail">삭제</button>
+                            <button id="oneToOne_goDetail" onClick="oneToOneUpdate();">수정</button>
+                            <button id="oneToOne_goDetail" >삭제</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div id="oneToOneView_body">
                 <div class="oneToOneDetail_Content">
-
+					${ oto.bContent }
                 </div>
             </div>
             <div id="oneToOneView_tail">
@@ -143,18 +160,25 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- reply head -->
+            
+            
+            
+            <!-- reply tail -->
         </div>
     </div>
     <script>
-        $(document).ready(function(){
-            $("#loaded").load("../helpdeskSidebar.html");
-        });
-         // menubar
-         $(document).ready(function(){
-            $("#menubar").load("../menubar.html");
-        });
-        
-
+    function oneToOneUpdate(){
+    	var select = confirm('수정하시겠습니까?');
+    	if(select === true){
+    		
+    		location.href = '${ oToUpdate }';
+    		submit();
+    	}else {
+    		location.href=location.href;
+    	}
+    }
 
         function resize(obj) {
             obj.style.height = "1px";

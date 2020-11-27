@@ -1,4 +1,4 @@
-package com.dong.san.board.model.service;
+package mat.dong.san.board.model.service;
 
 import java.util.ArrayList;
 
@@ -6,9 +6,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dong.san.board.model.dao.BoardDAO;
-import com.dong.san.board.model.vo.Board;
-import com.dong.san.board.model.vo.PageInfo;
+import mat.dong.san.board.model.dao.BoardDAO;
+import mat.dong.san.board.model.vo.Board;
+import mat.dong.san.board.model.vo.PageInfo;
 
 
 
@@ -61,13 +61,13 @@ public class BoardServiceImpl implements BoardService {
 		return bDAO.boardNoticeListCount(sqlSession);
 	}
 
-
+	// 공지사항 목록
 	@Override
 	public ArrayList<Board> selectNoticeList(PageInfo pi) {
 		return bDAO.selectNoticeList(sqlSession, pi);
 	}
 
-
+	// 공지사항 디테일 뷰
 	@Override
 	public Board noticeDetail(int noticeId) {
 		// TODO Auto-generated method stub
@@ -83,12 +83,73 @@ public class BoardServiceImpl implements BoardService {
 		return board;
 	}
 
-
+	// 공지사항 쓰기
 	@Override
 	public int noticeInsert(Board b) {
 		// TODO Auto-generated method stub
 		return bDAO.noticeInsert(sqlSession,b)	;
 	}
+
+	// 목록에서 선택 삭제
+	@Override
+	public int deleteNotice(int bId) {
+		// TODO Auto-generated method stub
+		return bDAO.deleteNotice(sqlSession, bId);
+	}
+
+	// 공지사항 수정
+	@Override
+	public int noticeUpdate(Board b) {
+		// TODO Auto-generated method stub
+		return bDAO.updateNotice(sqlSession, b);
+	}
+
+
+	// 1대1 문의
+	@Override
+	public int oneToOneListCount() {
+
+		return bDAO.oneToOneListCount(sqlSession);
+	}
+
+
+	@Override
+	public ArrayList<Board> oneToOneList(PageInfo pi) {
+		// TODO Auto-generated method stub
+		return bDAO.oneToOneList(sqlSession, pi);
+	}
+
+
+	@Override
+	public int oneToOneInsert(Board b) {
+		// TODO Auto-generated method stub
+		return bDAO.oneToOneInsert(sqlSession,b)	;
+	}
+
+
+	@Override
+	public int deleteOneToOne(int bId) {
+		// TODO Auto-generated method stub
+		return bDAO.deleteOneToOne(sqlSession, bId);
+	}
+
+	// 1대1 디테일
+	@Override
+	public Board oneToOneDetail(int oneToOneId) {
+		// TODO Auto-generated method stub
+		return bDAO.oneToOneDetail(sqlSession, oneToOneId);
+	}
+
+
+	@Override
+	public int oneToOneUpdate(Board b) {
+		// TODO Auto-generated method stub
+		return bDAO.updateOneToOne(sqlSession, b);
+	}
+
+
+	
+	
 	
 
 

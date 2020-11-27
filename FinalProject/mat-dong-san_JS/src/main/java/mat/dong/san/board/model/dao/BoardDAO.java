@@ -1,4 +1,4 @@
-package com.dong.san.board.model.dao;
+package mat.dong.san.board.model.dao;
 
 import java.util.ArrayList;
 
@@ -6,8 +6,8 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.dong.san.board.model.vo.Board;
-import com.dong.san.board.model.vo.PageInfo;
+import mat.dong.san.board.model.vo.Board;
+import mat.dong.san.board.model.vo.PageInfo;
 
 @Repository("bDAO")
 public class BoardDAO {
@@ -68,5 +68,49 @@ public class BoardDAO {
 	public int noticeInsert(SqlSessionTemplate sqlSession, Board b) {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("boardMapper.noticeInsert", b);
+	}
+
+	public int deleteNotice(SqlSessionTemplate sqlSession, int bId) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("boardMapper.noticeDelete", bId);
+	}
+
+	public int updateNotice(SqlSessionTemplate sqlSession, Board b) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("boardMapper.noticeUpdate", b);
+	}
+
+	
+	//1대1 게시글 갯수
+	public int oneToOneListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("boardMapper.oneToOneListCount");
+	}
+	// 목록조회
+	public ArrayList<Board> oneToOneList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rb = new RowBounds(offset, pi.getBoardLimit());
+		
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.oneToOneList", null, rb);
+	}
+
+	// 1대1 글 작성
+	public int oneToOneInsert(SqlSessionTemplate sqlSession, Board b) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("boardMapper.oneToOneInsert", b);
+	}
+
+	public int deleteOneToOne(SqlSessionTemplate sqlSession, int bId) {
+		return sqlSession.update("boardMapper.oneToOneDelete", bId);
+	}
+
+	public Board oneToOneDetail(SqlSessionTemplate sqlSession, int oneToOneId) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("boardMapper.oneToOneDetail", oneToOneId);
+	}
+
+	public int updateOneToOne(SqlSessionTemplate sqlSession, Board b) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("boardMapper.oneToOneUpdate", b);
 	}
 }

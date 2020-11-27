@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="../ckeditor_4.14.1_standard//ckeditor/ckeditor.js"></script>
-    <title>1대1문의 작성</title>
+    <title>공지사항수정</title>
     <style>
         html, body{
             height:100%;
@@ -49,19 +50,37 @@
             height:80px;
         } */
         .oneToOneView_B_mid{
-            height:80px;
+        	border: 1px solid black;
+            height:20px;
+            padding:20px;
         }
         .oneToOneView_B_bot{
+        	padding : 20px;
             height:300px;
+            border : 1px solid black;
+        }
+        #noticeWrite_content{
+        	outline: none;
+        	border : 0;
+        	width : 99%;
+        	height: 99%;
+        }
+        #noticeWrite_title{
+        	height:99%;
+        	width:99%;
+        	outline: none;
+        	border : 0;
         }
     </style>
 </head>
 <body>
     <div id="oneToOneView_Wrapper">
         <c:import url="../../common/menubar.jsp"/>
+        <c:import url="../../common/helpdeskSidebar.jsp"/>
         
-        <div id="loaded">
-        </div>
+        <form  method="POST"  name="noticeUpdateComfirm">
+        <input type="hidden" name="page" value="${ page }">
+		<input type="hidden" name="bId" value="${ notice.bId }">
         <div id="oneToOneView_innerWrapper">
             <!-- head-->
             <div id="oneToOneView_head">
@@ -71,7 +90,7 @@
                 <div class="oneToOne_mid">
                     <div id="mid_flex_div"> 
                         <div class="oneToOneListMid_right">
-                            <button id="oneToOne_goDetail">수정</button>
+                            <button id="oneToOne_goDetail" onClick="noticeUpdate();">수정</button>
                         </div>
                     </div>
                 </div>
@@ -87,26 +106,29 @@
                 </div> -->
                 <div class="oneToOneView_BodyLayout">
                     <div class="oneToOneView_B_mid">
-                        <input type="text">
+                        <input type="text" placeholder="제목을 입력하세요." id="noticeWrite_title" name="bTitle" value="${ notice.bTitle }">
                     </div>
                 </div>
                 <div class="oneToOneView_BodyLayout">
                     <div class="oneToOneView_B_bot">
-                        <textarea id="b_textA" name="FAQ_Content"></textarea>
-						<script>CKEDITOR.replace('b_textA');</script>
+                        <textarea id="noticeWrite_content" name="bContent"placeholder="내용을 입력하세요.">${ notice.bContent }</textarea>
                     </div>
                 </div>
             </div>
         </div>
+        </form>
     </div>    
     <script>
-        $(document).ready(function(){
-            $("#loaded").load("../helpdeskSidebar.html");
-        });
-         // menubar
-         $(document).ready(function(){
-            $("#menubar").load("../menubar.html");
-        });
+    function noticeUpdate(){
+    	var select = confirm("수정 하시겠습니까?");
+    	if(select === true){
+			document.noticeUpdateComfirm.action='noticeUpdateConfirm.board';
+			document.noticeUpdateComfirm.submit();
+			alert('수정완료!');
+    	} else {
+    		location.href=location.href;
+    	}
+	}
     </script>
 
 </body>

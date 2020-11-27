@@ -49,7 +49,9 @@
             height:80px;
         } */
         .oneToOneView_B_mid{
-            height:80px;
+            border: 1px solid black;
+            height:20px;
+            padding:20px;
         }
         .oneToOneView_B_bot{
         	padding : 20px;
@@ -62,6 +64,13 @@
         	width : 99%;
         	height: 99%;
         }
+        #noticeWrite_title{
+	       	height:99%;
+	       	width:99%;
+	       	outline: none;
+	       	border : 0;
+       }
+        
     </style>
 </head>
 <body>
@@ -69,8 +78,6 @@
         <c:import url="../../common/menubar.jsp"/>
 		<c:import url="../../common/helpdeskSidebar.jsp"/>
         
-        <div id="loaded">
-        </div>
         <form  method="POST"  name="noticeWriteComfirm">
         <div id="oneToOneView_innerWrapper">
             <!-- head-->
@@ -81,7 +88,7 @@
                 <div class="oneToOne_mid">
                     <div id="mid_flex_div"> 
                         <div class="oneToOneListMid_right">
-                            <button id="oneToOne_goDetail" onClick="noticeWrite()">등록</button>
+                            <button id="oneToOne_goDetail" onClick="noticeWrite();">등록</button>
                         </div>
                     </div>
                 </div>
@@ -102,7 +109,7 @@
                 </div>
                 <div class="oneToOneView_BodyLayout">
                     <div class="oneToOneView_B_bot">
-                        <textarea id="noticeWrite_content" name="bContent"placeholder="내용을 입력하세요."></textarea>
+                        <textarea id="noticeWrite_content" name="bContent" placeholder="내용을 입력하세요."></textarea>
                     </div>
                 </div>
             </div>
@@ -111,9 +118,13 @@
     </div>    
 	<script>
 		function noticeWrite(){
-			document.noticeWriteComfirm.action='NoticeWriteConfirm.board';
-			alert('작성완료!');
-			document.noticeWriteComfirm.submit();
+			var select = confirm("작성하시겠습니까?");
+			if(select === true){
+				document.noticeWriteComfirm.action='noticeWriteConfirm.board';
+				alert('작성완료!');
+				document.noticeWriteComfirm.submit();
+				
+			}
 		}
 	
 	</script>
