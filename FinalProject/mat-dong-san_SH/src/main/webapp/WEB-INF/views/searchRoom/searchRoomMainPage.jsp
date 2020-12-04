@@ -427,7 +427,7 @@
 				});
 				
 				
-			}; //여기
+			};
 			
 			
 			function filterPaging(cP){
@@ -633,7 +633,7 @@
   
   <div id="contentContainer">
      <div id="listHouseDiv">
-<<<<<<< HEAD
+<!-- <<<<<<< HEAD -->
      	<div id="ShowProductCount">전체 매물 수 : ${ pageInfo.listCount } </div>
      	<c:forEach var="p" items="${ productList }" varStatus="status">
      		
@@ -653,7 +653,7 @@
 		        
 		        <span class="content">${ p.p_content }</span>
 		        <span class="addre" id="addSpan" name="addSpan${ status.index }">${ p.p_addr }</span>
-=======
+<%-- =======
      	<div>전체 매물 수 : ${ pageInfo.Count } </div>
      	<c:forEach var="p" items="${ productList }" varStatus="status">
      		
@@ -671,7 +671,7 @@
 		        </span>
 		        <span>${ p.p_content }</span>
 		        <span id="addSpan" name="addSpan${ status.index }"> ${ p.p_addr }</span>
->>>>>>> 7ad5790d32c8a3cb035ffc865dd5c87947b766f9
+>>>>>>> 7ad5790d32c8a3cb035ffc865dd5c87947b766f9 --%>
 		        <input type="hidden" value="${ p.p_id }">
 	        </div>
 	        
@@ -883,8 +883,8 @@
 	
   	/* 디테일 페이지 이동하기 */
   	function goDetailPage(thisInfo){
-  		var us_id = $(thisInfo).children(":last").val();
-  		location.href="searchRoomDetailPage.search?us_id="+us_id;
+  		var p_id = $(thisInfo).children(":last").val();
+  		location.href="searchRoomDetailPage.search?p_id="+p_id;
   	}
   	
 </script>
