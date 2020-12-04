@@ -60,6 +60,7 @@
   	and (P_CHARTER <![CDATA[>=]]> #{minCharter} and P_CHARTER <![CDATA[<=]]> #{maxCharter})
   	and (P_RENT <![CDATA[>=]]> #{minMonthly} and P_RENT <![CDATA[<=]]> #{maxMonthly})
   </select>
+  
   <select id="selectFilterList" resultType="Product">
   	select 
   	*
