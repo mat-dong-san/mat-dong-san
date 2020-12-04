@@ -12,7 +12,9 @@
             margin:0;
             padding:0;
         }
-
+		body{
+            background-color:#f9fbfc;
+		}
         #oneToOneView_Wrapper{
 /*       	 	width:1100px; */
             margin-top: 100px;
@@ -43,7 +45,6 @@
             /* border-top:1px solid black;
             border-bottom:1px solid black; */
 /*             border-bottom: 1px solid black; */
-            height: 500px;
             margin-bottom:100px;
         }
         .oneToOneView_body_table{
@@ -60,13 +61,18 @@
             border: 1px solid black; 
             padding: 10px 10px 10px 10px;
         }
-        tbody>tr td:nth-child(1){
+        tbody>tr td:nth-child(2){
             width:1fr;
         }
+        
+        #ck_box{
+        	width:50px;
+        }
+        
        	#noticeCountDiv, #fst{
         	width:60px;
         }
-		td:nth-child(3){
+		td:nth-child(4){
 			width:100px;
 		}
 /*         table>tbody>tr td:not(:nth-child(2)){ */
@@ -90,7 +96,8 @@
     <div id="oneToOneView_Wrapper">
         <c:import url="../../common/menubar.jsp"/>
         <c:import url="../../common/helpdeskSidebar.jsp"/>
-        <div id="oneToOneView_innerWrapper">
+       	<form method="post"name="noticeListForm">
+        <div id="oneToOneView_innerWrapper" >
             <!-- head-->
             <div id="oneToOneView_head">
                 <div class="oneToOne_top">
@@ -98,11 +105,10 @@
                 </div>
                 <div class="oneToOne_mid">
                     <div id="mid_flex_div"> 
-                    	<form method="post" action="boardNoticeWrite.board">
                         <div class="oneToOneListMid_right">
-                            <button id="oneToOne_goDetail">작성하기</button>
+                            <input type="button" id="oneToOne_goDetail" onClick="noticeWrite();" value="작성하기"/>
+                            <input type="button" onClick="noticebIdDelete();" value="삭제하기"/>
                         </div>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -112,6 +118,11 @@
                     <table>
                         <thead>
                             <tr>
+                                <th>
+                                    <div class="oneToOneView_column">
+                                        <span><input type="checkbox" /></span>
+                                    </div>
+                                </th>
                                 <th>
                                     <div class="oneToOneView_column">
                                         <span>번호</span>
@@ -137,14 +148,19 @@
                         </thead>
                         <tbody>
                         <c:forEach var="notice" items="${ list }">
-                            <tr class="goNoticeDetail">
+                            <tr>
+                                <td id="ck_box">
+                                    <div class="oneToOneView_column">
+                                        <span><input type="checkbox" name="deleteNoticebId" value="${ notice.bId }"/></span>
+                                    </div>
+                                </td>
                                 <td id="fst">
                                     <div class="oneToOneView_column">
                                         <span>${ notice.bId }</span>
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="oneToOneView_column">
+                                    <div class="oneToOneView_column goNoticeDetail">
                                         <span>${ notice.bTitle }</span>
                                     </div>
                                 </td>
@@ -161,7 +177,7 @@
                             </tr>
                         </c:forEach>
                         	<tr>
-								<td id="centerAlign" colspan="4">
+								<td id="centerAlign" colspan="5">
 									<c:if test="${ pi.currentPage <= 1 }">
 										[이전] &nbsp;
 									</c:if>
@@ -203,23 +219,29 @@
                 </div>
             </div>
         </div>
+        </form>
     </div>
     <script>
-        $(document).ready(function(){
-            $("#loaded").load("../helpdeskSidebar.html");
-        });
-//         $(document).ready(function(){
-//             $("#menubar").load("../menubar.html");
-//         });
-
 		// 디테일 이동 , 조회수 
 		$('.goNoticeDetail').click(function(){
-			var noticeId = $(this).children('#fst').children().children().text();
-			alert(noticeId);
-			location.href = "noticeDetail.board?noticeId=" + noticeId + "&page=" + ${pi.currentPage};
+			var noticeId = $(this).parent().parent().children('#fst').children().children().text();
+			location.href = "noticeDetail.board?bId=" + noticeId + "&page=" + ${pi.currentPage};
 		});
         
+		function noticeWrite(){
+			document.noticeListForm.action="boardNoticeWrite.board";
+			document.noticeListForm.submit();
+		}
 		
+		function noticebIdDelete() {
+			var select = confirm("삭제하시겠습니까?");
+			if(select === true){
+				document.noticeListForm.action="boardNoticeDelete.board";
+				document.noticeListForm.submit();
+			}else{
+				location.href=location.href;
+			}
+		}
 		
 		
 

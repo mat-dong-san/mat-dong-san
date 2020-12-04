@@ -37,11 +37,6 @@
 		where B_ID=#{bId}
 	</delete>
 	
-	<select id="selectNoticeList">
-		select count(*)
-		from board
-		where b_type='NOTICE' and b_del_yn ='N'
-	</select>
 	
 	<!-- FAQ업데이트 -->
 	<update id="updateFAQ" >
@@ -50,6 +45,12 @@
 	
 	
 	<!-- 공지사항  -->
+	
+	<select id="selectNoticeList">
+		select count(*)
+		from board
+		where b_type='NOTICE' and b_del_yn ='N'
+	</select>
 	<!-- 리스트카운트 -->
 	<select id="boardNoticeListCount" resultType="_int">
 		select count(*) 
@@ -79,5 +80,59 @@
 		values(seq_noticeId.nextval, #{bTitle}, #{bContent}, 'NOTICE' , sysdate, default,  
 				'admin', default)
 	</insert>
+	<!-- 공지사항 삭제 -->
+	<update id="noticeDelete">
+		update board set b_del_yn='Y'
+		where b_Id = #{bId}
+	</update>
+	<!-- 공지사항 수정 -->
+	<update id="noticeUpdate">
+		update board set b_title=#{ bTitle }, b_content=#{ bContent }
+		,b_reg_d=sysdate where b_id=#{ bId }
+	</update>
+	
+	<!-- 1대1 문의 -->
+	<!-- 1대1 리스트 카운트 -->
+	<select id="oneToOneListCount" resultType="_int">
+		select count(*)
+		from board 
+		where B_DEL_YN='N' AND B_TYPE='oneToOne'
+	</select>
+	
+	<select id="oneToOneList" resultMap="boardResultSet">
+		select *
+		from board
+		where b_del_yn='N' And b_type='oneToOne'
+		order by b_id desc
+	</select>
+	
+	<insert id="oneToOneInsert">
+		insert into board
+		values(seq_oneToOneId.nextval, #{bTitle}, #{bContent}, 'oneToOne' , sysdate, default,  
+				'admin', default)
+	</insert>
+	
+	
+	<update id="oneToOneDelete">
+		update board set b_del_yn='Y'
+		where b_Id = #{bId} and B_TYPE='oneToOne'
+	</update>
+	
+	<!-- 1대1 디테일 -->
+	<select id="oneToOneDetail" resultMap="boardResultSet">
+		select * from board 
+		where b_Id=#{bId} and b_type='oneToOne' and b_del_yn='N'
+	</select>
+	
+	<!-- 업데이트 -->
+	<update id="oneToOneUpdate">
+		update board set
+		b_title=#{ bTitle }, b_content=#{bContent}
+		, b_reg_d=sysdate where b_id=#{bId}
+	</update>
+	
+	
+	
+	
 	
 </mapper>

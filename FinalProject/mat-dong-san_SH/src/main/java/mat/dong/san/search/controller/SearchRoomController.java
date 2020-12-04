@@ -79,6 +79,7 @@ public class SearchRoomController {
 		return mv;
 	
 	}
+	
 	@RequestMapping(value = "goPagingMainPage.search", method = RequestMethod.GET)
 	public ModelAndView goPagingMainPage(
 			@RequestParam(value="page", required=false) Integer page,
@@ -168,7 +169,6 @@ public class SearchRoomController {
 		}
 		
 		return mv;
-		
 	}
 	@RequestMapping(value = "goSearchFilter.search", method = RequestMethod.GET)
 	public void goSearchRoomMainPage(
@@ -196,6 +196,7 @@ public class SearchRoomController {
 		int currentPage = 1;
 		
 		SearchRoomFilter sf = new SearchRoomFilter();
+		
 		sf.getRoomType().clear();
 		if(!one.equals("empty")) {
 			sf.getRoomType().add(one);

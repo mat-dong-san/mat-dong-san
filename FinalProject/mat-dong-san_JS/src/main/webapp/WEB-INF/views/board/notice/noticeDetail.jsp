@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -95,8 +96,24 @@
 <body>
     <div id="oneToOneView_Wrapper">
         
-         <c:import url="../../common/menubar.jsp"/>
+        <c:import url="../../common/menubar.jsp"/>
         <c:import url="../../common/helpdeskSidebar.jsp"/>
+<!--         <form name="goDetailForm" method="POST"> -->
+        
+       	<!-- 업데이트 폼으로 -->
+       	<c:url var="noticeUpdate" value="goNoticeUpdate.board">
+			<c:param name="bId" value="${ notice.bId }"/>
+			<c:param name="page" value="${ page }"/>
+		</c:url>
+		<!-- 삭제하기 폼으로 -->
+		<c:url var="bdelete" value="boardNoticeDelete.board">
+			<c:param name="deleteNoticebId" value="${ notice.bId }"/>
+		</c:url>
+		<!-- 목록으로 -->
+		<c:url var="blist" value="boardNoticeList.board">
+			<c:param name="page" value="${ page }"/>
+		</c:url>
+			
         <div id="oneToOneView_innerWrapper">
             <!-- head-->
             <div id="oneToOneView_head">
@@ -113,21 +130,36 @@
                             <span>${ notice.bRegD }</span>
                         </div>
                         <div class="oneToOneListMid_right">
-                            <button id="oneToOne_goDetail">수정</button>
-                            <button id="oneToOne_goDetail">삭제</button>
+                            <input type="button" id="oneToOne_goDetail" value="수정" onClick="noticeUpdate();" />
+<%--                            	<button id="oneToOne_goDetail" onClick="location.href='${noticeUpdate}'">수정하기</button> --%>
+                            <input id="oneToOne_goDelete" value="삭제" />
                         </div>
                     </div>
                 </div>
             </div>
             <div id="oneToOneView_body">
                 <div class="oneToOneDetail_Content">
-					${ notice.bContent }
+               	 	<% pageContext.setAttribute("newLineChar", "\r\n"); %>
+               	 	${ fn:replace(notice.bContent, newLineChar, "<br>") }
                 </div>
             </div>
-            
         </div>
+<!--         </form> -->
    </div>    
     <script>
+    function noticeUpdate(){
+    	var select = confirm('수정하시겠습니까?');
+    	if(select === true){
+    		
+    		location.href = '${ noticeUpdate }';
+    		submit();
+    	}else {
+    		location.href=location.href;
+    	}
+    }
+    
+    
+    
     </script>
 </body>
 </html>

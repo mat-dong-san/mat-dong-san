@@ -61,6 +61,7 @@
   	and (P_RENT <![CDATA[>=]]> #{minMonthly} and P_RENT <![CDATA[<=]]> #{maxMonthly})
   	order by p_id
   </select>
+  
   <select id="selectFilterList" resultType="Product">
   	select 
   	*

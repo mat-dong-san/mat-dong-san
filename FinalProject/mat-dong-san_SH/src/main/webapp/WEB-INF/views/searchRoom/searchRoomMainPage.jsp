@@ -427,7 +427,7 @@
 				});
 				
 				
-			};
+			}; //여기
 			
 			
 			function filterPaging(cP){
@@ -633,6 +633,7 @@
   
   <div id="contentContainer">
      <div id="listHouseDiv">
+<<<<<<< HEAD
      	<div id="ShowProductCount">전체 매물 수 : ${ pageInfo.listCount } </div>
      	<c:forEach var="p" items="${ productList }" varStatus="status">
      		
@@ -652,6 +653,25 @@
 		        
 		        <span class="content">${ p.p_content }</span>
 		        <span class="addre" id="addSpan" name="addSpan${ status.index }">${ p.p_addr }</span>
+=======
+     	<div>전체 매물 수 : ${ pageInfo.Count } </div>
+     	<c:forEach var="p" items="${ productList }" varStatus="status">
+     		
+	        <div class="productContent" onclick="goDetailPage(this)">
+		        <img alt="${ p.p_picture }" src="">
+		        <span>${ p.p_kind }</span>
+		        <span>${ p.p_deal }</span>
+		        <span>
+		        	<c:if test="${ p.p_deal == '전세' }">
+		        		${ p.p_charter }
+		        	</c:if>
+		        	<c:if test="${ p.p_deal == '월세' }">
+		        		${ p.p_deposit }/${ p.p_rent }
+		        	</c:if>
+		        </span>
+		        <span>${ p.p_content }</span>
+		        <span id="addSpan" name="addSpan${ status.index }"> ${ p.p_addr }</span>
+>>>>>>> 7ad5790d32c8a3cb035ffc865dd5c87947b766f9
 		        <input type="hidden" value="${ p.p_id }">
 	        </div>
 	        
@@ -863,8 +883,8 @@
 	
   	/* 디테일 페이지 이동하기 */
   	function goDetailPage(thisInfo){
-  		var p_id = $(thisInfo).children(":last").val();
-  		location.href="searchRoomDetailPage.search?p_id="+p_id;
+  		var us_id = $(thisInfo).children(":last").val();
+  		location.href="searchRoomDetailPage.search?us_id="+us_id;
   	}
   	
 </script>
