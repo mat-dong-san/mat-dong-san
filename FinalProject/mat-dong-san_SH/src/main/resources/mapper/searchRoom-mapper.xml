@@ -31,10 +31,10 @@
   		and p_addr like '%' || #{searchInput} || '%'
   	</if>
   	<if test='parkType != "무관"'>
-  		and P_PARK like '%' || #{parkType} || '%'
+  		and P_PARK like #{parkType}
   	</if>
   	<if test='petType != "무관"'>
-  		and P_PET '%' || #{petType} || '%'
+  		and P_PET like #{petType}
   	</if>
   	<if test='eleType != "무관"'>
   		and P_ELEVATOR like '%' || #{eleType} || '%'
@@ -59,6 +59,7 @@
   	</if>
   	and (P_CHARTER <![CDATA[>=]]> #{minCharter} and P_CHARTER <![CDATA[<=]]> #{maxCharter})
   	and (P_RENT <![CDATA[>=]]> #{minMonthly} and P_RENT <![CDATA[<=]]> #{maxMonthly})
+  	order by p_id
   </select>
   <select id="selectFilterList" resultType="Product">
   	select 
@@ -69,10 +70,10 @@
   		and p_addr like '%' || #{searchInput} || '%'
   	</if>
   	<if test='parkType != "무관"'>
-  		and P_PARK like '%' || #{parkType} || '%'
+  		and P_PARK like #{parkType}
   	</if>
   	<if test='petType != "무관"'>
-  		and P_PET '%' || #{petType} || '%'
+  		and P_PET like #{petType}
   	</if>
   	<if test='eleType != "무관"'>
   		and P_ELEVATOR like '%' || #{eleType} || '%'
@@ -97,6 +98,7 @@
   	</if>
   	and (P_CHARTER <![CDATA[>=]]> #{minCharter} and P_CHARTER <![CDATA[<=]]> #{maxCharter})
   	and (P_RENT <![CDATA[>=]]> #{minMonthly} and P_RENT <![CDATA[<=]]> #{maxMonthly})
+  	order by p_id desc
   </select>
   
   <select id="selectProductDetail" resultType="Product">
@@ -104,6 +106,7 @@
   	*
   	from PRODUCT
   	where P_ID = #{p_id}  	
+  	order by p_id desc
   </select>
   
   <select id="selectAgent" resultType="EstateAgent">
@@ -135,7 +138,13 @@
   </update>
   
   <select id="selectProductEstate" resultType="Product">
-  	select * from product where US_ID = #{us_id}
+  	select * from product where US_ID = #{us_id} order by p_id desc
+  </select>
+  
+  <select id="selectTopList" resultType="Product">
+  	select * from(
+	select * from product order by p_id desc
+	) where rownum <![CDATA[<]]> 7
   </select>
  
 </mapper>

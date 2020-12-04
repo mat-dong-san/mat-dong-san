@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,6 +38,7 @@
        	height: 64px;
        	margin-top: 70px;
        	flex-direction: row;
+       	letter-spacing: -0.5px;
    }
    #listHouseDiv{
       	position: absolute;
@@ -45,7 +47,6 @@
        	bottom: 0;
        	width: 450px;
        	overflow: auto;
-       	background: lightgray;
        	padding-top: 20px;
    }
    #map{
@@ -65,31 +66,52 @@
    }
    #searchAddr{
    		height: 100%;
-    	width: 220px;
-    	border: 0;
-    	outline: none;
-    	font-size: 15px;
+	    width: 220px;
+	    border: 0;
+	    outline: none;
+	    font-size: 13px;
+	    margin-left: 23px;
    }
    #searchBtn{
-   		height: 100%;
-   		width: 50px; 
-   		border: 0; 
-   		outline: none;
+   		width: 40px;
+	    height: 95%;
+	    margin: 0;
+	    border: 0;
+	    font-size: 15px;
    }
    .productContent{
     	display: inline-flex;
     	width: 180px;
-    	border: 1px solid black;
+    	/* border: 1px solid #c1c1c1; */
      	height: 250px;
      	margin: 15px;
       	flex-direction: column;
+      	letter-spacing: -0.5px;
    }
    .productContent:hover{
    		cursor: pointer;
    }
    .filter{
-   		border: 1px solid rgb(223, 223, 223);
-   		outline: none;
+   		border: 1px solid rgb(136 136 136);
+	    outline: none;
+	    margin-left: 20px;
+	    margin-top: 16px;
+	    width: 70px;
+	    height: 33px;
+	    background: white;
+	    color: rgb(136, 136, 136);
+	    font-size: 13px;
+	    font-weight: 400;
+   }
+   .filterDivTitle{
+   		font-weight: 600;
+    	opacity: 0.7;
+    	border-bottom: 1px solid black;
+    	padding-bottom: 8px;
+    	border-bottom: 1px solid #d4d4d4;
+   }
+   .filter:hover{
+   		cursor: pointer;
    }
    .filterDiv{
    		position: fixed;
@@ -103,6 +125,46 @@
    		flex-direction: column;
    		padding: 10px;
    }
+   .inputMargin{
+   	    margin-bottom:10px;
+   	    color: rgb(84 84 84);
+   }
+   #searchImg:hover{
+   		cursor: pointer;
+   }
+   #ShowProductCount{
+   		padding-left: 15px;
+	    font-size: 15px;
+	    letter-spacing: -0.3px;
+	    color: #777777;
+	    font-weight: 600;
+   }
+   .kind{
+   		border: 1px solid rgb(21 100 249 / 90%);
+	    width: 55px;
+	    text-align: center;
+	    font-size: 14px;
+	    margin-top: 10px;
+	    color: rgb(21 100 249 / 90%);
+	    margin-bottom: 6px;
+   }
+   .deal{
+   		font-size: 18px;
+   }
+   .charter{
+   		font-size: 17px;
+   		font-weight: 600;
+   }
+   .content{
+   		font-size: 13px;
+   }
+   .addre{
+   		font-size: 11px;
+   		color: lightslategrey;
+   }
+   .pageDivCss{
+   		text-align:center;
+   }
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -112,8 +174,11 @@
   <!-- <div id="headDiv">헤더(방찾기,고객센터,로그인,회원가입 등)</div> -->
   <div id="filterDiv">
 	  <form action="goSearchHomeMain.search" method="get">
-		<input type="text" id="searchAddr" name="searchInput" value="${ searchInput }" placeholder="찾고싶은 지역을 입력해주세요.">
-		<input type="submit" value="검색" id="searchBtn">
+	  	<div style="display: inline-block;height: 100%;margin-right: 104px;margin-left: 59px;">
+			<input type="text" id="searchAddr" name="searchInput" value="${ searchInput }" placeholder="찾고싶은 지역을 입력해주세요.">
+			<img id="searchImg" width="25px" height="25px" src="resources/Icon/searchIcon.png" style="margin-top: 21px;float: right;opacity: 0.6;" onclick="submit()">
+			<!-- <input type="submit" value="검색" id="searchBtn" class="filter"> -->
+		</div>
 	  </form>
 	  <button id="roomFilter" class="filter">방 종류</button>
 	  <button id="productFilter" class="filter">거래 종류</button>
@@ -121,19 +186,19 @@
 	  <button id="rentFilter" class="filter">건물 유형</button>
 	  <button id="otherFilter" class="filter">기타 옵션</button>
 	  
-	  <div id="roomFilterDiv" class="filterDiv" style="left: 280px;">
-	  		방 종류
-	  		<label><input type="checkbox" id="roomTypeOne" name="roomType" onclick="checkFilterFun(); checkOneForce(this);" value="원룸">원룸</label>
-	  		<label><input type="checkbox" id="roomTypeTwo" name="roomType" onclick="checkFilterFun(); checkOneForce(this);" value="투룸">투룸</label>
-	  		<label><input type="checkbox" id="roomTypeThree" name="roomType" onclick="checkFilterFun(); checkOneForce(this);" value="쓰리룸">쓰리룸</label>
+	  <div id="roomFilterDiv" class="filterDiv" style="left: 454px;top: 124px;">
+	  		<label style="margin-bottom: 15px;" class="filterDivTitle">방 종류</label>
+	  		<label class="inputMargin"><input type="checkbox" id="roomTypeOne" name="roomType" onclick="checkFilterFun(); checkOneForce(this);" value="원룸">원룸</label>
+	  		<label class="inputMargin"><input type="checkbox" id="roomTypeTwo" name="roomType" onclick="checkFilterFun(); checkOneForce(this);" value="투룸">투룸</label>
+	  		<label class="inputMargin"><input type="checkbox" id="roomTypeThree" name="roomType" onclick="checkFilterFun(); checkOneForce(this);" value="쓰리룸">쓰리룸</label>
 	  </div>
-	  <div id="productFilterDiv" class="filterDiv" style="left: 335px;">
-	  		거래 종류
-	  		<label><input id="monthly" name="tradeType" type="checkbox" onclick="checkFilterFun(); checkOneForce(this); rentTypeCheck(this);" value="월세">월세</label>
-	  		<label><input id="charter" name="tradeType" type="checkbox" onclick="checkFilterFun(); checkOneForce(this); rentTypeCheck(this);" value="전세">전세</label>
+	  <div id="productFilterDiv" class="filterDiv" style="left: 543px;top: 124px;">
+	  		<label style="margin-bottom: 15px;" class="filterDivTitle">거래종류</label>
+	  		<label class="inputMargin"><input id="monthly" name="tradeType" type="checkbox" onclick="checkFilterFun(); checkOneForce(this); rentTypeCheck(this);" value="월세">월세</label>
+	  		<label class="inputMargin"><input id="charter" name="tradeType" type="checkbox" onclick="checkFilterFun(); checkOneForce(this); rentTypeCheck(this);" value="전세">전세</label>
 	  </div>
-	  <div id="productPayDiv" class="filterDiv" style="left: 400px;">
-	  		가격대
+	  <div id="productPayDiv" class="filterDiv" style="left: 633px;top: 124px;">
+	  		<label style="margin-bottom: 15px;" class="filterDivTitle">가격대</label>
 	  		<div id="charterDiv">
 	  			전세
 	  			<div>
@@ -157,51 +222,56 @@
 		  		</div>
 	  		</div>
 	  		<div>
+	  			<div id="monthlyDiv" style="margin-top: 20px; margin-bottom: 10px;">
 	  			월세
-	  			<div id="monthlyDiv">
-			  		<span>
-			  			<select id="minMonthly" style="width: 100px;" onchange="checkFilterFun();">
-			  				<option value="0">0</option>
-			  				<option value="20">20</option>
-			  				<option value="30">30</option>
-			  				<option value="40">40</option>
-			  			</select>
-			  		</span>
-			  			~
-			  		<span>
-			  			<select id="maxMonthly" style="width: 100px;" onchange="checkFilterFun();">
-			  				<option value="20">20</option>
-			  				<option value="30">30</option>
-			  				<option value="40">40</option>
-			  				<option value="10000000">제한 없음</option>
-			  			</select>
-			  		</span>
+		  			<div>
+				  		<span>
+				  			<select id="minMonthly" style="width: 100px;top: 124px;" onchange="checkFilterFun();">
+				  				<option value="0">0</option>
+				  				<option value="20">20</option>
+				  				<option value="30">30</option>
+				  				<option value="40">40</option>
+				  			</select>
+				  		</span>
+				  			~
+				  		<span>
+				  			<select id="maxMonthly" style="width: 100px;top: 124px;" onchange="checkFilterFun();">
+				  				<option value="20">20</option>
+				  				<option value="30">30</option>
+				  				<option value="40">40</option>
+				  				<option value="10000000">제한 없음</option>
+				  			</select>
+				  		</span>
+				  	</div>	
 		  		</div>
 	  		</div>
 	  </div>
-	  <div id="rentFilterDiv" class="filterDiv" style="left: 450px;">
-	  		건물 유형
-	  		<label><input id="build1" type="checkbox" name="buildType" onclick="checkFilterFun(); checkOneForce(this);" value="단독주택">단독주택</label>
-	  		<label><input id="build2" type="checkbox" name="buildType" onclick="checkFilterFun(); checkOneForce(this);" value="다가구주택">다가구주택</label>
-	  		<label><input id="build3" type="checkbox" name="buildType" onclick="checkFilterFun(); checkOneForce(this);" value="빌라">빌라/연립/다세대</label>
-	  		<label><input id="build4" type="checkbox" name="buildType" onclick="checkFilterFun(); checkOneForce(this);" value="상가주택">상가주택</label>
+	  <div id="rentFilterDiv" class="filterDiv" style="left: 723px;top: 124px;">
+	  		<label style="margin-bottom: 15px;" class="filterDivTitle">건물유형</label>
+	  		<label class="inputMargin"><input id="build1" type="checkbox" name="buildType" onclick="checkFilterFun(); checkOneForce(this);" value="단독주택">단독주택</label>
+	  		<label class="inputMargin"><input id="build2" type="checkbox" name="buildType" onclick="checkFilterFun(); checkOneForce(this);" value="다가구주택">다가구주택</label>
+	  		<label class="inputMargin"><input id="build3" type="checkbox" name="buildType" onclick="checkFilterFun(); checkOneForce(this);" value="빌라">빌라/연립/다세대</label>
+	  		<label class="inputMargin"><input id="build4" type="checkbox" name="buildType" onclick="checkFilterFun(); checkOneForce(this);" value="상가주택">상가주택</label>
 	  </div>
-	  <div id="otherFilterDiv" class="filterDiv" style="left: 500px; flex-direction: row;">
+	  <div id="otherFilterDiv" class="filterDiv" style="left: 813px;top: 124px; flex-direction: row;">
 	  		
-	  		<div style="display:flex; flex-direction: column">주차여부
-	  			<label><input id="parkAll" type="radio" name="parkType" checked="checked" onclick="checkFilterFun();" value="무관">무관</label>
-	  			<label><input id="parkAble" type="radio" name="parkType" onclick="checkFilterFun();" value="가능">가능</label>
-	  			<label><input id="parkDidable" type="radio" name="parkType" onclick="checkFilterFun();" value="불가능">불가능</label>
+	  		<div style="display:flex; flex-direction: column">
+				<label style="margin-bottom: 15px;margin-right: 25px;" class="filterDivTitle">주차여부</label>
+	  			<label class="inputMargin"><input id="parkAll" type="radio" name="parkType" checked="checked" onclick="checkFilterFun();" value="무관">무관</label>
+	  			<label class="inputMargin"><input id="parkAble" type="radio" name="parkType" onclick="checkFilterFun();" value="가능">가능</label>
+	  			<label class="inputMargin"><input id="parkDidable" type="radio" name="parkType" onclick="checkFilterFun();" value="불가능">불가능</label>
 	  		</div>
-	  		<div style="display:flex; flex-direction: column">반려동물
-	  			<label><input id="petAll" type="radio" name="petType" checked="checked" onclick="checkFilterFun();" value="무관">무관</label>
-	  			<label><input id="petAble" type="radio" name="petType" onclick="checkFilterFun();" value="가능">가능</label>
-	  			<label><input id="petDisable" type="radio" name="petType" onclick="checkFilterFun();" value="불가능">불가능</label>
+	  		<div style="display:flex; flex-direction: column">
+				<label style="margin-bottom: 15px;margin-right: 25px;" class="filterDivTitle">반려동물</label>
+	  			<label class="inputMargin"><input id="petAll" type="radio" name="petType" checked="checked" onclick="checkFilterFun();" value="무관">무관</label>
+	  			<label class="inputMargin"><input id="petAble" type="radio" name="petType" onclick="checkFilterFun();" value="가능">가능</label>
+	  			<label class="inputMargin"><input id="petDisable" type="radio" name="petType" onclick="checkFilterFun();" value="불가능">불가능</label>
 	  		</div>
-	  		<div style="display:flex; flex-direction: column">엘레베이터
-	  			<label><input id="eleAll" type="radio" name="eleType" checked="checked" onclick="checkFilterFun();" value="무관">무관</label>
-	  			<label><input id="eleAble" type="radio" name="eleType" onclick="checkFilterFun();" value="있음">있음</label>
-	  			<label><input id="eleDisable" type="radio" name="eleType" onclick="checkFilterFun();" value="없음">없음</label>
+	  		<div style="display:flex; flex-direction: column">
+				<label style="margin-bottom: 15px;" class="filterDivTitle">엘레베이터</label>
+	  			<label class="inputMargin"><input id="eleAll" type="radio" name="eleType" checked="checked" onclick="checkFilterFun();" value="무관">무관</label>
+	  			<label class="inputMargin"><input id="eleAble" type="radio" name="eleType" onclick="checkFilterFun();" value="있음">있음</label>
+	  			<label class="inputMargin"><input id="eleDisable" type="radio" name="eleType" onclick="checkFilterFun();" value="없음">없음</label>
 	  		</div>
 	  		
 	  </div>
@@ -275,26 +345,27 @@
 						$listHouseDiv.html(""); 
 						
 						/* 전체 매물수 표기 */
-						var $div1 = $('<div>').text("전체 매물 수 : " + data[0].listCount);
+						var $div1 = $('<div id="ShowProductCount">').text("전체 매물 수 : " + data[0].listCount);
 						$listHouseDiv.append($div1);
 						
 						/* 매물 div */
 						
 					 	for(var i = 0; i < data[1].length; i++){
 							
-							var $div2 = $("<div class='productContent'>");
+							var $div2 = $("<div class='productContent'>").css('margin-right','21px');
 							$div2.attr('onclick','goDetailPage(this)');
-							var $img = $("<img alt="+data[1][i].p_picture+" src=''>");
-							var $span1 = $("<span>").text(data[1][i].p_kind);
-							var $span2 = $("<span>").text(data[1][i].p_deal);
-							var $span3 = $("<span>");
+							var $img = $("<img alt="+data[1][i].p_picture+" src='resources/buploadFiles/"+data[1][i].p_picture.substring(1,21)+"' width='97%' height='100px'>");
+							var $span1 = $("<span class='kind'>").text(data[1][i].p_kind);
+							var $span2 = $("<span class='deal'>").text(data[1][i].p_deal);
+							var $span3 = $("<span class='charter'>");
 							if(data[1][i].p_deal == '전세'){
 								$span3.text(data[1][i].p_charter);
 							} else {
 								$span3.text(data[1][i].p_deposit+"/"+data[1][i].p_rent);
 							}
-							var $span4 = $("<span>").text(data[1][i].p_content);
-							var $span5 = $("<span id='addSpan'>").text(data[1][i].p_addr);
+							var $span4 = $("<span class='content'>").text(data[1][i].p_content);
+							var $span5 = $("<span class='addre' id='addSpan'>").text(data[1][i].p_addr);
+							var $input = $("<input type='hidden'>").val(data[1][i].p_id);
 							
 							$div2.append($img);
 							$div2.append($span1);
@@ -302,13 +373,13 @@
 							$div2.append($span3);
 							$div2.append($span4);
 							$div2.append($span5);
+							$div2.append($input);
 							$listHouseDiv.append($div2);
 							
 						}
-						
 						/* 페이징 */
 						
-						$div3 = $("<div>");
+						$div3 = $("<div class='pageDivCss'>");
 
 						/* 이전페이지 */
 						if(data[0].currentPage <= 1){
@@ -540,9 +611,21 @@
 		  		
 		  		if($(DivId).css('display') == 'flex'){
 		  			$(DivId).css('display','none');
+		  			$(this).css('border-color','rgb(136 136 136)');
+		  			$(this).css('height','33px');
+		  			$(this).css('width','70px');
+		  			$(this).css('font-weight','400');
 		  		} else {
 			  		$('#filterDiv>Div').css('display','none');
+			  		$('#filterDiv>button').css('border-color','rgb(136 136 136)');
+			  		$('#filterDiv>button').css('height','33px');
+		  			$('#filterDiv>button').css('width','70px');
+		  			$('#filterDiv>button').css('font-weight','400');
 			  		$(DivId).css('display','flex');
+		  			$(this).css('border-color','#585bb7');
+		  			$(this).css('height','35px');
+		  			$(this).css('width','72px');
+		  			$(this).css('font-weight','600');
 		  		}
 		  	});
 	  </script>
@@ -550,30 +633,32 @@
   
   <div id="contentContainer">
      <div id="listHouseDiv">
-     	<div>전체 매물 수 : ${ pageInfo.listCount } </div>
+     	<div id="ShowProductCount">전체 매물 수 : ${ pageInfo.listCount } </div>
      	<c:forEach var="p" items="${ productList }" varStatus="status">
      		
 	        <div class="productContent" onclick="goDetailPage(this)">
-		        <img alt="${ p.p_picture }" src="">
-		        <span>${ p.p_kind }</span>
-		        <span>${ p.p_deal }</span>
-		        <span>
-		        	<c:if test="${ p.p_deal == '전세' }">
-		        		${ p.p_charter }
-		        	</c:if>
-		        	<c:if test="${ p.p_deal == '월세' }">
-		        		${ p.p_deposit }/${ p.p_rent }
-		        	</c:if>
-		        </span>
-		        <span>${ p.p_content }</span>
-		        <span id="addSpan" name="addSpan${ status.index }">${ p.p_addr }</span>
+		        <img alt="${ p.p_picture }" src="resources/buploadFiles/${ fn:substring(p.p_picture,1,21) }" width="97%" height="100px">
+		        <span class="kind">${ p.p_kind }</span>
+		        
+			        <span class="deal">${ p.p_deal }</span>
+			        <span class="charter">
+			        	<c:if test="${ p.p_deal == '전세' }">
+			        		${ p.p_charter }
+			        	</c:if>
+			        	<c:if test="${ p.p_deal == '월세' }">
+			        		${ p.p_deposit }/${ p.p_rent }
+			        	</c:if>
+			        </span>
+		        
+		        <span class="content">${ p.p_content }</span>
+		        <span class="addre" id="addSpan" name="addSpan${ status.index }">${ p.p_addr }</span>
 		        <input type="hidden" value="${ p.p_id }">
 	        </div>
 	        
      	</c:forEach>
      	
      	<!-- 페이징 -->
-     	<div>
+     	<div class="pageDivCss">
      		<!-- 이전 -->
      		<c:if test="${ pageInfo.currentPage <= 1 }">
      			[이전]
@@ -704,7 +789,8 @@
 	
 		    		    // 마커에 표시할 인포윈도우를 생성합니다 
 		    		    var infowindow = new kakao.maps.InfoWindow({
-		    		        content: '<div>'+position[i].content+rent+'</div>' // 인포윈도우에 표시할 내용
+		    		        content: '<div><div style="font-size: 16px;color: lightslategrey;">'+position[i].content+'</div><div style="margin-left:5px;margin-bottom: 5px;font-size: 17px;font-weight: 600;">'+rent+'</div></div>' // 인포윈도우에 표시할 내용
+		    		        //content: '<div>'+position[i].content+rent+'</div>' // 인포윈도우에 표시할 내용
 		    		    });
 	
 		    		    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 
 import mat.dong.san.member.model.vo.EstateAgent;
@@ -274,8 +275,16 @@ public class SearchRoomController {
 	@RequestMapping(value = "searchRoomDetailPage.search", method = RequestMethod.GET)
 	public ModelAndView goSearchRoomDetailPage(@RequestParam("p_id") Integer p_id, ModelAndView mv) {
 		
+		System.out.println("p_id : " + p_id);
 		// 매물 정보
 		Product product = sService.selectProductDetail(p_id);
+		String[] productArr = product.getP_picture().split("/");
+		ArrayList<String> productPictureList = new ArrayList<String>();
+		
+		for(int i = 1; i < productArr.length; i++) {
+			productPictureList.add(productArr[i]);
+		}
+		
 		// 중개사 정보
 		EstateAgent ea = sService.selectAgent(p_id);
 		// 중개사의 댓글정보
@@ -288,6 +297,7 @@ public class SearchRoomController {
 			mv.addObject("EstateAgent", ea);
 			mv.addObject("review", reviewList);
 			mv.addObject("productList", productList);
+			mv.addObject("pictureList", productPictureList);
 			mv.setViewName("searchRoomDetailPage");
 		}
 		return mv;
@@ -315,7 +325,10 @@ public class SearchRoomController {
 					
 					ArrayList<EstateAgentReview> reviewList = sService.selectReview(e_id);
 					response.setContentType("application/json; charset=UTF-8");
-					new Gson().toJson(reviewList,response.getWriter());
+					GsonBuilder gb = new GsonBuilder();
+					GsonBuilder df = gb.setDateFormat("yyyy-MM-dd");
+					Gson gson = df.create();
+					gson.toJson(reviewList,response.getWriter());
 					
 				} catch (JsonIOException e) {
 					e.printStackTrace();
@@ -326,6 +339,12 @@ public class SearchRoomController {
 			}
 		}
 		
+	}
+	
+	@RequestMapping("openMessage.search")
+	public String openPup() {
+		
+		return "../common/message";
 	}
 	
 }
