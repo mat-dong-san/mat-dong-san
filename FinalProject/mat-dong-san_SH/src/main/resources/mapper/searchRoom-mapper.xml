@@ -5,7 +5,7 @@
   	select 
   	count(*) 
   	from product 
-  	where P_DEL_YN = 'N'
+  	where P_DEL_YN = 'N' and P_REG_STATUS = 'Y'
   	<if test="searchInput != null">
   		and p_addr like '%' || #{searchInput} || '%'
   	</if>
@@ -15,7 +15,7 @@
   	select
   	*
   	from product
-  	where P_DEL_YN = 'N'
+  	where P_DEL_YN = 'N' and P_REG_STATUS = 'Y'
   	<if test="searchInput != null">
   		and p_addr like '%' || #{searchInput} || '%'
   	</if>
@@ -26,7 +26,7 @@
   	select 
   	count(*)
   	from product 
-  	where P_DEL_YN = 'N'
+  	where P_DEL_YN = 'N' and P_REG_STATUS = 'Y'
   	<if test='searchInput != ""'>
   		and p_addr like '%' || #{searchInput} || '%'
   	</if>
@@ -66,7 +66,7 @@
   	select 
   	*
   	from product 
-  	where P_DEL_YN = 'N'
+  	where P_DEL_YN = 'N' and P_REG_STATUS = 'Y'
   	<if test='searchInput != ""'>
   		and p_addr like '%' || #{searchInput} || '%'
   	</if>
@@ -111,12 +111,10 @@
   </select>
   
   <select id="selectAgent" resultType="EstateAgent">
-  	select
-  	E_ID, E_NAME, E_PHONE, E_CONTENT, E_ADDR, E_PICTURE, E_FIELD, E_REG_NUM,
-    E_COORD, E_C_LAT, E_C_LNG, E_POINT, E_REG_D, E_DEL_YN, US_ID
-  	from ESTATEAGENT
-  	join PRODUCT using(US_ID)
-  	where P_ID = #{p_id}
+  	select * from
+	(select * from product p where p.p_id = #{p_id}) a
+	join product_application pa on a.p_id = pa.p_id
+	join estateagent e on pa.e_id = e.e_id
   </select>
   
   <select id="selectReview" resultType="EstateAgentReview">

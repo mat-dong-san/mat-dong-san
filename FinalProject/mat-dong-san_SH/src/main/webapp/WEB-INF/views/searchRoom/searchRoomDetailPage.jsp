@@ -147,6 +147,21 @@
 	    padding: 5px 9px;
 	    color: white;
 	}
+	#schFooter{
+		outline: none;
+	    border: 0;
+	    background: rgb(125 125 125 / 88%);
+	    padding: 5px 9px;
+	    color: white;
+	    cursor: pointer;
+	}
+	#topIndexBtn{
+		outline: none;
+	    border: 0;
+	    background: rgb(125 125 125 / 88%);
+	    padding: 5px 9px;
+	    color: white;
+	}
 	#moreRoomView{
 		outline: none;
 	    border: 0;
@@ -546,10 +561,23 @@
 		
 		<div id="footInfoDiv">
 			<div id="searchRoomNumDiv">
-				<input type="text" placeholder="매물번호 검색">
-				<input type="button" value="검색">
-				<span style="cursor: pointer; background: white;"onclick="location.href='#detailHeaderDiv'">맨 위로</span>
+				<input id="p_id_search" type="text" placeholder="매물번호 검색">
+				<input id="schFooter" type="button" value="검색">
+				<input id="topIndexBtn" type="button" style="cursor: pointer;"onclick="location.href='#detailHeaderDiv'" value="맨 위로">
 			</div>
+			<script>
+				$('#schFooter').click(function(){
+					var p_id = $('#p_id_search').val();
+					
+					if(p_id == ""){
+						alert('매물 번호를 입력해주세요.');
+						return false;
+					} else {
+						location.href="searchRoomDetailPage.search?p_id="+p_id;
+					}
+				});
+			</script>
+			
 			<div id="footDetailInfoDiv">
 				<p>(주)맛동산</p>
 				<p>대표: 김수환, 김용연, 백성강, 이정서, 정창섭</p>
