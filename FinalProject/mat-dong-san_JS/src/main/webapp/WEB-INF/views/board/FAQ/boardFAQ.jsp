@@ -9,21 +9,28 @@
 <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
+<style type="text/css">
 	html, body{
 		margin:0;
 		padding:0;
 	}
+<<<<<<< HEAD
 	
 	#bFAQModal_Wrapper,#bFAQModal_WrapperUpdate {
 		display:none;
 		position:fixed;
+=======
+
+	#bFAQModal_Wrapper{
+		display:none;
+		position:relative;
+>>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
 		border:1px solid black;
 		width:400px;
+		margin:180px auto;
 	 	z-index:1;
-	 	top: 0px;
-	 	left:0px;
 	}
+<<<<<<< HEAD
 	
 	#modal_FAQ_standard{
 		border:none;
@@ -37,21 +44,22 @@
 	}
 	
 	.b_modal_QA, .b_modal_QAUpdate{
+=======
+	.b_modal_QA{
+>>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
  	    padding:10px; 
 	}
 	
-	.b_model_QA_input, .b_model_QA_inputUpdate{
+	.b_model_QA_input{
 		width: 300px;
 		height:50px;	
 		}
-	.b_modal_inputbox, .b_modal_inputboxUpdate{
+	.b_modal_inputbox{
 		width:100%;
 		height:100%;
-		outline: none;
-		border:none;
 	}
 	
-	.b_modal_layer, .b_modal_layerUpdate{
+	.b_modal_layer{
 		position: fixed;
         left:0;
         top:0;
@@ -61,17 +69,22 @@
         z-index:-1;
 	}
 	
-	#b_modal_submit, #b_modal_submitUpdate ,#modal_cancel{
+	#b_modal_submit{
 		width:100%;
 		height:50px;
-		
 	}
+<<<<<<< HEAD
 	.bFAQ_Content, .bFAQ_ContentUpdate{
 	 	background:white;	
+=======
+	.bFAQ_Content{
+	 	background:white;
+>>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
 	 	padding:10px;
 	}
 	
 	
+<<<<<<< HEAD
 	#FAQ_Wrapper{
            margin-top: 100px;
            margin-right: 200px; 
@@ -262,13 +275,102 @@
 				</form>
 				</table>
 			</div>
+=======
+	<!-- 임시 -->
+	#boardFAQ_Wrapper {
+		background-color: yellow;
+	}
+	table {
+		border-collapse: collapse;
+	}
+	td:nth-child(2) {
+		border : 1px solid black;
+	}
+</style>
+</head>
+<body>
+	<div id="boardFAQ_Wrapper">
+		<input type="button" value="모달창" id="b_modal_btn"/>
+		<table>
+			<tr>
+				<td>
+					<input type="checkbox">
+				</td>
+				<td>자주묻는질문</td>
+			</tr>
+			<form method="post" action="FAQDelete.board" >
+			<input type="submit" value="확인">
+			<c:forEach var="FAQ" items="${ list }">
+			<tr>
+				<td>
+					<input type="checkbox" name="FAQDeletebId" value="${ FAQ.bId }">
+<%-- 					<c:url var="bdelete" value="FAQDelete.board" > --%>
+<%-- 						<c:param name="bId" value="${ FAQ.bId }" /> --%>
+<%-- 					</c:url> --%>
+				</td>
+				<td>
+					<div class="b_qb_div">
+						<div class="b_question">Q. ${ FAQ.bTitle }</div>
+						<div class="b_answer">A. ${ FAQ.bContent }</div>
+					</div>
+				</td>				
+			</tr>
+			
+			</c:forEach>
+			
+			<!-- 페이징 -->
+			<tr>
+				<td></td>
+				<td>
+					<c:if test="${ pi.currentPage <= 1 }">
+						[이전] &nbsp;
+					</c:if>
+					<c:if test="${ pi.currentPage > 1 }">
+						<c:url var="before" value="boardFAQ.board">
+							<c:param name="page" value="${ pi.currentPage - 1 }"/>
+						</c:url>
+						<a href="${ before }">[이전]</a> &nbsp;
+					</c:if>
+					
+						<!-- 페이지 -->
+					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+						<c:if test="${ p eq pi.currentPage }">
+							<font color="red" size="4"><b>[${ p }]</b></font>
+						</c:if>
+						
+						<c:if test="${ p ne pi.currentPage }">
+							<c:url var="pagination" value="boardFAQ.board">
+								<c:param name="page" value="${ p }"/>
+							</c:url>
+							<a href="${ pagination }">${ p }</a> &nbsp;
+						</c:if>
+					</c:forEach>
+				
+					<!-- [다음] -->
+					<c:if test="${ pi.currentPage >= pi.maxPage }">
+						[다음]
+					</c:if>
+					<c:if test="${ pi.currentPage < pi.maxPage }">
+						<c:url var="after" value="boardFAQ.board">
+							<c:param name="page" value="${ pi.currentPage + 1 }"/>
+						</c:url> 
+						<a href="${ after }">[다음]</a>
+					</c:if>
+					
+					
+				</td>
+			</tr>
+							
+		</table>
+		</form>
+>>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
 	</div>
 	
 	<!-- 모달창 -->
 	<div id="bFAQModal_Wrapper">
 		<div class="bFAQ_Content" >
 			<form action="InsertFAQ.board" method="post" >
-				<table id="modal_FAQ_standard">
+				<table>
 					<tr>
 						<td class="b_modal_QA">
 							<div>Q.</div>
@@ -287,11 +389,11 @@
 					</tr>
 				</table>		
 				<input type="submit" value="확인" id="b_modal_submit"/>
-				<input type="button" value="취소" id="modal_cancel">
 			</form>
 		</div>
 		<div class="b_modal_layer"></div>
 	</div>
+<<<<<<< HEAD
 	
 	
 	
@@ -396,6 +498,16 @@
     	});
     	
 	    
+=======
+	<script>
+		// 모달창 display on/off
+		document.getElementById("b_modal_btn").onclick = function(){
+	        document.getElementById("bFAQModal_Wrapper").style.display="block";
+	    }
+	    document.getElementById("b_modal_submit").onclick = function(){
+	        document.getElementById("bFAQModal_Wrapper").style.display="none";
+	    }
+>>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
 	</script>
 	
 	

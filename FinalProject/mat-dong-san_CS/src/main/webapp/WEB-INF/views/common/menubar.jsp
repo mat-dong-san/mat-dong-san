@@ -30,12 +30,11 @@
 	
 	<div id="menubarDiv">
 		<span id="goSearchHouse" class="goMenuButton" onclick="location.href='gosSarchHouseMain.search'">방찾기</span>
-		<span id="goSearchHouse" class="goMenuButton" onclick="location.href='productRecentList.pr'">관심목록</span>
+		<span id="goSearchHouse" class="goMenuButton" onclick="location.href='productRecentList.es'">관심목록</span>
 		<span id="goSearchHouse" class="goMenuButton" onclick="location.href='#'">중고장터</span>
 		<span id="goSearchHouse" class="goMenuButton" onclick="location.href='#'">고객센터</span>
-		<span id="goSearchHouse" class="goMenuButton" onclick="location.href='mypageView.me'">마이페이지</span>
-		<span id="goSearchHouse" class="goMenuButton" onclick="location.href='test.pr'">테스트</span>
-		<span id="goSearchHouse" class="goMenuButton" onclick="location.href='test2.pr'">테스트2</span>
+		<span id="goSearchHouse" class="goMenuButton" onclick="location.href='mypageView.es'">마이페이지</span>
+		<span id="goSearchHouse" class="goMenuButton" onclick="location.href='test.es'">테스트</span>
 	
 		<div class="loginArea" align="right">
 			<c:if test="${ empty sessionScope.loginUser }">

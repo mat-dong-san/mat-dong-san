@@ -114,6 +114,7 @@
 	Hello world!  
 </h1>
 
+<<<<<<< HEAD
 <P>  The time on the server is ${serverTime}. </P> --%>
 	<c:import url="common/menubar.jsp" />
 	<div id="mainRootDiv">
@@ -177,5 +178,11 @@
 			</div>
 		</div>
 	</div>
+=======
+<P>  The time on the server is ${serverTime}. </P>
+
+<a href="searchHouseMain.search">방찾기 테스트</a>
+<a href="notice.board">고객 센터로</a>
+>>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
 </body>
 </html>

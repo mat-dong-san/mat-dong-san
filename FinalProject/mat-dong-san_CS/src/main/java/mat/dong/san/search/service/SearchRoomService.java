@@ -11,6 +11,6 @@ public interface SearchRoomService {
 
 	int selectProductCount();
 
-	Product selectProductRoom(Product p);
+	Product selectProductRoom(int p_id);
 	
 }

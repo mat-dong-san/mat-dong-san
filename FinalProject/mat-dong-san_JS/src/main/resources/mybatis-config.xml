@@ -6,6 +6,7 @@
 	</settings>
 	
 	<typeAliases>
+<<<<<<< HEAD
 		<typeAlias type="mat.dong.san.board.model.vo.Board" alias="Board"/>
 		<typeAlias type="mat.dong.san.board.model.vo.BoardAttachment" alias="BoardAttachment"/>
 		<typeAlias type="mat.dong.san.board.model.vo.BoardType" alias="BoardType"/>
@@ -15,6 +16,9 @@
 		<typeAlias type="mat.dong.san.member.vo.Member" alias="Member"/>
 		<typeAlias type="mat.dong.san.member.vo.EstateAgent" alias="EstateAgent"/>	
 		
+=======
+		<typeAlias type="com.dong.san.board.model.vo.Board" alias="Board"/>
+>>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
 	</typeAliases>
 	
 	<mappers>

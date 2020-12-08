@@ -25,8 +25,6 @@
 		<form action="einsert.me" method="post" enctype="Multipart/form-data" id="joinForm">
 			<table>
 				
-				
-				
 				<tr>
 					<th>* 중개사이름</th>
 					<td>

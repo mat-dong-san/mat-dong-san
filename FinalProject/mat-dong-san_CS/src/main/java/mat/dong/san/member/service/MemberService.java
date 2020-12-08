@@ -16,4 +16,6 @@ public interface MemberService {
 
 	int checkNameDup(String name);
 
+	
+
 }
