@@ -5,7 +5,7 @@
   	select 
   	count(*) 
   	from product 
-  	where P_DEL_YN = 'N'
+  	where P_DEL_YN = 'N' and P_REG_STATUS = 'Y'
   	<if test="searchInput != null">
   		and p_addr like '%' || #{searchInput} || '%'
   	</if>
@@ -15,10 +15,135 @@
   	select
   	*
   	from product
-  	where P_DEL_YN = 'N'
+  	where P_DEL_YN = 'N' and P_REG_STATUS = 'Y'
   	<if test="searchInput != null">
   		and p_addr like '%' || #{searchInput} || '%'
   	</if>
   	order by P_ID desc
   </select>
+ 
+  <select id="selectProductFilterCount" resultType="_int">
+  	select 
+  	count(*)
+  	from product 
+  	where P_DEL_YN = 'N' and P_REG_STATUS = 'Y'
+  	<if test='searchInput != ""'>
+  		and p_addr like '%' || #{searchInput} || '%'
+  	</if>
+  	<if test='parkType != "무관"'>
+  		and P_PARK like #{parkType}
+  	</if>
+  	<if test='petType != "무관"'>
+  		and P_PET like #{petType}
+  	</if>
+  	<if test='eleType != "무관"'>
+  		and P_ELEVATOR like '%' || #{eleType} || '%'
+  	</if>
+  	<if test="roomType != null">
+  		and
+  		<foreach item="item" collection="roomType" separator="or" open="(" close=")">
+  			p_kind like '%' || #{item} || '%'
+  		</foreach>
+  	</if>
+  	<if test="tradeType != null">
+  		and
+  		<foreach item="item" collection="tradeType" separator="or" open="(" close=")">
+  			P_DEAL like '%' || #{item} || '%'
+  		</foreach>
+  	</if>
+  	<if test="buildType != null">
+  		and
+  		<foreach item="item" collection="buildType" separator="or" open="(" close=")">
+  			P_FIELD like '%' || #{item} || '%'
+  		</foreach>
+  	</if>
+  	and (P_CHARTER <![CDATA[>=]]> #{minCharter} and P_CHARTER <![CDATA[<=]]> #{maxCharter})
+  	and (P_RENT <![CDATA[>=]]> #{minMonthly} and P_RENT <![CDATA[<=]]> #{maxMonthly})
+  	order by p_id
+  </select>
+  
+  <select id="selectFilterList" resultType="Product">
+  	select 
+  	*
+  	from product 
+  	where P_DEL_YN = 'N' and P_REG_STATUS = 'Y'
+  	<if test='searchInput != ""'>
+  		and p_addr like '%' || #{searchInput} || '%'
+  	</if>
+  	<if test='parkType != "무관"'>
+  		and P_PARK like #{parkType}
+  	</if>
+  	<if test='petType != "무관"'>
+  		and P_PET like #{petType}
+  	</if>
+  	<if test='eleType != "무관"'>
+  		and P_ELEVATOR like '%' || #{eleType} || '%'
+  	</if>
+  	<if test="roomType != null">
+  		and
+  		<foreach item="item" collection="roomType" separator="or" open="(" close=")">
+  			p_kind like '%' || #{item} || '%'
+  		</foreach>
+  	</if>
+  	<if test="tradeType != null">
+  		and
+  		<foreach item="item" collection="tradeType" separator="or" open="(" close=")">
+  			P_DEAL like '%' || #{item} || '%'
+  		</foreach>
+  	</if>
+  	<if test="buildType != null">
+  		and
+  		<foreach item="item" collection="buildType" separator="or" open="(" close=")">
+  			P_FIELD like '%' || #{item} || '%'
+  		</foreach>
+  	</if>
+  	and (P_CHARTER <![CDATA[>=]]> #{minCharter} and P_CHARTER <![CDATA[<=]]> #{maxCharter})
+  	and (P_RENT <![CDATA[>=]]> #{minMonthly} and P_RENT <![CDATA[<=]]> #{maxMonthly})
+  	order by p_id desc
+  </select>
+  
+  <select id="selectProductDetail" resultType="Product">
+  	select
+  	*
+  	from PRODUCT
+  	where P_ID = #{p_id}  	
+  	order by p_id desc
+  </select>
+  
+  <select id="selectAgent" resultType="EstateAgent">
+  	select * from
+	(select * from product p where p.p_id = #{p_id}) a
+	join product_application pa on a.p_id = pa.p_id
+	join estateagent e on pa.e_id = e.e_id
+  </select>
+  
+  <select id="selectReview" resultType="EstateAgentReview">
+  	select
+  	*
+  	from ESTATEAGENT_REVIEW
+  	where E_ID = #{e_id}
+  	order by er_id desc
+  </select>
+  
+  <insert id="insertReplay">
+  	insert into ESTATEAGENT_REVIEW
+  	values(SEQ_ER_ID.NEXTVAL, #{er_content}, #{er_point}, sysdate, 'N', #{us_id}, #{e_id})
+  </insert>
+  
+  <update id="updatePoint">
+  	update estateagent set e_point = (
+	select trunc(avg(er_point),1) from estateagent_review where e_id = #{e_id} group by e_id)
+	where e_id = #{e_id}
+  </update>
+  
+  <select id="selectProductEstate" resultType="Product">
+  	select * from product where US_ID = #{us_id} order by p_id desc
+  </select>
+  
+  <select id="selectTopList" resultType="Product">
+  	select * from(
+	select * from product order by p_id desc
+	) where rownum <![CDATA[<]]> 7
+  </select>
+ 
 </mapper>
