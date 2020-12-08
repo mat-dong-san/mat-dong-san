@@ -665,7 +665,8 @@
 		        	<c:if test="${ p.p_deal == '전세' }">
 		        		${ p.p_charter }
 		        	</c:if>
-		        	<c:if test="${ p.p_deal == '월세' }">
+		        	<c:if test="${ p.p_deal == '
+' }">
 		        		${ p.p_deposit }/${ p.p_rent }
 		        	</c:if>
 		        </span>
