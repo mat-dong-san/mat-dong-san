@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="mat.san.dong">
+	<logger name="com.san.dong">
 		<level value="info" />
 	</logger>
 	

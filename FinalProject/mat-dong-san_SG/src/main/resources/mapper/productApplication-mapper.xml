@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="productApplicationMapper">
+
+	<resultMap type="ProductApplication" id="estatePropertyResultSet">
+		<id column="A_ID" property="a_id"/>
+		<result column="A_STATUS" property="a_status"/>
+		<result column="A_DATE" property="a_date"/>
+		<result column="P_ID" property="p_id"/>
+		<result column="PR_ID" property="pr_id"/>
+		<result column="E_ID" property="e_id"/>
+		<result column="P_ADDR" property="p_addr"/>
+		<result column="P_FIELD" property="p_field"/>
+		<result column="P_FLOOR" property="p_floor"/>
+		<result column="P_SIZE" property="p_size"/>
+		<result column="P_STR" property="p_str"/>
+		<result column="P_KIND" property="p_kind"/>
+		<result column="P_ROOM" property="p_room"/>
+		<result column="P_S_SIZE" property="p_s_size"/>
+		<result column="P_D_SIZE" property="p_d_size"/>
+		<result column="P_LAYER" property="p_layer"/>
+		<result column="P_DEAL" property="p_deal"/>
+		<result column="P_CHARTER" property="p_charter"/>
+		<result column="P_RENT" property="p_rent"/>
+		<result column="P_DEPOSIT" property="p_deposit"/>
+		<result column="P_COST" property="p_cost"/>
+		<result column="P_COST_ITEM" property="p_cost_item"/>
+		<result column="P_EN_D" property="p_en_d"/>
+		<result column="P_CONTENT" property="p_content"/>
+		<result column="P_HEAT" property="p_heat"/>
+		<result column="P_DIR" property="p_dir"/>
+		<result column="P_PARK" property="p_park"/>
+		<result column="P_ELEVATOR" property="p_elevator"/>
+		<result column="P_VERANDAR" property="p_verandar"/>
+		<result column="P_PET" property="p_pet"/>
+		<result column="P_BUILT_IN" property="p_built_in"/>
+		<result column="P_LOAN" property="p_loan"/>
+		<result column="P_OPTION" property="p_option"/>
+		<result column="P_PICTURE" property="p_picture"/>
+		<result column="P_REG_D" property="p_reg_d"/>
+		<result column="P_REG_STATUS" property="p_reg_status"/>
+		<result column="P_DEL_YN" property="p_del_yn"/>
+		<result column="US_ID" property="us_id"/>
+		<result column="US_NAME" property="us_name"/>
+		<result column="US_PHONE" property="us_phone"/>
+		<result column="US_EMAIL" property="us_email"/>
+		<result column="US_PICTURE" property="us_picture"/>
+	</resultMap>
+	
+	<!-- 관리자페이지에서 신청 리스트 카운트 -->
+	<select id="getProductApplicationListCount" resultType="_int">
+	    select count(*)
+        from Product_Application pa
+            join product p on (p.p_id = pa.p_id)
+        where p_del_yn='N' 
+        and e_id=#{e_id}
+        and a_status='A'
+        and p_reg_status='Y'
+        and p_content like '%' || #{searchValue} || '%'
+        <if test='searchCondition == "원룸"'>
+ 		and p_kind='원룸'
+  		</if>
+  		<if test='searchCondition == "투룸"'>
+  		and p_kind='투룸'
+  		</if>
+  		<if test='searchCondition == "쓰리룸"'>
+		and p_kind='쓰리룸'
+  		</if>
+	</select>
+
+	<!-- 관리자페이지에서 신청 리스트 가져오기 -->
+	<select id="selectProductApplicationList" resultMap="estatePropertyResultSet">
+        select * 
+        from(select rownum rnum, descpa.*
+        from (select a_id, a_status, a_date, pa.p_id p_id, pr_id, e_id, p_addr, p_field, p_floor, p_size,
+        p_str, p_kind, p_room, p_s_size, p_d_size, p_layer, p_deal, p_charter, p_rent, p_deposit, p_cost,
+        p_cost_item, p_en_d, p_content, p_heat, p_dir, p_park, p_elevator, p_verandar, p_pet, p_built_in,
+        p_loan, p_option, p_picture, p_reg_d, p_reg_status, p_del_yn, p.us_id us_id, us_name, us_phone, us_picture, us_email
+        from Product_Application pa
+            join product p on (p.p_id = pa.p_id)
+            join member m on (m.us_id = p.us_id)
+        where p_del_yn='N'and e_id = #{e_id}
+        and a_status='A'
+        and p_reg_status='Y'
+        and p_content like '%' || #{searchValue} || '%'
+        <if test='searchCondition == "원룸"'>
+ 		and p_kind='원룸'
+  		</if>
+  		<if test='searchCondition == "투룸"'>
+  		and p_kind='투룸'
+  		</if>
+  		<if test='searchCondition == "쓰리룸"'>
+		and p_kind='쓰리룸'
+  		</if>
+        order by a_id desc) descpa)
+    </select>
+</mapper>

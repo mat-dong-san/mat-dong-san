@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="../ckeditor_4.14.1_standard//ckeditor/ckeditor.js"></script>
     <title>1대1문의 작성</title>
     <style>
         html, body{
@@ -24,7 +24,7 @@
             margin:100px auto;
         }
         #oneToOneView_head{
-/*             border:1px solid black; */
+            border:1px solid black;
 
         }
         #mid_flex_div{
@@ -38,47 +38,40 @@
         }
         #oneToOneView_body{
             margin-top: 10px;
-/*             border: 1px solid black; */
+            border: 1px solid black;
             margin-bottom:100px;
         }
         .oneToOneView_BodyLayout{
-/*             border: 1px solid black;     */
+            border: 1px solid black;    
             padding:20px;
         }
         /* .oneToOneView_B_top{
             height:80px;
         } */
         .oneToOneView_B_mid{
-            border: 1px solid black;
-            height:20px;
-            padding:20px;
+            height:80px;
         }
         .oneToOneView_B_bot{
-        	padding : 20px;
             height:300px;
-            border : 1px solid black;
         }
-        #noticeWrite_content{
-        	outline: none;
-        	border : 0;
-        	width : 99%;
-        	height: 99%;
-        }
-        #noticeWrite_title{
-	       	height:99%;
-	       	width:99%;
-	       	outline: none;
-	       	border : 0;
-       }
-        
     </style>
 </head>
 <body>
     <div id="oneToOneView_Wrapper">
-        <c:import url="../../common/menubar.jsp"/>
-		<c:import url="../../common/helpdeskSidebar.jsp"/>
+        <div id="menubar">
+        </div>
         
+<<<<<<< HEAD
         <form  method="POST"  name="noticeWriteComfirm">
+<%--         <input type="hidden" name="page" value="${ page }"> --%>
+        
+        <c:url var="noticeWrite" value="noticeWriteConfirm.board">
+				<c:param name="page" value="${ page }"/>
+		</c:url>
+=======
+        <div id="loaded">
+        </div>
+>>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
         <div id="oneToOneView_innerWrapper">
             <!-- head-->
             <div id="oneToOneView_head">
@@ -88,7 +81,7 @@
                 <div class="oneToOne_mid">
                     <div id="mid_flex_div"> 
                         <div class="oneToOneListMid_right">
-                            <button id="oneToOne_goDetail" onClick="noticeWrite();">등록</button>
+                            <button id="oneToOne_goDetail">문의하기</button>
                         </div>
                     </div>
                 </div>
@@ -104,25 +97,27 @@
                 </div> -->
                 <div class="oneToOneView_BodyLayout">
                     <div class="oneToOneView_B_mid">
-                        <input type="text" placeholder="제목을 입력하세요." id="noticeWrite_title" name="bTitle">
+                        <input type="text">
                     </div>
                 </div>
                 <div class="oneToOneView_BodyLayout">
                     <div class="oneToOneView_B_bot">
-                        <textarea id="noticeWrite_content" name="bContent" placeholder="내용을 입력하세요."></textarea>
+                        <textarea id="b_textA" name="FAQ_Content"></textarea>
+						<script>CKEDITOR.replace('b_textA');</script>
                     </div>
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
         </form>
     </div>    
 	<script>
 		function noticeWrite(){
 			var select = confirm("작성하시겠습니까?");
 			if(select === true){
-				document.noticeWriteComfirm.action='noticeWriteConfirm.board';
-				alert('작성완료!');
+				document.noticeWriteComfirm.action='${ noticeWrite }';
 				document.noticeWriteComfirm.submit();
+				alert('작성완료!');
 				
 			}
 		}
@@ -130,6 +125,17 @@
 	</script>
 
 
+=======
+    <script>
+        $(document).ready(function(){
+            $("#loaded").load("../helpdeskSidebar.html");
+        });
+         // menubar
+         $(document).ready(function(){
+            $("#menubar").load("../menubar.html");
+        });
+    </script>
+>>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
 
 </body>
 </html>

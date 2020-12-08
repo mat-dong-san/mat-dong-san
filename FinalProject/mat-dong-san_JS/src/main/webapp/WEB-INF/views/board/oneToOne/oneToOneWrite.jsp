@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="../ckeditor_4.14.1_standard//ckeditor/ckeditor.js"></script>
     <title>1대1문의 작성</title>
     <style>
         html, body{
@@ -58,9 +58,20 @@
 </head>
 <body>
     <div id="oneToOneView_Wrapper">
+<<<<<<< HEAD
         <c:import url="../../common/menubar.jsp"/>
 		<c:import url="../../common/helpdeskSidebar.jsp"/>
 		<form name="oneToOneWriteForm" method="POST">
+
+		<input type="hidden" name="page" value="${ page }">
+		
+=======
+        <div id="menubar">
+        </div>
+        
+        <div id="loaded">
+        </div>
+>>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
         <div id="oneToOneView_innerWrapper">
             <!-- head-->
             <div id="oneToOneView_head">
@@ -70,40 +81,41 @@
                 <div class="oneToOne_mid">
                     <div id="mid_flex_div"> 
                         <div class="oneToOneListMid_right">
-                            <button id="oneToOne_goDetail" onClick="oneToOneWrite();">문의하기</button>
+                            <button id="oneToOne_goDetail">문의하기</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div id="oneToOneView_body">
                 <div class="oneToOneView_BodyLayout">
-                    <div class="oneToOneView_B_top"></div>
+                    <div class="oneToOneView_B_top">
+                        <select>
+                            <option value="" selected>공개 </option>
+                            <option value="">비공개</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="oneToOneView_BodyLayout">
                     <div class="oneToOneView_B_mid">
-                        <input type="text" name="bTitle" id="oneToOneWrite_title" placeholder="제목을 입력하세요.">
+                        <input type="text">
                     </div>
                 </div>
                 <div class="oneToOneView_BodyLayout">
                     <div class="oneToOneView_B_bot">
-                        <textarea id="oneToOneContent" name="bContent"></textarea>
+                        <textarea id="b_textA" name="FAQ_Content"></textarea>
+						<script>CKEDITOR.replace('b_textA');</script>
                     </div>
                 </div>
             </div>
         </div>
-        </form>
-    </div>    
     <script>
-    function oneToOneWrite(){
-	    var select = confirm("작성하시겠습니까?");
-		if(select === true){
-			document.oneToOneWriteForm.action='oneToOneWriteConfirm.board';
-			alert('작성완료!');
-			document.oneToOneWriteForm.submit();
-		}
-    }
-    
-    
+        $(document).ready(function(){
+            $("#loaded").load("../helpdeskSidebar.html");
+        });
+         // menubar
+         $(document).ready(function(){
+            $("#menubar").load("../menubar.html");
+        });
     </script>
 
 </body>

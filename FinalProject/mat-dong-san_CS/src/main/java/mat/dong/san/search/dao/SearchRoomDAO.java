@@ -22,9 +22,9 @@ public class SearchRoomDAO {
 	}
 
 	
-	public Product selectProductRoom(SqlSessionTemplate sqlSession, Product p) {
+	public Product selectProductRoom(SqlSessionTemplate sqlSession, int p_id) {
 		
-		return sqlSession.selectOne("SearchRoomMapper.selectProductRoom", p);
+		return sqlSession.selectOne("SearchRoomMapper.selectProductRoom", p_id);
 	}
 	
 	

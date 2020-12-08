@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="boardMapper">
+	
+	<insert id="insertFAQ">
+		insert into board
+		values(seq_bid.nextval, #{bTitle}, #{bContent}, 'FAQ' , sysdate, default,  
+				'admin')
+	</insert>
 	<resultMap type="Board" id="boardResultSet">
 		<id column="B_ID" property="bId"/>
 		<result column="B_TITLE" property="bTitle"/>
@@ -9,14 +15,44 @@
 		<result column="B_REG_D" property="bRegD"/>
 		<result column="B_DEL_YN" property="bDelYN"/>
 		<result column="US_ID" property="usId"/>
-		<result column="B_Count" property="bCount"/>
+<<<<<<< HEAD
+		<result column="B_COUNT" property="bCount"/>
+		<result column="B_PRICE" property="bPrice"/>
+		<result column="B_C_ID" property="bCategory"/>
+		<result column="BA_CH_NAME" property="baChName"/>
+		
 	</resultMap>
+	<resultMap type="BoardAttachment" id="boardAttach">
+		<id column="BA_ID" property="baId"/>
+		<result column="BA_OR_NAME" property="baOrName"/>
+		<result column="BA_CH_NAME" property="baChName"/>
+		<result column="BA_UP_D" property="baUpD"/>
+		<result column="BA_DEL_YN" property="baDelYN"/>
+		<result column="B_ID" property="bId"/>
+		<result column="B_TYPE" property="bType"/>
+	</resultMap>
+	<resultMap type="BoardType" id="boardType">
+		<id column="B_C_ID" property="bcId"/>
+		<result column="B_CATEGORY" property="bCategory"/>
+	</resultMap>	
+	
+	<resultMap type="BoardComment" id="boardComment">
+		<id column="BC_ID" property="bcId"/>
+		<result column="BC_CONTENT" property="bcContent"/>
+		<result column="BC_REG_D" property="bcRegD"/>
+		<result column="US_ID" property="usId"/>
+		<result column="B_ID" property="bId"/>
+		<result column="B_TYPE" property="bType"/>
+	</resultMap>	
 	
 	<insert id="insertFAQ">
 		insert into board
 		values(seq_faqId.nextval, #{bTitle}, #{bContent}, 'FAQ' , sysdate, default,  
-				'admin', default)
+				'admin', default,default,default)
 	</insert>
+=======
+	</resultMap>
+>>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
 
 	<select id="boardFAQListCount" resultType="_int">
 		select count(*) 
@@ -27,7 +63,7 @@
 	<select id="boardFAQList" resultMap="boardResultSet">
 		select *
 		from board
-		where b_del_yn='N'and b_type='FAQ'
+		where b_del_yn='N'
 		order by b_id desc
 	</select>
 	
@@ -38,6 +74,7 @@
 	</delete>
 	
 	
+<<<<<<< HEAD
 	<!-- FAQ업데이트 -->
 	<update id="updateFAQ" >
 		update board set b_title=#{ bTitle }, b_content=#{ bContent } ,b_reg_d=sysdate where b_id=#{ bId }
@@ -46,11 +83,11 @@
 	
 	<!-- 공지사항  -->
 	
-	<select id="selectNoticeList">
-		select count(*)
-		from board
-		where b_type='NOTICE' and b_del_yn ='N'
-	</select>
+<!-- 	<select id="selectNoticeList"> -->
+<!-- 		select count(*) -->
+<!-- 		from board -->
+<!-- 		where b_type='NOTICE' and b_del_yn ='N' -->
+<!-- 	</select> -->
 	<!-- 리스트카운트 -->
 	<select id="boardNoticeListCount" resultType="_int">
 		select count(*) 
@@ -78,8 +115,16 @@
 	<insert id="noticeInsert">
 		insert into board
 		values(seq_noticeId.nextval, #{bTitle}, #{bContent}, 'NOTICE' , sysdate, default,  
-				'admin', default)
+				'admin', default,default,default)
 	</insert>
+	<!-- 공지사항bId찾기 -->
+	<select id="noticebIdFind" resultMap="boardResultSet">
+		select B_ID 
+		from BOARD 
+		where B_TITLE=#{bTitle} and B_CONTENT=#{ bContent }
+	</select>
+	
+	
 	<!-- 공지사항 삭제 -->
 	<update id="noticeDelete">
 		update board set b_del_yn='Y'
@@ -109,7 +154,7 @@
 	<insert id="oneToOneInsert">
 		insert into board
 		values(seq_oneToOneId.nextval, #{bTitle}, #{bContent}, 'oneToOne' , sysdate, default,  
-				'admin', default)
+				'admin', default,default,default)
 	</insert>
 	
 	
@@ -132,7 +177,108 @@
 	</update>
 	
 	
+	<!-- 중고장터 -->
+	<!-- 리스트카운트 -->
+	<select id="usedListCount" resultType="_int">
+		select count(*) 
+		from board
+		where B_DEL_YN='N' AND B_TYPE='used'
+	</select>
+	
+	<!--  리스트 + 페이징 -->
+	<select id="usedList" resultMap="boardResultSet">
+		select *
+		 from board 
+		where b_del_yn='N' and b_type='used'
+		order by b_id desc
+	</select>
+	
+	<!-- 중고장터  -->
+	<insert id="usedWrite">
+		insert into board
+		values(seq_usedId.nextval, #{bTitle}, #{bContent}, 'used' , sysdate, default,  
+				'admin', default, #{bPrice}, #{bCategory})
+	</insert>
+	<insert id="usedWriteAttachment">
+		insert into Board_Attachment
+		values(seq_at_Id.nextval, #{ baOrName }, #{ baChName }, sysdate, default, seq_usedId.CURRVAL, 'used')
+	</insert>
+	
+	<!-- 중고 디테일 -->
+	<select id="usedDetail" resultMap="boardResultSet">
+		select *
+		   from board
+		where b_id=#{ b_id } and b_type='used' and b_del_yn='N'
+	</select>
+	<select id="usedAttachDetail"   resultMap="boardAttach">
+		select  BA_ID, BA_CH_NAME
+		from board_attachment
+		where b_id=#{b_id}
+	</select>
 	
 	
 	
+	<!-- 보드 타입 -->
+	<select id="selectBType" resultMap="boardType">
+		select * from board_category
+	</select>
+	<!--  보드삭제 -->
+	<update id="usedDelete" >
+		 update board set b_del_yn='Y' where b_id=#{b_id} and b_type='used'
+	</update>
+	
+	<!-- 중고댓글 Insert -->
+	<insert id="usedinsertComment" >
+		insert into BOARD_COMMENT
+		values(seq_bc_Id.nextval, #{ bcContent  }, sysdate, #{ usId } , #{ bId }, 'used')
+	</insert>
+	
+	<select id="commentListPrint" resultMap="boardComment">
+		select *
+		from BOARD_COMMENT 
+		where b_id = #{ bId } and b_type='used' 
+		order by bc_Id desc
+	</select>
+	
+	<delete id="usedCommentDelete" >
+		 delete from board_comment where bc_id=#{bcId} and b_type='used'
+	</delete>
+	
+	
+	<!-- 1대1댓글 Insert -->
+	<insert id="oneToOneInsertComment" >
+		insert into BOARD_COMMENT
+		values(seq_bc_Id.nextval, #{ bcContent }, sysdate, #{ usId} , #{ bId }, 'oneToOne')
+	</insert>
+	
+	<select id="oneToOneCommentList" resultMap="boardComment">
+		select *
+		from BOARD_COMMENT 
+		where b_id = #{ bId } and b_type='oneToOne' 
+		order by bc_Id desc
+	</select>
+	
+	<delete id="oneToOneCommentDelete" >
+		 delete from board_comment where bc_id=#{bcId} and b_type='oneToOne'
+	</delete>
+	
+	<update id="noticeDetailDelete">
+		 update board set b_del_yn='Y' where b_id=#{bId} and b_type='NOTICE' 
+	</update>
+	
+	<update id="oneToOneDetailDelete">
+		 update board set b_del_yn='Y' where b_id=#{bId} and b_type='oneToOne' 
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+=======
+>>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
 </mapper>
