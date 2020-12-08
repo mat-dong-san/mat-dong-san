@@ -16,8 +16,6 @@ public interface MemberService {
 
 	int checkNameDup(String name);
 
-	EstateAgent selectEstateAgentInfo(String us_id);
-
-	int updateEstateAgent(EstateAgent e);
+	
 
 }

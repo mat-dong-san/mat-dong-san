@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -21,8 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.google.gson.Gson;
 
 import mat.dong.san.member.exception.MemberException;
 import mat.dong.san.member.service.MemberService;
@@ -109,8 +106,7 @@ public class MemberController {
 			@RequestParam("field") String [] fields
 			
 			) {
-		System.out.println("1");
-		e.setE_id(1);
+		
 		if(fileName != null && !fileName.isEmpty()) {
 			String renameFileName = saveFile(fileName, request);
 			
@@ -177,7 +173,7 @@ public class MemberController {
 		System.out.println(m.getUs_pwd());
 		System.out.println(loginUser.getUs_pwd());
 		if(bcryptPasswordEncoder.matches(m.getUs_pwd(), loginUser.getUs_pwd())) {
-			model.addAttribute("loginUser", loginUser);
+
 			session.setAttribute("loginUser", loginUser);
 			
 		}else {
@@ -216,163 +212,17 @@ public class MemberController {
 		response.getWriter().print(isUsable);
 	}
 	
-	
-	//추가------------------------------------------------------------------------------------------------------------------------------------------------------
-	
-	
-	// 마이페이지이동
-	@RequestMapping("mypageView.me")
-	public String mypageView(Model model, HttpSession session) {
-			
-		Member loginUser = (Member)session.getAttribute("loginUser");
-		if(loginUser == null) {
-			return "redirect:/";
-		}
-		
-		if(loginUser.getUs_type().equals("일반")){
-			return "memberMypage";
-		}else if(loginUser.getUs_type().equals("중개사")) {
-			return "estateAgentMypage";
-		}
-		return "redirect:/";
-	}
-	
-	
-	// 마이페이지중개사정보
-	@RequestMapping("selectEstateAgentInfo.me")
-	public void selectEstateAgentInfo(HttpSession session, HttpServletResponse response) throws IOException {
-		
-		Member loginUser = (Member)session.getAttribute("loginUser");
-		
-		
-		EstateAgent estate = new EstateAgent();
-		
-		estate = mService.selectEstateAgentInfo(loginUser.getUs_id());
-
-		JSONObject userObj = null;
-		userObj = new JSONObject();
-		userObj.put("e_id", estate.getE_id());
-		userObj.put("e_name", estate.getE_name());
-		userObj.put("e_phone", estate.getE_phone());
-		userObj.put("e_content", estate.getE_content());
-		userObj.put("e_addr", estate.getE_addr());
-		userObj.put("e_picture", estate.getE_picture());
-		userObj.put("e_field", estate.getE_field());
-		userObj.put("e_reg_num", estate.getE_reg_num());
-		
-		
-		response.setContentType("application/json; charset=UTF-8");		
-		new Gson().toJson(userObj, response.getWriter());
-	}
-	
-	// 중개사업데이트
-	@RequestMapping("updateEstateAgent.me")
-	public String updateEstateAgent(
-			@ModelAttribute EstateAgent e, 
-			@RequestParam("fileName") MultipartFile fileName,
-			HttpServletRequest request,
-			@RequestParam("content") String contents,
-			@RequestParam("post") String post,
-			@RequestParam("address1") String address1,
-			@RequestParam("address2") String address2,
-			@RequestParam("field") String [] fields
-				
-			) {
-		System.out.println("1");
-		e.setE_id(1);
-		if(fileName != null && !fileName.isEmpty()) {
-			String renameFileName = saveFile(fileName, request);
-				
-			if(renameFileName != null) {
-				e.setE_picture(fileName.getOriginalFilename());
-			}
-		}
-			
-		String e_field = "";
-		for (int i = 0; i < fields.length;) { 
-			e_field += fields[i];
-			if (++i < fields.length) { 
-
-				e_field += ","; 
-				
-			}
-			
-		}
-		contents = contents.replace("\r\n","<br>"); 
-		e.setE_content(contents);
-		e.setE_field(e_field);
-		e.setE_addr(post + "/" + address1 + "/" + address2);
-		
-		System.out.println(e.getE_addr());
-		System.out.println(e.getE_content());
-		System.out.println(e.getE_field());
-		System.out.println(e.getE_name());
-		System.out.println(e.getE_phone());
-		System.out.println(e.getE_reg_num());
-		System.out.println(e.getE_id());
-		System.out.println(e.getE_picture());
-		System.out.println(e.getUs_id());
-		
-		int result = mService.updateEstateAgent(e);
-			
-		if(result > 0) {
-			return "estateAgentMypage";
-			
-		}else {
-			
-			throw new MemberException("중개사 업데이트에 실패했습니다.");
-		}
-			
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@RequestMapping("memberMyPage.me")
+	   public String memberMyPage(@ModelAttribute("loginUser") Member m) {
+	      System.out.println(m.getUs_type());
+	         
+	         if(m.getUs_type().equals("일반")) {
+	            return "memberMyPage";
+	         } else {
+	            return "EstateAgentMypage";
+	         }   
+	      
+	   }
 	
 	
 	
