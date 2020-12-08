@@ -38,5 +38,7 @@ public class MemberDAO {
 		
 		return sqlSession.selectOne("memberMapper.checkNameDup", name);
 	}
+
+
 	
 }

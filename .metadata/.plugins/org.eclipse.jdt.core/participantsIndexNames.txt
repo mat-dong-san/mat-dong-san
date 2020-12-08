@@ -1,11 +1,5 @@
 INDEX VERSION 1.131
-C:\Users\BACK\Documents\GitHub\mat-dong-san\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\839066497.index
-\mat-dong-san_SH\src\main\java
 C:\Users\BACK\Documents\GitHub\mat-dong-san\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2831552370.index
 \FinalProject\src\main\java
 C:\Users\BACK\Documents\GitHub\mat-dong-san\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\752844503.index
 \mat-dong-san_SG\src\main\java
-C:\Users\BACK\Documents\GitHub\mat-dong-san\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1935123048.index
-\mat-dong-san_SH\src\main\java
-C:\Users\BACK\Documents\GitHub\mat-dong-san\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3531739844.index
-\mat-dong-san_SH\src\main\java

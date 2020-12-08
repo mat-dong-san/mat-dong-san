@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,25 +92,11 @@
 </head>
 <body>
     <div id="oneToOneView_Wrapper">
+        <div id="menubar">
+        </div>
         
-        <c:import url="../../common/menubar.jsp"/>
-        <c:import url="../../common/helpdeskSidebar.jsp"/>
-<!--         <form name="goDetailForm" method="POST"> -->
-        
-       	<!-- 업데이트 폼으로 -->
-       	<c:url var="noticeUpdate" value="goNoticeUpdate.board">
-			<c:param name="bId" value="${ notice.bId }"/>
-			<c:param name="page" value="${ page }"/>
-		</c:url>
-		<!-- 삭제하기 폼으로 -->
-		<c:url var="bdelete" value="boardNoticeDelete.board">
-			<c:param name="deleteNoticebId" value="${ notice.bId }"/>
-		</c:url>
-		<!-- 목록으로 -->
-		<c:url var="blist" value="boardNoticeList.board">
-			<c:param name="page" value="${ page }"/>
-		</c:url>
-			
+        <div id="loaded">
+        </div>
         <div id="oneToOneView_innerWrapper">
             <!-- head-->
             <div id="oneToOneView_head">
@@ -122,44 +105,35 @@
                 </div>
                 <div class="oneToOne_mid">
                     <div>
-                        <h2>${ notice.bTitle }</h2>
+                        <h2>제목</h2>
                     </div>
                     <div id="mid_flex_div"> 
                         <div class="oneToOneListMid_left">
-                            <span>관리자</span>
-                            <span>${ notice.bRegD }</span>
+                            <span>아이디</span>
+                            <span>날짜</span>
                         </div>
                         <div class="oneToOneListMid_right">
-                            <input type="button" id="oneToOne_goDetail" value="수정" onClick="noticeUpdate();" />
-<%--                            	<button id="oneToOne_goDetail" onClick="location.href='${noticeUpdate}'">수정하기</button> --%>
-                            <input id="oneToOne_goDelete" value="삭제" />
+                            <button id="oneToOne_goDetail">수정</button>
+                            <button id="oneToOne_goDetail">삭제</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div id="oneToOneView_body">
                 <div class="oneToOneDetail_Content">
-               	 	<% pageContext.setAttribute("newLineChar", "\r\n"); %>
-               	 	${ fn:replace(notice.bContent, newLineChar, "<br>") }
+
                 </div>
             </div>
+            
         </div>
-<!--         </form> -->
-   </div>    
     <script>
-    function noticeUpdate(){
-    	var select = confirm('수정하시겠습니까?');
-    	if(select === true){
-    		
-    		location.href = '${ noticeUpdate }';
-    		submit();
-    	}else {
-    		location.href=location.href;
-    	}
-    }
-    
-    
-    
+        $(document).ready(function(){
+            $("#loaded").load("../helpdeskSidebar.html");
+        });
+         // menubar
+         $(document).ready(function(){
+            $("#menubar").load("../menubar.html");
+        });
     </script>
 </body>
 </html>

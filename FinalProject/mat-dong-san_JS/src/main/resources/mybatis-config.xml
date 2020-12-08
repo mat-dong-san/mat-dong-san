@@ -6,7 +6,7 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias type="mat.dong.san.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="com.dong.san.board.model.vo.Board" alias="Board"/>
 	</typeAliases>
 	
 	<mappers>
