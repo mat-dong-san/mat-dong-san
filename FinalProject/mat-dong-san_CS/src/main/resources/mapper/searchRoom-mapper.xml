@@ -6,7 +6,8 @@
 		select count(*) from product where P_DEL_YN = 'N';
 	</select>
 
-	<select id="selectProductRoom" resultType="Product">
+	<select id="selectProductRoom" parameterType="Product"
+		resultType="Product">
 		select *
 		from product
 		where P_ID=#{p_id}

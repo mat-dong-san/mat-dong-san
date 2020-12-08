@@ -1,6 +1,8 @@
 package mat.dong.san.member.vo;
 
 import java.sql.Date;
+import java.util.ArrayList;
+
 
 public class EstateAgent {
 	private int e_id;
@@ -163,7 +165,7 @@ public class EstateAgent {
 	}
 	@Override
 	public String toString() {
-		return "Estate [e_id=" + e_id + ", e_name=" + e_name + ", e_phone=" + e_phone + ", e_content=" + e_content
+		return "EstateAgent [e_id=" + e_id + ", e_name=" + e_name + ", e_phone=" + e_phone + ", e_content=" + e_content
 				+ ", e_addr=" + e_addr + ", e_picture=" + e_picture + ", e_field=" + e_field + ", e_reg_num="
 				+ e_reg_num + ", e_coord=" + e_coord + ", e_c_lat=" + e_c_lat + ", e_c_lng=" + e_c_lng + ", e_point="
 				+ e_point + ", e_reg_d=" + e_reg_d + ", e_del_yn=" + e_del_yn + ", us_id=" + us_id + "]";

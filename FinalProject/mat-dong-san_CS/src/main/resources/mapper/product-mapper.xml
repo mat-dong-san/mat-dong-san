@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="productMapper">
+	
+	<select id="selectEstateAgent" resultMap="estateAgentInfoResultSet">
+		select *
+		from product
+		join product_application on(product.p_id = product_application.p_id)
+		join estateagent on(estateagent.e_id = product_application.e_id)
+		where product.p_id=#{p_id}
+		
+	</select>
+
+
+	<resultMap type="EstateAgent" id="estateAgentInfoResultSet">
+		<id column="E_ID" property="e_id"/>
+		<result column="E_NAME" property="e_name"/>
+		<result column="E_PHONE" property="e_phone"/>
+		<result column="E_CONTENT" property="e_content"/>
+		<result column="E_ADDR" property="e_addr"/>
+		<result column="E_PICTURE" property="e_picture"/>
+		<result column="E_FIELD" property="e_field"/>
+		<result column="E_REG_NUM" property="e_reg_num"/>
+		<result column="E_COORD" property="e_coord"/>
+		<result column="E_C_LAT" property="e_c_lat"/>
+		<result column="E_C_LNG" property="e_c_lng"/>
+		<result column="E_POINT" property="e_point"/>
+		<result column="E_REG_D" property="e_reg_d"/>
+		<result column="E_DEL_YN" property="e_del_yn"/>
+		<result column="US_ID" property="us_id"/>
+	</resultMap>
+	
+	<insert id="insertMessage" parameterType="Note">
+		insert into user_note
+		values(seq_un_id.nextval, #{un_content}, sysdate, default, #{p_id}, null, #{e_id}, #{us_id})
+	</insert>
+	
+
+</mapper>

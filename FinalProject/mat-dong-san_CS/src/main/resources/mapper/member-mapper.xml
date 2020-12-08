@@ -54,6 +54,5 @@
 		#{e_reg_num}, default, default, default, default, sysdate, default, #{us_id})
 	</insert>
 	
-	
 
 </mapper>

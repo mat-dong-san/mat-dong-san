@@ -1,20 +1,13 @@
 package mat.dong.san.board.model.service;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import mat.dong.san.board.model.dao.BoardDAO;
 import mat.dong.san.board.model.vo.Board;
-import mat.dong.san.board.model.vo.BoardAttachment;
-import mat.dong.san.board.model.vo.BoardComment;
-import mat.dong.san.board.model.vo.BoardType;
 import mat.dong.san.board.model.vo.PageInfo;
 
 
@@ -96,15 +89,6 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return bDAO.noticeInsert(sqlSession,b)	;
 	}
-	
-	// 공지사항 BID를 알아오는 역할
-		@Override
-		public Board noticebIdFind(Board b) {
-
-			return bDAO.noticebIdFind(sqlSession, b);
-		}
-
-	
 
 	// 목록에서 선택 삭제
 	@Override
@@ -131,147 +115,38 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public ArrayList<Board> oneToOneList(PageInfo pi) {
+		// TODO Auto-generated method stub
 		return bDAO.oneToOneList(sqlSession, pi);
 	}
 
 
 	@Override
 	public int oneToOneInsert(Board b) {
-		return bDAO.oneToOneInsert(sqlSession,b);
+		// TODO Auto-generated method stub
+		return bDAO.oneToOneInsert(sqlSession,b)	;
 	}
 
 
 	@Override
 	public int deleteOneToOne(int bId) {
+		// TODO Auto-generated method stub
 		return bDAO.deleteOneToOne(sqlSession, bId);
 	}
 
 	// 1대1 디테일
 	@Override
 	public Board oneToOneDetail(int oneToOneId) {
+		// TODO Auto-generated method stub
 		return bDAO.oneToOneDetail(sqlSession, oneToOneId);
 	}
 
 
 	@Override
 	public int oneToOneUpdate(Board b) {
+		// TODO Auto-generated method stub
 		return bDAO.updateOneToOne(sqlSession, b);
 	}
 
-	
-	
-	// 중고장터 
-	// 리스트 개수 
-	@Override
-	public int usedListCount() {
-		return bDAO.usedListCount(sqlSession);
-	}
-
-	@Override
-	public ArrayList usedList(PageInfo pi) {
-		return bDAO.usedList(sqlSession, pi);
-	}
-
-
-	@Override
-	public int usedWrite(Board b, List<MultipartFile> fileList, HttpServletRequest request) {
-		return bDAO.usedWrite(sqlSession, b, fileList, request);
-	}
-
-
-	@Override
-	public Board usedDetail(int usedId) {
-		return bDAO.usedDetail(sqlSession, usedId);
-	}
-
-
-	@Override
-	public ArrayList<BoardType> selectBType() {
-		return bDAO.selectBType(sqlSession);
-	}
-
-
-	@Override
-	public int usedDelete(int bId) {
-		return bDAO.usedDelete(sqlSession, bId);
-	}
-
-
-	@Override
-	public int usedinsertComment(BoardComment bc) {
-		return bDAO.usedinsertComment(sqlSession, bc);
-	}
-
-
-	@Override
-	public ArrayList<BoardComment> commentListPrint(int bId) {
-		return bDAO.commentListPrint(sqlSession, bId);
-	}
-
-
-	@Override
-	public int usedCommentDelete(BoardComment bc) {
-		return bDAO.usedCommentDelete(sqlSession, bc);
-	}
-
-
-	@Override
-	public ArrayList<BoardAttachment> usedAttachDetail(int usedId) {
-		return bDAO.usedAttachDetail(sqlSession, usedId);
-	}
-
-
-	@Override
-	public int oneToOneInsertComment(BoardComment bc) {
-		return bDAO.oneToOneInsertComment(sqlSession, bc);
-	}
-
-
-	@Override
-	public ArrayList<BoardComment> oneToOneCommentList(int bId) {
-		return bDAO.oneToOneCommentList(sqlSession, bId);
-	}
-
-
-	@Override
-	public int oneToOneCommentDelete(BoardComment bc) {
-		// TODO Auto-generated method stub
-		return bDAO.oneToOneCommentDelete(sqlSession, bc);
-	}
-
-
-	@Override
-	public ArrayList<BoardAttachment> usedAttachDetail() {
-		// TODO Auto-generated method stub
-		return bDAO.usedAttachDetail(sqlSession);
-	}
-
-
-	@Override
-	public int noticeDetailDelete(Board b) {
-		// TODO Auto-generated method stub
-		return bDAO.noticeDetailDelete(sqlSession, b);
-	}
-
-
-	@Override
-	public int oneToOneDetailDelete(Board b) {
-		// TODO Auto-generated method stub
-		return bDAO.oneToOneDetailDelete(sqlSession, b);
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-	
 
 	
 	

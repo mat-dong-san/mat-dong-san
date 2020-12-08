@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import mat.dong.san.estate.exception.EstateException;
+import mat.dong.san.product.exception.ProductException;
 import mat.dong.san.product.vo.Product;
 import mat.dong.san.search.common.Pagenation;
 import mat.dong.san.search.service.SearchRoomService;
@@ -62,7 +62,7 @@ public class SearchRoomController {
 		
 		int cnt = 0;
 		
-		Product product = sService.selectProductRoom(p.getP_id());
+		Product product = sService.selectProductRoom(p);
 		if (product == null) {
 		} else {
 

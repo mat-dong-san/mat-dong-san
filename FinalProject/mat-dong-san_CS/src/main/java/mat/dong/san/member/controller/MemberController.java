@@ -7,7 +7,6 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -35,6 +34,12 @@ public class MemberController {
 	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	
+	// 마이페이지이동
+	@RequestMapping("mypageView.me")
+	public String mypageView() {
+		return "report";
+	}
 	
 	// 로그인이동
 	@RequestMapping("loginView.me")
@@ -106,7 +111,8 @@ public class MemberController {
 			@RequestParam("field") String [] fields
 			
 			) {
-		
+		System.out.println("1");
+		e.setE_id(1);
 		if(fileName != null && !fileName.isEmpty()) {
 			String renameFileName = saveFile(fileName, request);
 			
@@ -166,15 +172,14 @@ public class MemberController {
 	
 	// 암호화 후 로그인
 	@RequestMapping(value="login.me", method=RequestMethod.POST)
-	public String login(Member m, Model model, HttpSession session) {
+	public String login(Member m, Model model) {
 		
 		System.out.println(bcryptPasswordEncoder.encode("1234"));
 		Member loginUser = mService.memberLogin(m);
 		System.out.println(m.getUs_pwd());
 		System.out.println(loginUser.getUs_pwd());
 		if(bcryptPasswordEncoder.matches(m.getUs_pwd(), loginUser.getUs_pwd())) {
-
-			session.setAttribute("loginUser", loginUser);
+			model.addAttribute("loginUser", loginUser);
 			
 		}else {
 			throw new MemberException("로그인에 실패했습니다.");
@@ -211,20 +216,6 @@ public class MemberController {
 		
 		response.getWriter().print(isUsable);
 	}
-	
-	@RequestMapping("memberMyPage.me")
-	   public String memberMyPage(@ModelAttribute("loginUser") Member m) {
-	      System.out.println(m.getUs_type());
-	         
-	         if(m.getUs_type().equals("일반")) {
-	            return "memberMyPage";
-	         } else {
-	            return "EstateAgentMypage";
-	         }   
-	      
-	   }
-	
-	
 	
 	
 }

@@ -27,12 +27,9 @@
 
         }
         .helpdesk_sideBar{
+            border-bottom: 1px solid black;
             padding:20px;
         }
-        #noticeClixk,#oneToOneClixk,#FAQClixk{
-            border-bottom: 1px solid rgb(235, 235, 235);
-        }
-        
         a {
         	text-decoration: none;
         }
@@ -46,20 +43,14 @@
             <h2 class="helpdesk_title">고객센터</h2>
         </div>
         <div class="helpdesk_body">
-            <div class="helpdesk_sideBar" id="noticeClixk"><a href="boardNoticeList.board">공지사항</a></div>
+            <div class="helpdesk_sideBar"><a href="boardNoticeList.board">공지사항</a></div>
         
-            <div class="helpdesk_sideBar" id="oneToOneClixk"><a href="boardOneToOne.board">1:1문의</a></div>
+            <div class="helpdesk_sideBar"><a href="boardOneToOne.board">1:1문의</a></div>
         
-            <div class="helpdesk_sideBar" id="FAQClixk"><a href="boardFAQ.board">자주 묻는 질문</a></div>
+            <div class="helpdesk_sideBar"><a href="boardFAQ.board">FAQ</a></div>
         </div>
+               
+        
     </div>
 </body>
-<script>
-	
-	
-
-</script>
-
-
-
 </html>

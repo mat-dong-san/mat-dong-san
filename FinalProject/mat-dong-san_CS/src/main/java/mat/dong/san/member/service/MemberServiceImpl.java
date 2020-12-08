@@ -50,8 +50,5 @@ public class MemberServiceImpl implements MemberService{
 		
 		return mDAO.checkNameDup(sqlSession, name);
 	}
-
 	
-
-
 }

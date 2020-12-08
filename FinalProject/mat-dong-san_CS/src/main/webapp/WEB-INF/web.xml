@@ -48,18 +48,19 @@
 	
 	</servlet-mapping>
 	
-	<!--중개/최근본방 관련 -->
+	<!--매물 관련 -->
 	<servlet>
-		<servlet-name>estateServlet</servlet-name>
+		<servlet-name>productServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring/appServlet/estate-context.xml</param-value>
+			<param-value>/WEB-INF/spring/appServlet/product-context.xml</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>estateServlet</servlet-name>
-		<url-pattern>*.es</url-pattern>
+		<servlet-name>productServlet</servlet-name>
+		<url-pattern>*.pr</url-pattern>
+	
 	</servlet-mapping>
 	
 	<!-- 방찾기 -->

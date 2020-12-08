@@ -1,16 +1,8 @@
 package mat.dong.san.board.model.service;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.web.multipart.MultipartFile;
 
 import mat.dong.san.board.model.vo.Board;
-import mat.dong.san.board.model.vo.BoardAttachment;
-import mat.dong.san.board.model.vo.BoardComment;
-import mat.dong.san.board.model.vo.BoardType;
 import mat.dong.san.board.model.vo.PageInfo;
 
 public interface BoardService {
@@ -34,7 +26,6 @@ public interface BoardService {
 	Board noticeDetail(int noticeId);
 
 	int noticeInsert(Board b);
-	Board noticebIdFind(Board b);
 
 	int deleteNotice(int bId);
 
@@ -53,46 +44,6 @@ public interface BoardService {
 	Board oneToOneDetail(int oneToOneId);
 
 	int oneToOneUpdate(Board b);
-
-	
-	//중고
-	int usedListCount();
-
-	ArrayList usedList(PageInfo pi);
-
-	int usedWrite(Board b, List<MultipartFile> fileList, HttpServletRequest request);
-
-	Board usedDetail(int usedId);
-
-	ArrayList<BoardType> selectBType();
-
-	int usedDelete(int bId);
-
-	int usedinsertComment(BoardComment bc);
-
-	ArrayList<BoardComment> commentListPrint(int bId);
-
-	int usedCommentDelete(BoardComment bc);
-
-	ArrayList<BoardAttachment> usedAttachDetail(int usedId);
-
-	int oneToOneInsertComment(BoardComment bc);
-
-	ArrayList<BoardComment> oneToOneCommentList(int bId);
-
-	int oneToOneCommentDelete(BoardComment bc);
-
-	ArrayList<BoardAttachment> usedAttachDetail();
-
-	
-	
-	
-	int noticeDetailDelete(Board b);
-
-	int oneToOneDetailDelete(Board b);
-
-
-
 
 	
 	
