@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+<<<<<<< HEAD
 import com.google.gson.GsonBuilder;
+=======
+>>>>>>> parent of 408f50c... 오케이오케
 import com.google.gson.JsonIOException;
 
 import mat.dong.san.member.model.vo.EstateAgent;
@@ -66,6 +69,8 @@ public class SearchRoomController {
 		
 		ArrayList<Product> productList = sService.selectAllProduct(pageInfo, searchInput);
 		
+<<<<<<< HEAD
+=======
 		if(productList != null) {
 			mv.addObject("productList", productList);
 			mv.addObject("pageInfo", pageInfo);
@@ -77,6 +82,99 @@ public class SearchRoomController {
 		}
 		
 		return mv;
+	
+	}
+	@RequestMapping(value = "goPagingMainPage.search", method = RequestMethod.GET)
+	public ModelAndView goPagingMainPage(
+			@RequestParam(value="page", required=false) Integer page,
+			@RequestParam(value="searchInput", required=false) String searchInput,
+			@RequestParam(value="one", required=false) String one,
+			@RequestParam(value="two", required=false) String two,
+			@RequestParam(value="three", required=false) String three,
+			@RequestParam(value="monthly", required=false) String monthly,
+			@RequestParam(value="charter", required=false) String charter,
+			@RequestParam(value="build1", required=false) String build1,
+			@RequestParam(value="build2", required=false) String build2,
+			@RequestParam(value="build3", required=false) String build3,
+			@RequestParam(value="build4", required=false) String build4,
+			@RequestParam(value="minCharter", required=false) Integer minCharter,
+			@RequestParam(value="maxCharter", required=false) Integer maxCharter,
+			@RequestParam(value="minMonthly", required=false) Integer minMonthly,
+			@RequestParam(value="maxMonthly", required=false) Integer maxMonthly,
+			@RequestParam(value="parkType", required=false) String parkType,
+			@RequestParam(value="petType", required=false) String petType,
+			@RequestParam(value="eleType", required=false) String eleType,
+			ModelAndView mv) {
+		
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = page;
+		}
+		
+		SearchRoomFilter sf = new SearchRoomFilter();
+		sf.getRoomType().clear();
+		if(!one.equals("empty")) {
+			sf.getRoomType().add(one);
+		}
+		if(!two.equals("empty")) {
+			sf.getRoomType().add(two);
+		}
+		if(!three.equals("empty")) {
+			sf.getRoomType().add(three);
+		}
+		sf.getTradeType().clear();
+		if(!monthly.equals("empty")) {
+			sf.getTradeType().add(monthly);
+		}
+		if(!charter.equals("empty")) {
+			sf.getTradeType().add(charter);
+		}
+		sf.getBuildType().clear();
+		if(!build1.equals("empty")) {
+			sf.getBuildType().add(build1);
+		}
+		if(!build2.equals("empty")) {
+			sf.getBuildType().add(build2);
+		}
+		if(!build3.equals("empty")) {
+			sf.getBuildType().add(build3);
+		}
+		if(!build4.equals("empty")) {
+			sf.getBuildType().add(build4);
+		}
+		sf.setMinCharter(minCharter);
+		sf.setMaxCharter(maxCharter);
+		sf.setMinMonthly(minMonthly);
+		sf.setMaxMonthly(maxMonthly);
+		sf.setParkType(parkType);
+		sf.setPetType(petType);
+		sf.setEleType(eleType);
+		
+		if(searchInput != null){
+			if(!searchInput.equals("")) {
+				sf.setSearchInput(searchInput);
+			}
+		}
+		
+		int productListFilterCount = sService.selectProductFilterCount(sf);
+		
+		SearchRoomPageInfo pageInfo = Pagenation.getPageInfo(currentPage, productListFilterCount);
+		
+		ArrayList<Product> productList = sService.selectFilterProduct(pageInfo, sf);
+		
+>>>>>>> parent of 408f50c... 오케이오케
+		if(productList != null) {
+			mv.addObject("productList", productList);
+			mv.addObject("pageInfo", pageInfo);
+			mv.setViewName("searchRoomMainPage");
+			mv.addObject("searchInput", searchInput);
+			mv.addObject("filter", sf);
+		} else {
+			throw new SearchRoomException("방 목록 조회에 실패하였습니다.");
+		}
+		
+		return mv;
+<<<<<<< HEAD
 	
 	}
 	
@@ -169,6 +267,9 @@ public class SearchRoomController {
 		}
 		
 		return mv;
+=======
+		
+>>>>>>> parent of 408f50c... 오케이오케
 	}
 	@RequestMapping(value = "goSearchFilter.search", method = RequestMethod.GET)
 	public void goSearchRoomMainPage(
@@ -196,7 +297,10 @@ public class SearchRoomController {
 		int currentPage = 1;
 		
 		SearchRoomFilter sf = new SearchRoomFilter();
+<<<<<<< HEAD
 		
+=======
+>>>>>>> parent of 408f50c... 오케이오케
 		sf.getRoomType().clear();
 		if(!one.equals("empty")) {
 			sf.getRoomType().add(one);
@@ -276,6 +380,7 @@ public class SearchRoomController {
 	@RequestMapping(value = "searchRoomDetailPage.search", method = RequestMethod.GET)
 	public ModelAndView goSearchRoomDetailPage(@RequestParam("p_id") Integer p_id, ModelAndView mv) {
 		
+<<<<<<< HEAD
 		System.out.println("p_id : " + p_id);
 		// 매물 정보
 		Product product = sService.selectProductDetail(p_id);
@@ -286,6 +391,10 @@ public class SearchRoomController {
 			productPictureList.add(productArr[i]);
 		}
 		
+=======
+		// 매물 정보
+		Product product = sService.selectProductDetail(p_id);
+>>>>>>> parent of 408f50c... 오케이오케
 		// 중개사 정보
 		EstateAgent ea = sService.selectAgent(p_id);
 		// 중개사의 댓글정보
@@ -298,7 +407,10 @@ public class SearchRoomController {
 			mv.addObject("EstateAgent", ea);
 			mv.addObject("review", reviewList);
 			mv.addObject("productList", productList);
+<<<<<<< HEAD
 			mv.addObject("pictureList", productPictureList);
+=======
+>>>>>>> parent of 408f50c... 오케이오케
 			mv.setViewName("searchRoomDetailPage");
 		}
 		return mv;
@@ -326,10 +438,14 @@ public class SearchRoomController {
 					
 					ArrayList<EstateAgentReview> reviewList = sService.selectReview(e_id);
 					response.setContentType("application/json; charset=UTF-8");
+<<<<<<< HEAD
 					GsonBuilder gb = new GsonBuilder();
 					GsonBuilder df = gb.setDateFormat("yyyy-MM-dd");
 					Gson gson = df.create();
 					gson.toJson(reviewList,response.getWriter());
+=======
+					new Gson().toJson(reviewList,response.getWriter());
+>>>>>>> parent of 408f50c... 오케이오케
 					
 				} catch (JsonIOException e) {
 					e.printStackTrace();
@@ -342,12 +458,15 @@ public class SearchRoomController {
 		
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping("openMessage.search")
 	public String openPup() {
 		
 		return "../common/message";
 	}
 	
+=======
+>>>>>>> parent of 408f50c... 오케이오케
 }
 
 

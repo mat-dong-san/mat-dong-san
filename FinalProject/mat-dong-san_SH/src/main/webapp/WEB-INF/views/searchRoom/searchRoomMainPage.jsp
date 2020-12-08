@@ -124,6 +124,7 @@
    		background: white;
    		flex-direction: column;
    		padding: 10px;
+<<<<<<< HEAD
    }
    .inputMargin{
    	    margin-bottom:10px;
@@ -178,6 +179,8 @@
 	    -webkit-border-radius:2px;
 	    text-indent:-9999px;
 	    display:inline-block;
+=======
+>>>>>>> parent of 408f50c... 오케이오케
    }
 </style>
 <meta charset="UTF-8">
@@ -200,6 +203,7 @@
 	  <button id="rentFilter" class="filter">건물 유형</button>
 	  <button id="otherFilter" class="filter">기타 옵션</button>
 	  
+<<<<<<< HEAD
 	  <div id="roomFilterDiv" class="filterDiv" style="left: 454px;top: 124px;">
 	  		<label style="margin-bottom: 15px;" class="filterDivTitle">방 종류</label>
 	  		<label class="inputMargin"><input type="checkbox" id="roomTypeOne" name="roomType" onclick="checkFilterFun(); checkOneForce(this);" value="원룸">원룸</label>
@@ -213,6 +217,21 @@
 	  </div>
 	  <div id="productPayDiv" class="filterDiv" style="left: 633px;top: 124px;">
 	  		<label style="margin-bottom: 15px;" class="filterDivTitle">가격대</label>
+=======
+	  <div id="roomFilterDiv" class="filterDiv" style="left: 280px;">
+	  		방 종류
+	  		<label><input type="checkbox" id="roomTypeOne" name="roomType" onclick="checkFilterFun(); checkOneForce(this);" value="원룸">원룸</label>
+	  		<label><input type="checkbox" id="roomTypeTwo" name="roomType" onclick="checkFilterFun(); checkOneForce(this);" value="투룸">투룸</label>
+	  		<label><input type="checkbox" id="roomTypeThree" name="roomType" onclick="checkFilterFun(); checkOneForce(this);" value="쓰리룸">쓰리룸</label>
+	  </div>
+	  <div id="productFilterDiv" class="filterDiv" style="left: 335px;">
+	  		거래 종류
+	  		<label><input id="monthly" name="tradeType" type="checkbox" onclick="checkFilterFun(); checkOneForce(this); rentTypeCheck(this);" value="월세">월세</label>
+	  		<label><input id="charter" name="tradeType" type="checkbox" onclick="checkFilterFun(); checkOneForce(this); rentTypeCheck(this);" value="전세">전세</label>
+	  </div>
+	  <div id="productPayDiv" class="filterDiv" style="left: 400px;">
+	  		가격대
+>>>>>>> parent of 408f50c... 오케이오케
 	  		<div id="charterDiv">
 	  			전세
 	  			<div>
@@ -236,6 +255,7 @@
 		  		</div>
 	  		</div>
 	  		<div>
+<<<<<<< HEAD
 	  			<div id="monthlyDiv" style="margin-top: 20px; margin-bottom: 10px;">
 	  			월세
 		  			<div>
@@ -286,6 +306,53 @@
 	  			<label class="inputMargin"><input id="eleAll" type="radio" name="eleType" checked="checked" onclick="checkFilterFun();" value="무관">무관</label>
 	  			<label class="inputMargin"><input id="eleAble" type="radio" name="eleType" onclick="checkFilterFun();" value="있음">있음</label>
 	  			<label class="inputMargin"><input id="eleDisable" type="radio" name="eleType" onclick="checkFilterFun();" value="없음">없음</label>
+=======
+	  			월세
+	  			<div id="monthlyDiv">
+			  		<span>
+			  			<select id="minMonthly" style="width: 100px;" onchange="checkFilterFun();">
+			  				<option value="0">0</option>
+			  				<option value="20">20</option>
+			  				<option value="30">30</option>
+			  				<option value="40">40</option>
+			  			</select>
+			  		</span>
+			  			~
+			  		<span>
+			  			<select id="maxMonthly" style="width: 100px;" onchange="checkFilterFun();">
+			  				<option value="20">20</option>
+			  				<option value="30">30</option>
+			  				<option value="40">40</option>
+			  				<option value="10000000">제한 없음</option>
+			  			</select>
+			  		</span>
+		  		</div>
+	  		</div>
+	  </div>
+	  <div id="rentFilterDiv" class="filterDiv" style="left: 450px;">
+	  		건물 유형
+	  		<label><input id="build1" type="checkbox" name="buildType" onclick="checkFilterFun(); checkOneForce(this);" value="단독주택">단독주택</label>
+	  		<label><input id="build2" type="checkbox" name="buildType" onclick="checkFilterFun(); checkOneForce(this);" value="다가구주택">다가구주택</label>
+	  		<label><input id="build3" type="checkbox" name="buildType" onclick="checkFilterFun(); checkOneForce(this);" value="빌라">빌라/연립/다세대</label>
+	  		<label><input id="build4" type="checkbox" name="buildType" onclick="checkFilterFun(); checkOneForce(this);" value="상가주택">상가주택</label>
+	  </div>
+	  <div id="otherFilterDiv" class="filterDiv" style="left: 500px; flex-direction: row;">
+	  		
+	  		<div style="display:flex; flex-direction: column">주차여부
+	  			<label><input id="parkAll" type="radio" name="parkType" checked="checked" onclick="checkFilterFun();" value="무관">무관</label>
+	  			<label><input id="parkAble" type="radio" name="parkType" onclick="checkFilterFun();" value="가능">가능</label>
+	  			<label><input id="parkDidable" type="radio" name="parkType" onclick="checkFilterFun();" value="불가능">불가능</label>
+	  		</div>
+	  		<div style="display:flex; flex-direction: column">반려동물
+	  			<label><input id="petAll" type="radio" name="petType" checked="checked" onclick="checkFilterFun();" value="무관">무관</label>
+	  			<label><input id="petAble" type="radio" name="petType" onclick="checkFilterFun();" value="가능">가능</label>
+	  			<label><input id="petDisable" type="radio" name="petType" onclick="checkFilterFun();" value="불가능">불가능</label>
+	  		</div>
+	  		<div style="display:flex; flex-direction: column">엘레베이터
+	  			<label><input id="eleAll" type="radio" name="eleType" checked="checked" onclick="checkFilterFun();" value="무관">무관</label>
+	  			<label><input id="eleAble" type="radio" name="eleType" onclick="checkFilterFun();" value="있음">있음</label>
+	  			<label><input id="eleDisable" type="radio" name="eleType" onclick="checkFilterFun();" value="없음">없음</label>
+>>>>>>> parent of 408f50c... 오케이오케
 	  		</div>
 	  		
 	  </div>
@@ -359,27 +426,45 @@
 						$listHouseDiv.html(""); 
 						
 						/* 전체 매물수 표기 */
+<<<<<<< HEAD
 						var $div1 = $('<div id="ShowProductCount">').text("전체 매물 수 : " + data[0].listCount);
+=======
+						var $div1 = $('<div>').text("전체 매물 수 : " + data[0].listCount);
+>>>>>>> parent of 408f50c... 오케이오케
 						$listHouseDiv.append($div1);
 						
 						/* 매물 div */
 						
 					 	for(var i = 0; i < data[1].length; i++){
 							
+<<<<<<< HEAD
 							var $div2 = $("<div class='productContent'>").css('margin-right','21px');
 							$div2.attr('onclick','goDetailPage(this)');
 							var $img = $("<img alt="+data[1][i].p_picture+" src='resources/buploadFiles/"+data[1][i].p_picture.substring(1,21)+"' width='97%' height='100px'>");
 							var $span1 = $("<span class='kind'>").text(data[1][i].p_kind);
 							var $span2 = $("<span class='deal'>").text(data[1][i].p_deal);
 							var $span3 = $("<span class='charter'>");
+=======
+							var $div2 = $("<div class='productContent'>");
+							$div2.attr('onclick','goDetailPage(this)');
+							var $img = $("<img alt="+data[1][i].p_picture+" src=''>");
+							var $span1 = $("<span>").text(data[1][i].p_kind);
+							var $span2 = $("<span>").text(data[1][i].p_deal);
+							var $span3 = $("<span>");
+>>>>>>> parent of 408f50c... 오케이오케
 							if(data[1][i].p_deal == '전세'){
 								$span3.text(data[1][i].p_charter);
 							} else {
 								$span3.text(data[1][i].p_deposit+"/"+data[1][i].p_rent);
 							}
+<<<<<<< HEAD
 							var $span4 = $("<span class='content'>").text(data[1][i].p_content);
 							var $span5 = $("<span class='addre' id='addSpan'>").text(data[1][i].p_addr);
 							var $input = $("<input type='hidden'>").val(data[1][i].p_id);
+=======
+							var $span4 = $("<span>").text(data[1][i].p_content);
+							var $span5 = $("<span id='addSpan'>").text(data[1][i].p_addr);
+>>>>>>> parent of 408f50c... 오케이오케
 							
 							$div2.append($img);
 							$div2.append($span1);
@@ -387,6 +472,7 @@
 							$div2.append($span3);
 							$div2.append($span4);
 							$div2.append($span5);
+<<<<<<< HEAD
 							$div2.append($input);
 							$listHouseDiv.append($div2);
 							
@@ -394,6 +480,15 @@
 						/* 페이징 */
 						
 						$div3 = $("<div class='pageDivCss'>");
+=======
+							$listHouseDiv.append($div2);
+							
+						}
+						
+						/* 페이징 */
+						
+						$div3 = $("<div>");
+>>>>>>> parent of 408f50c... 오케이오케
 
 						/* 이전페이지 */
 						if(data[0].currentPage <= 1){
@@ -647,6 +742,7 @@
   
   <div id="contentContainer">
      <div id="listHouseDiv">
+<<<<<<< HEAD
      	<div id="ShowProductCount">전체 매물 수 : ${ pageInfo.listCount } </div>
      	<c:forEach var="p" items="${ productList }" varStatus="status">
      		
@@ -666,6 +762,25 @@
 		        
 		        <span class="content">${ p.p_content }</span>
 		        <span class="addre" id="addSpan" name="addSpan${ status.index }">${ p.p_addr }</span>
+=======
+     	<div>전체 매물 수 : ${ pageInfo.listCount } </div>
+     	<c:forEach var="p" items="${ productList }" varStatus="status">
+     		
+	        <div class="productContent" onclick="goDetailPage(this)">
+		        <img alt="${ p.p_picture }" src="">
+		        <span>${ p.p_kind }</span>
+		        <span>${ p.p_deal }</span>
+		        <span>
+		        	<c:if test="${ p.p_deal == '전세' }">
+		        		${ p.p_charter }
+		        	</c:if>
+		        	<c:if test="${ p.p_deal == '월세' }">
+		        		${ p.p_deposit }/${ p.p_rent }
+		        	</c:if>
+		        </span>
+		        <span>${ p.p_content }</span>
+		        <span id="addSpan" name="addSpan${ status.index }">${ p.p_addr }</span>
+>>>>>>> parent of 408f50c... 오케이오케
 		        <input type="hidden" value="${ p.p_id }">
 	        </div>
 	        
@@ -803,8 +918,12 @@
 	
 		    		    // 마커에 표시할 인포윈도우를 생성합니다 
 		    		    var infowindow = new kakao.maps.InfoWindow({
+<<<<<<< HEAD
 		    		        content: '<div><div style="font-size: 16px;color: lightslategrey;">'+position[i].content+'</div><div style="margin-left:5px;margin-bottom: 5px;font-size: 17px;font-weight: 600;">'+rent+'</div></div>' // 인포윈도우에 표시할 내용
 		    		        //content: '<div>'+position[i].content+rent+'</div>' // 인포윈도우에 표시할 내용
+=======
+		    		        content: '<div>'+position[i].content+rent+'</div>' // 인포윈도우에 표시할 내용
+>>>>>>> parent of 408f50c... 오케이오케
 		    		    });
 	
 		    		    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다

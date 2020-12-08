@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<<<<<<< HEAD
+=======
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+>>>>>>> parent of 408f50c... 오케이오케
 <!DOCTYPE html>
 <html>
 <head>
@@ -125,19 +129,33 @@
                     </div>
                     <div id="mid_flex_div"> 
                         <div class="oneToOneListMid_left">
+<<<<<<< HEAD
                             <span>${oto.usId}</span>
                             <span>${oto.bRegD}</span>
                         </div>
                         <div class="oneToOneListMid_right">
                             <button id="oneToOne_goDetail" onClick="oneToOneUpdate();">수정</button>
                             <button id="oneToOne_goDetail" >삭제</button>
+=======
+                            &nbsp;&nbsp;&nbsp;<span><img src="resources/images/boardIcon/bnickname.png">${oto.usId}</span>
+                            &nbsp;&nbsp;|&nbsp; <span><img src="resources/images/boardIcon/bdate.png">${oto.bRegD}</span>
+                        </div>
+                        <div class="oneToOneListMid_right">
+                            <button id="oneToOne_goDetail" onClick="oneToOneUpdate();">수정</button>
+                            <button id="oneToOne_goDetail" onClick="oneToOneDelete();">삭제</button>
+>>>>>>> parent of 408f50c... 오케이오케
                         </div>
                     </div>
                 </div>
             </div>
             <div id="oneToOneView_body">
                 <div class="oneToOneDetail_Content">
+<<<<<<< HEAD
 					${ oto.bContent }
+=======
+                		<% pageContext.setAttribute("newLineChar", "\r\n"); %>
+               	 		${ fn:replace(oto.bContent, newLineChar, "<br>") }
+>>>>>>> parent of 408f50c... 오케이오케
                 </div>
             </div>
             <div id="oneToOneView_tail">
@@ -160,8 +178,18 @@
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
             
             <!-- reply head -->
+=======
+            <div id="oneToOneCommentList_Wrapper">
+            	<article id="oneToOneComment" >
+            		<div class="oneToOneCommentArea">
+            		
+            		</div>
+            	</article>
+            </div>
+>>>>>>> parent of 408f50c... 오케이오케
             
             
             
@@ -169,6 +197,20 @@
         </div>
     </div>
     <script>
+<<<<<<< HEAD
+=======
+    
+    function oneToOneDelete(){
+    	var select = confirm('삭제하시겠습니까?');
+    	if(select === true){
+    		location.href = '${ oTodelete }';
+    		submit();
+    	}else {
+    		location.href=location.href;
+    	}
+    }
+    
+>>>>>>> parent of 408f50c... 오케이오케
     function oneToOneUpdate(){
     	var select = confirm('수정하시겠습니까?');
     	if(select === true){

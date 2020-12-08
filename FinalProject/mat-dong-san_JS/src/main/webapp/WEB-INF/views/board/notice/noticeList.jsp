@@ -53,7 +53,11 @@
         table{
             width:100%;
             margin-top: 10px;
+<<<<<<< HEAD
             border: 1px solid black; 
+=======
+/*             border: 1px solid black;  */
+>>>>>>> parent of 408f50c... 오케이오케
             border-collapse: collapse;
         }
         td { 
@@ -61,9 +65,19 @@
             border: 1px solid black; 
             padding: 10px 10px 10px 10px;
         }
+<<<<<<< HEAD
         tbody>tr td:nth-child(2){
             width:1fr;
         }
+=======
+        tbody>tr th:nth-child(2){
+            width:1fr;
+        }
+        
+        .td_date{
+        	width:100px;
+        }
+>>>>>>> parent of 408f50c... 오케이오케
         
         #ck_box{
         	width:50px;
@@ -106,8 +120,15 @@
                 <div class="oneToOne_mid">
                     <div id="mid_flex_div"> 
                         <div class="oneToOneListMid_right">
+<<<<<<< HEAD
                             <input type="button" id="oneToOne_goDetail" onClick="noticeWrite();" value="작성하기"/>
                             <input type="button" onClick="noticebIdDelete();" value="삭제하기"/>
+=======
+                        	<c:if test="${ loginUser.us_id == 'admin' }">
+                            	<input type="button" class="nBtn" id="oneToOne_goDetail" onClick="noticeWrite();" value="작성하기"/>
+                           	 	<input type="button" class="nBtn" onClick="noticebIdDelete();" value="삭제하기"/>
+                            </c:if>
+>>>>>>> parent of 408f50c... 오케이오케
                         </div>
                     </div>
                 </div>
@@ -138,7 +159,11 @@
                                         <span>등록일</span>
                                     </div>
                                 </th>
+<<<<<<< HEAD
                                 <th>
+=======
+                                <th style="border-right:none; width:60px;" >
+>>>>>>> parent of 408f50c... 오케이오케
                                     <div class="oneToOneView_column">
                                         <span>조회수</span>
                                     </div>	
@@ -149,7 +174,12 @@
                         <tbody>
                         <c:forEach var="notice" items="${ list }">
                             <tr>
+<<<<<<< HEAD
                                 <td id="ck_box">
+=======
+                            	<c:if test="${ loginUser.us_id == 'admin' }">
+                                <td id="ck_box" style="border-left:none;">
+>>>>>>> parent of 408f50c... 오케이오케
                                     <div class="oneToOneView_column">
                                         <span><input type="checkbox" name="deleteNoticebId" value="${ notice.bId }"/></span>
                                     </div>
@@ -169,7 +199,11 @@
                                         <span>${ notice.bRegD }</span>
                                     </div>
                                 </td>
+<<<<<<< HEAD
                                 <td id="noticeCountDiv">
+=======
+                                <td id="noticeCountDiv" style="border-right:none;">
+>>>>>>> parent of 408f50c... 오케이오케
                                     <div class="oneToOneView_column">
                                         <span>${ notice.bCount }</span>
                                     </div>
@@ -244,6 +278,10 @@
 		}
 		
 		
+<<<<<<< HEAD
+=======
+		
+>>>>>>> parent of 408f50c... 오케이오케
 
 
     </script>

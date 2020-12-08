@@ -122,7 +122,11 @@
                 </div>
                 <div class="oneToOne_mid">
                     <div>
+<<<<<<< HEAD
                         <h2>${ notice.bTitle }</h2>
+=======
+                        <h2>&nbsp;${ notice.bTitle }</h2>
+>>>>>>> parent of 408f50c... 오케이오케
                     </div>
                     <div id="mid_flex_div"> 
                         <div class="oneToOneListMid_left">
@@ -132,7 +136,11 @@
                         <div class="oneToOneListMid_right">
                             <input type="button" id="oneToOne_goDetail" value="수정" onClick="noticeUpdate();" />
 <%--                            	<button id="oneToOne_goDetail" onClick="location.href='${noticeUpdate}'">수정하기</button> --%>
+<<<<<<< HEAD
                             <input id="oneToOne_goDelete" value="삭제" />
+=======
+                            <input id="oneToOne_goDelete" type="button" class="nBtn" value="삭제" onClick="noticeDelete();"/>
+>>>>>>> parent of 408f50c... 오케이오케
                         </div>
                     </div>
                 </div>
@@ -159,7 +167,10 @@
     }
     
     
+<<<<<<< HEAD
     
+=======
+>>>>>>> parent of 408f50c... 오케이오케
     </script>
 </body>
 </html>

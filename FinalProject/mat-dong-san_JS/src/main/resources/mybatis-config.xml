@@ -7,6 +7,17 @@
 	
 	<typeAliases>
 		<typeAlias type="mat.dong.san.board.model.vo.Board" alias="Board"/>
+<<<<<<< HEAD
+=======
+		<typeAlias type="mat.dong.san.board.model.vo.BoardAttachment" alias="BoardAttachment"/>
+		<typeAlias type="mat.dong.san.board.model.vo.BoardType" alias="BoardType"/>
+		<typeAlias type="mat.dong.san.board.model.vo.BoardComment" alias="BoardComment"/>
+		
+		<!-- 멤버 -->
+		<typeAlias type="mat.dong.san.member.vo.Member" alias="Member"/>
+		<typeAlias type="mat.dong.san.member.vo.EstateAgent" alias="EstateAgent"/>	
+		
+>>>>>>> parent of 408f50c... 오케이오케
 	</typeAliases>
 	
 	<mappers>

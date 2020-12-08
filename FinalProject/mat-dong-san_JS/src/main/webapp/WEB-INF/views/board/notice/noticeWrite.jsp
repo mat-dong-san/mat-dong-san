@@ -57,6 +57,7 @@
         	padding : 20px;
             height:300px;
             border : 1px solid black;
+<<<<<<< HEAD
         }
         #noticeWrite_content{
         	outline: none;
@@ -64,6 +65,15 @@
         	width : 99%;
         	height: 99%;
         }
+=======
+        }
+        #noticeWrite_content{
+        	outline: none;
+        	border : 0;
+        	width : 99%;
+        	height: 99%;
+        }
+>>>>>>> parent of 408f50c... 오케이오케
         #noticeWrite_title{
 	       	height:99%;
 	       	width:99%;
@@ -79,6 +89,14 @@
 		<c:import url="../../common/helpdeskSidebar.jsp"/>
         
         <form  method="POST"  name="noticeWriteComfirm">
+<<<<<<< HEAD
+=======
+<%--         <input type="hidden" name="page" value="${ page }"> --%>
+        
+        <c:url var="noticeWrite" value="noticeWriteConfirm.board">
+				<c:param name="page" value="${ page }"/>
+		</c:url>
+>>>>>>> parent of 408f50c... 오케이오케
         <div id="oneToOneView_innerWrapper">
             <!-- head-->
             <div id="oneToOneView_head">

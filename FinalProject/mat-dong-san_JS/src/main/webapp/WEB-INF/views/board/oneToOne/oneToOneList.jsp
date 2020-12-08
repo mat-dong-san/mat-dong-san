@@ -42,10 +42,13 @@
 
         #oneToOneView_body{
             margin-top: 10px;
+<<<<<<< HEAD
             /* border-top:1px solid black;
             border-bottom:1px solid black; */
 /*             border-bottom: 1px solid black; */
 /* 			border: 1px solid black; */
+=======
+>>>>>>> parent of 408f50c... 오케이오케
             margin-bottom:100px;
         }
         .oneToOneView_body_table{
@@ -54,7 +57,10 @@
         table{
             width:100%;
             margin-top: 10px;
+<<<<<<< HEAD
             border: 1px solid black; 
+=======
+>>>>>>> parent of 408f50c... 오케이오케
             border-collapse: collapse;
         }
         td { 
@@ -88,6 +94,13 @@
         	padding: 10px;
         }
         
+<<<<<<< HEAD
+=======
+        
+        
+        
+        
+>>>>>>> parent of 408f50c... 오케이오케
     </style>
 </head>
 <body>
@@ -104,8 +117,15 @@
                 <div class="oneToOne_mid">
                     <div id="mid_flex_div"> 
                         <div class="oneToOneListMid_right">
+<<<<<<< HEAD
                             <input type="button" id="oneToOne_goDetail" onClick="oneToOneWrite();" value="작성하기"/>
                             <input type="button" onClick="oneToOnebIdDelete();" value="삭제하기"/>
+=======
+                            <input type="button" class="nBtn"id="oneToOne_goDetail" onClick="oneToOneWrite();" value="작성하기"/>
+                            <c:if test="${ loginUser.us_id == 'admin' }">
+                            <input type="button" class="nBtn" onClick="oneToOnebIdDelete();" value="삭제하기"/>
+                        	</c:if>
+>>>>>>> parent of 408f50c... 오케이오케
                         </div>
                     </div>
                 </div>
@@ -115,6 +135,7 @@
                 <div class="oneToOneView_body_table">
                     <table>
                         <thead>
+<<<<<<< HEAD
                             <tr>
                                 <th>
                                     <div class="oneToOneView_column">
@@ -122,6 +143,17 @@
                                     </div>
                                 </th>
                                 <th>
+=======
+                            <tr >
+                            	<c:if test="${ loginUser.us_id == 'admin' }">
+	                                <th class="fstLast">
+	                                    <div class="oneToOneView_column" >
+	                                        <span><input type="checkbox" /></span>
+	                                    </div>
+	                                </th>
+                                </c:if>
+                                <th class="sec">
+>>>>>>> parent of 408f50c... 오케이오케
                                     <div class="oneToOneView_column">
                                         <span>번호</span>
                                     </div>
@@ -147,6 +179,7 @@
                         <tbody>
                         <c:forEach var="oneToOne" items="${ list }">
                             <tr>
+<<<<<<< HEAD
                                 <td id="ck_box">
                                     <div class="oneToOneView_column">
                                         <span>
@@ -171,6 +204,33 @@
                                 </td>
                                 <td id="noticeCountDiv">
                                     <div class="oneToOneView_column">
+=======
+                            	<c:if test="${ loginUser.us_id == 'admin' }">
+	                                <td id="ck_box" class="fstLast">
+	                                    <div class="oneToOneView_column">
+	                                        <input type="checkbox" name="deleteOneToOneId" value="${ oneToOne.bId }"/>
+	                                    </div>
+	                                </td>
+                                </c:if>
+                                
+                                <td id="fst" class="sec">
+                                    <div class="oneToOneView_column">
+                                        <span>${ oneToOne.bId }</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="oneToOneView_column goOneToOneDetail">
+                                        <span>${ oneToOne.bContent }</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="oneToOneView_column">
+                                        <span>${ oneToOne.bRegD }</span>
+                                    </div>
+                                </td>
+                                <td id="noticeCountDiv" style="border-right:none;">
+                                    <div class="oneToOneView_column">
+>>>>>>> parent of 408f50c... 오케이오케
                                         <span>처리중</span>
                                     </div>
                                 </td>

@@ -12,7 +12,11 @@
 		margin:0;
 		padding:0;
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> parent of 408f50c... 오케이오케
 	#bFAQModal_Wrapper,#bFAQModal_WrapperUpdate {
 		visibility:hidden;
 		position:fixed;
@@ -22,6 +26,21 @@
 	 	top: 0px;
 	 	left:0px;
 	}
+<<<<<<< HEAD
+=======
+	
+	#modal_FAQ_standard{
+		border:none;
+	}
+	#modal_FAQ_standard  td{
+		border:1px solid black;
+	}
+	
+	.b_modal_QA{
+		width:20px;
+	}
+	
+>>>>>>> parent of 408f50c... 오케이오케
 	.b_modal_QA, .b_modal_QAUpdate{
  	    padding:10px; 
 	}
@@ -53,7 +72,11 @@
 		
 	}
 	.bFAQ_Content, .bFAQ_ContentUpdate{
+<<<<<<< HEAD
 	 	background:white;
+=======
+	 	background:white;	
+>>>>>>> parent of 408f50c... 오케이오케
 	 	padding:10px;
 	}
 	

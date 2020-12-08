@@ -9,7 +9,15 @@
 		<result column="B_REG_D" property="bRegD"/>
 		<result column="B_DEL_YN" property="bDelYN"/>
 		<result column="US_ID" property="usId"/>
+<<<<<<< HEAD
 		<result column="B_Count" property="bCount"/>
+=======
+		<result column="B_COUNT" property="bCount"/>
+		<result column="B_PRICE" property="bPrice"/>
+		<result column="B_C_ID" property="bCategory"/>
+		<result column="BA_CH_NAME" property="baChName"/>
+		
+>>>>>>> parent of 408f50c... 오케이오케
 	</resultMap>
 	
 	<insert id="insertFAQ">

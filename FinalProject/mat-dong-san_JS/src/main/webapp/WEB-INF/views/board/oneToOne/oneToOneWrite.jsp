@@ -61,6 +61,12 @@
         <c:import url="../../common/menubar.jsp"/>
 		<c:import url="../../common/helpdeskSidebar.jsp"/>
 		<form name="oneToOneWriteForm" method="POST">
+<<<<<<< HEAD
+=======
+
+		<input type="hidden" name="page" value="${ page }">
+		
+>>>>>>> parent of 408f50c... 오케이오케
         <div id="oneToOneView_innerWrapper">
             <!-- head-->
             <div id="oneToOneView_head">
