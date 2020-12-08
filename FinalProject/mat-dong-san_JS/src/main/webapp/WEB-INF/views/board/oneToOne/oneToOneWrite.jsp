@@ -58,11 +58,20 @@
 </head>
 <body>
     <div id="oneToOneView_Wrapper">
+<<<<<<< HEAD
+        <c:import url="../../common/menubar.jsp"/>
+		<c:import url="../../common/helpdeskSidebar.jsp"/>
+		<form name="oneToOneWriteForm" method="POST">
+
+		<input type="hidden" name="page" value="${ page }">
+		
+=======
         <div id="menubar">
         </div>
         
         <div id="loaded">
         </div>
+>>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
         <div id="oneToOneView_innerWrapper">
             <!-- head-->
             <div id="oneToOneView_head">

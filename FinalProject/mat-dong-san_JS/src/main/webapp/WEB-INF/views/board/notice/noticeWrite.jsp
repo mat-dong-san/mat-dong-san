@@ -61,8 +61,17 @@
         <div id="menubar">
         </div>
         
+<<<<<<< HEAD
+        <form  method="POST"  name="noticeWriteComfirm">
+<%--         <input type="hidden" name="page" value="${ page }"> --%>
+        
+        <c:url var="noticeWrite" value="noticeWriteConfirm.board">
+				<c:param name="page" value="${ page }"/>
+		</c:url>
+=======
         <div id="loaded">
         </div>
+>>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
         <div id="oneToOneView_innerWrapper">
             <!-- head-->
             <div id="oneToOneView_head">
@@ -99,6 +108,24 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
+        </form>
+    </div>    
+	<script>
+		function noticeWrite(){
+			var select = confirm("작성하시겠습니까?");
+			if(select === true){
+				document.noticeWriteComfirm.action='${ noticeWrite }';
+				document.noticeWriteComfirm.submit();
+				alert('작성완료!');
+				
+			}
+		}
+	
+	</script>
+
+
+=======
     <script>
         $(document).ready(function(){
             $("#loaded").load("../helpdeskSidebar.html");
@@ -108,6 +135,7 @@
             $("#menubar").load("../menubar.html");
         });
     </script>
+>>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
 
 </body>
 </html>
