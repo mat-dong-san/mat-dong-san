@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.dong</groupId>
+	<groupId>mat.dong</groupId>
 	<artifactId>san</artifactId>
 	<name>mat-dong-san_JS</name>
 	<packaging>war</packaging>
@@ -219,7 +219,12 @@
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
 		</dependency> 
-		
+		<!-- 제이슨 -->
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
 		
 		        
 		<!-- 사용자 추가 라이브러리 -->

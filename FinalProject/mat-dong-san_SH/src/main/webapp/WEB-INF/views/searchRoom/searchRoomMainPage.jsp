@@ -181,25 +181,6 @@
      	<div>전체 매물 수 : ${ pageInfo.listCount } </div>
      	<c:forEach var="p" items="${ productList }">
      		
-<<<<<<< HEAD
-	        <div class="productContent" onclick="goDetailPage(this)">
-		        <img alt="${ p.p_picture }" src="">
-		        <span>${ p.p_kind }</span>
-		        <span>${ p.p_deal }</span>
-		        <span>
-		        	<c:if test="${ p.p_deal == '전세' }">
-		        		${ p.p_charter }
-		        	</c:if>
-		        	<c:if test="${ p.p_deal == '
-' }">
-		        		${ p.p_deposit }/${ p.p_rent }
-		        	</c:if>
-		        </span>
-		        <span>${ p.p_content }</span>
-		        <span id="addSpan" name="addSpan${ status.index }"> ${ p.p_addr }</span>
->>>>>>> 7ad5790d32c8a3cb035ffc865dd5c87947b766f9 --%>
-		        <input type="hidden" value="${ p.p_id }">
-=======
 	        <div class="productContent" onclick="location.href='${ goDetailPage }'">
 	        <img alt="${ p.p_picture }" src="">
 	        <span>${ p.p_kind }</span>
@@ -214,7 +195,6 @@
 	        </span>
 	        <span>${ p.p_content }</span>
 	        <span>${ p.p_addr }</span>
->>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
 	        </div>
 	        <%-- <div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>원룸</span><span>월세</span><span>500/20</span><span>부가설명</span></div>
 	        <div class="productContent" onclick="location.href='${ goDetailPage }'"><img alt="사진" src=""><span>투룸</span><span>월세</span><span>1000/40</span><span>부가설명</span></div>

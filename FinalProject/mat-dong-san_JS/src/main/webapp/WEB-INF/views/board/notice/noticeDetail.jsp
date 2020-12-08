@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,10 +105,7 @@
 </head>
 <body>
     <div id="oneToOneView_Wrapper">
-        <div id="menubar">
-        </div>
         
-<<<<<<< HEAD
         <c:import url="../../common/menubar.jsp"/>
         <c:import url="../../common/helpdeskSidebar.jsp"/>
 <!--         <form name="goDetailForm" method="POST"> -->
@@ -125,10 +125,6 @@
 			<c:param name="page" value="${ page }"/>
 		</c:url>
 			
-=======
-        <div id="loaded">
-        </div>
->>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
         <div id="oneToOneView_innerWrapper">
             <!-- head-->
             <div id="oneToOneView_head">
@@ -137,7 +133,6 @@
                 </div>
                 <div class="oneToOne_mid">
                     <div>
-<<<<<<< HEAD
                         <h2>&nbsp;${ notice.bTitle }</h2>
                     </div>
                     <div id="mid_flex_div"> 
@@ -149,31 +144,20 @@
                             <input type="button" id="oneToOne_goDetail"  class="nBtn"value="수정" onClick="noticeUpdate();" />
 <%--                            	<button id="oneToOne_goDetail" onClick="location.href='${noticeUpdate}'">수정하기</button> --%>
                             <input id="oneToOne_goDelete" type="button" class="nBtn" value="삭제" onClick="noticeDelete();"/>
-=======
-                        <h2>제목</h2>
-                    </div>
-                    <div id="mid_flex_div"> 
-                        <div class="oneToOneListMid_left">
-                            <span>아이디</span>
-                            <span>날짜</span>
-                        </div>
-                        <div class="oneToOneListMid_right">
-                            <button id="oneToOne_goDetail">수정</button>
-                            <button id="oneToOne_goDetail">삭제</button>
->>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
                         </div>
                     </div>
                 </div>
             </div>
             <div id="oneToOneView_body">
                 <div class="oneToOneDetail_Content">
-
+               	 	<% pageContext.setAttribute("newLineChar", "\r\n"); %>
+               	 	${ fn:replace(notice.bContent, newLineChar, "<br>") }
                 </div>
             </div>
-            
         </div>
+<!--         </form> -->
+   </div>    
     <script>
-<<<<<<< HEAD
     function noticeUpdate(){
     	var select = confirm('수정하시겠습니까?');
     	if(select === true){
@@ -195,15 +179,6 @@
     }
     
     
-=======
-        $(document).ready(function(){
-            $("#loaded").load("../helpdeskSidebar.html");
-        });
-         // menubar
-         $(document).ready(function(){
-            $("#menubar").load("../menubar.html");
-        });
->>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
     </script>
 </body>
 </html>

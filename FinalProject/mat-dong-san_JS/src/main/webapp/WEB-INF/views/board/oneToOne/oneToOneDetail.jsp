@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<<<<<< HEAD
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-=======
->>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
 <!DOCTYPE html>
 <html>
 <head>
@@ -136,7 +133,6 @@
 </head>
 <body>
     <div id="oneToOneView_Wrapper">
-<<<<<<< HEAD
         <c:import url="../../common/menubar.jsp"/>
         <c:import url="../../common/helpdeskSidebar.jsp"/>
         
@@ -157,13 +153,7 @@
         
         
         
-=======
-        <div id="menubar">
-        </div>
->>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
         
-        <div id="loaded">
-        </div>
         <div id="oneToOneView_innerWrapper">
             <!-- head-->
             <div id="oneToOneView_head">
@@ -172,37 +162,24 @@
                 </div>
                 <div class="oneToOne_mid">
                     <div>
-                        <h2>제목</h2>
+                        <h2>${oto.bTitle}</h2>
                     </div>
                     <div id="mid_flex_div"> 
                         <div class="oneToOneListMid_left">
-<<<<<<< HEAD
                             &nbsp;&nbsp;&nbsp;<span><img src="resources/images/boardIcon/bnickname.png">${oto.usId}</span>
                             &nbsp;&nbsp;|&nbsp; <span><img src="resources/images/boardIcon/bdate.png">${oto.bRegD}</span>
                         </div>
                         <div class="oneToOneListMid_right">
                             <button id="oneToOne_goDetail" onClick="oneToOneUpdate();">수정</button>
                             <button id="oneToOne_goDetail" onClick="oneToOneDelete();">삭제</button>
-=======
-                            <span>아이디</span>
-                            <span>날짜</span>
-                        </div>
-                        <div class="oneToOneListMid_right">
-                            <button id="oneToOne_goDetail">수정</button>
-                            <button id="oneToOne_goDetail">삭제</button>
->>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
                         </div>
                     </div>
                 </div>
             </div>
             <div id="oneToOneView_body">
                 <div class="oneToOneDetail_Content">
-<<<<<<< HEAD
                 		<% pageContext.setAttribute("newLineChar", "\r\n"); %>
                	 		${ fn:replace(oto.bContent, newLineChar, "<br>") }
-=======
-
->>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
                 </div>
             </div>
             <div id="oneToOneView_tail">
@@ -223,7 +200,6 @@
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
             <div id="oneToOneCommentList_Wrapper">
             	<article id="oneToOneComment" >
             		<div class="oneToOneCommentArea">
@@ -235,11 +211,9 @@
             
             
             <!-- reply tail -->
-=======
->>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
         </div>
+    </div>
     <script>
-<<<<<<< HEAD
     
     function oneToOneDelete(){
     	var select = confirm('삭제하시겠습니까?');
@@ -261,17 +235,6 @@
     		location.href=location.href;
     	}
     }
-=======
-        $(document).ready(function(){
-            $("#loaded").load("../helpdeskSidebar.html");
-        });
-         // menubar
-         $(document).ready(function(){
-            $("#menubar").load("../menubar.html");
-        });
-        
-
->>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
 
         function resize(obj) {
             obj.style.height = "1px";
