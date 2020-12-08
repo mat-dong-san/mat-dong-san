@@ -14,16 +14,16 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	
-	<repositories>
-		<repository>
-			<id>Central</id>
-			<url>https://repo1.maven.org/maven2/</url>
-		</repository>
-		<repository>
-			<id>Datanucleus</id>
-			<url>http://www.datanucleus.org/downloads/maven2/</url>
-		</repository>
-	</repositories>
+		<repositories>
+			<repository>
+				<id>Central</id>
+				<url>https://repo1.maven.org/maven2/</url>
+			</repository>
+			<repository>
+				<id>Datanucleus</id>
+				<url>http://www.datanucleus.org/downloads/maven2/</url>
+			</repository>
+		</repositories>
 	
 	<dependencies>
 	

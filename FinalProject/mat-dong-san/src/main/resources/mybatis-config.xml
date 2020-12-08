@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+
+	<typeAliases>
+		<typeAlias type="mat.dong.san.product.model.vo.Product" alias="Product"/>
+		<typeAlias type="mat.dong.san.member.model.vo.EstateAgent" alias="EstateAgent"/>
+		<typeAlias type="mat.dong.san.member.model.vo.EstateAgentReview" alias="EstateAgentReview"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mapper/searchRoom-mapper.xml"/>
+	</mappers>
+</configuration>
