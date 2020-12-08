@@ -263,13 +263,8 @@
 			<table id="headTable">
 				<tr>
 					<td></td>
-<<<<<<< HEAD
 					<td style="font-size: 15px;">${ product.p_addr }</td>
 					<td><!-- <div class="goManage">신고하기</div> --></td>
-=======
-					<td>${ product.p_addr }</td>
-					<td><div class="goManage">신고하기</div></td>
->>>>>>> parent of 408f50c... 오케이오케
 				</tr>
 				<tr>
 					<th colspan="2" style="text-align:left">
@@ -291,7 +286,6 @@
 		</div>
 		<div id="detailBodyDiv" class="detailDiv">
 			<table id="bodyTable" style="text-align: left;">
-<<<<<<< HEAD
 				<tr class="trStyle">
 					<th>해당층/건물층</th>
 					<td>${ product.p_layer }/${ product.p_floor }</td>
@@ -346,57 +340,6 @@
 				</tr>
 				<tr style="height: 150px;" >
 					<td colspan="8" style="font-size: 15px;text-align:center;">
-=======
-				<tr>
-					<td>해당층/건물층</td>
-					<td>${ product.p_layer }/${ product.p_floor }</td>
-					<td>전용/공급면적</td>
-					<td>${ product.p_d_size }/${ product.p_s_size }</td>
-					<td>방 수</td>
-					<td>${ product.p_kind }</td>
-					<td>방향</td>
-					<td>${ product.p_dir }</td>
-				</tr>
-				<tr>
-					<td>난방종류</td>
-					<td>${ product.p_heat }</td>
-					<td>빌트인</td>
-					<td>${ product.p_built_in }</td>
-					<td>주차여부</td>
-					<td>${ product.p_park }</td>
-					<td>베란다/발코니</td>
-					<td>${ product.p_verander }</td>
-				</tr>
-				<tr>
-					<td>엘레베이터</td>
-					<td>${ product.p_elevator }</td>
-					<td>반려동물</td>
-					<td>${ product.p_pet }</td>
-					<td>건물유형</td>
-					<td>${ product.p_field }</td>
-					<td>관리비</td>
-					<td>${ product.p_cost }만</td>
-				</tr>
-				<tr>
-					<td>구조</td>
-					<td>${ product.p_str }</td>
-					<td>전세대출</td>
-					<td>${ product.p_loan }</td>
-					<td>입주가능일</td>
-					<td>${ product.p_en_d }</td>
-					<td>최초등록일</td>
-					<td>${ product.p_reg_d }</td>
-				</tr>
-				<tr style="height: 100px;">
-					<td>옵션</td>
-					<td colspan="7" style="text-align: left;">${ product.p_option }</td>
-				</tr>
-				<tr style="height: 350px;">
-					<td colspan="8"><img alt="${ product.p_picture }" src="${ product.p_picture }"></td>
-				</tr>
-				<tr style="height: 200px;">
-					<td colspan="8">
->>>>>>> parent of 408f50c... 오케이오케
 					${ product.p_content }
 					</td>
 				</tr>
@@ -420,11 +363,7 @@
 				<td style="color: rgb(34, 34, 34);">전세대출</td>
 			</tr>
 			<tr>
-<<<<<<< HEAD
 				<td style="color: rgb(136, 136, 136);">
-=======
-				<td>
->>>>>>> parent of 408f50c... 오케이오케
 					<c:if test="${ product.p_deal == '전세' }">
 		        		${ product.p_charter }만 원
 		        	</c:if>
@@ -432,11 +371,7 @@
 		        		${ product.p_deposit }만/${ product.p_rent }만원
 		        	</c:if>
 				</td>
-<<<<<<< HEAD
 				<td style="color: rgb(136, 136, 136);">
-=======
-				<td>
->>>>>>> parent of 408f50c... 오케이오케
 					<c:if test="${ product.p_cost == 0 }">
 		        		없음
 		        	</c:if>
@@ -444,7 +379,6 @@
 		        		${ product.p_cost }만원
 		        	</c:if>
 		        </td>
-<<<<<<< HEAD
 				<td style="color: rgb(136, 136, 136);">없음</td>
 				<td style="color: rgb(136, 136, 136);">${ product.p_loan }</td>
 			</tr>
@@ -452,15 +386,6 @@
 		<div id="monthRentInfo" style="letter-spacing: -1px;border-color: rgb(20, 118, 252);">
 			<label style="font-size: 20px; letter-spacing: -1px;color: rgb(20, 118, 252);">한달 예상 주거비용</label>
 			<label style="font-size: 30px; margin-left: 55px;color: rgb(20, 118, 252);">
-=======
-				<td>없음</td>
-				<td>${ product.p_loan }</td>
-			</tr>
-		</table>
-		<div id="monthRentInfo">
-			<label style="font-size: 20px; letter-spacing: -1px;">한달 예상 주거비용</label>
-			<label style="font-size: 30px; margin-left: 55px;">
->>>>>>> parent of 408f50c... 오케이오케
 				<c:if test="${ product.p_deal == '월세' }">
 					${ product.p_cost + product.p_rent }만원
 		        </c:if>
@@ -468,11 +393,7 @@
 		        	${ product.p_cost }만 원
 		        </c:if>
 			</label>
-<<<<<<< HEAD
 			<label style="letter-spacing: -1px;font-size: 14px;opacity: 0.6;">(월세 + 관리비)</label>
-=======
-			<label style="font-size: 15px; letter-spacing: -1px;">(월세 + 관리비)</label>
->>>>>>> parent of 408f50c... 오케이오케
 		</div>
 		<div class="detailInfoIndexTitle" id="index2" style="margin-bottom: 35px;">
 			위치
@@ -483,7 +404,6 @@
 		</div>
 		
 		<div class="detailDiv">
-<<<<<<< HEAD
 			<table id="footTableDiv" style="border-collapse: collapse;">
 				<tr style="border-bottom: 1px solid black; border-top: 1px solid black;">
 					<th>중개사 이름</th>
@@ -495,25 +415,11 @@
 					<th>위치 정보</th>
 					<td style="text-align:left; padding-left: 30px;">${ EstateAgent.e_addr }</td>
 					<th>평점</th>
-=======
-			<table id="footTableDiv">
-				<tr>
-					<td>중개사 이름</td>
-					<td style="text-align:left;">${ EstateAgent.e_name }</td>
-					<td>중개사 번호</td>
-					<td>${ EstateAgent.e_phone }</td>
-				</tr>
-				<tr>
-					<td>위치 정보</td>
-					<td style="text-align:left;">${ EstateAgent.e_addr }</td>
-					<td>평점</td>
->>>>>>> parent of 408f50c... 오케이오케
 					<td>${ EstateAgent.e_point }</td>
 				</tr>
 				<tr>
 					<td></td>
 					<td></td>
-<<<<<<< HEAD
 					<td>
 						<input id="e_name" type="hidden" value="${ EstateAgent.e_name }">
 						<input id="e_id" type="hidden" value="${ EstateAgent.e_id }">
@@ -537,19 +443,6 @@
 				<table id="footTableDiv" style="border-collapse: collapse;">
 					<tr style="border-bottom: 1px solid black;;">
 						<td style="width: 130px;font-weight:600; text-align:center;">평점
-=======
-					<td><span class="goManage">쪽지 보내기 버튼</span></td>
-					<td><span class="goManage">신고하기</span></td>
-				</tr>
-				<tr style="height: 300px;">
-					<td colspan="4"><img alt="${ EstateAgent.e_picture }" src="${ EstateAgent.e_picture }"></td>
-				</tr>
-			</table>
-			<div id="replyDiv" style="height: 400px; overflow: hidden;">
-				<table id="footTableDiv">
-					<tr>
-						<td style="width: 200px;">평점
->>>>>>> parent of 408f50c... 오케이오케
 							<select id="point">
 								<option value='1'>1점</option>
 								<option value='2'>2점</option>
@@ -558,7 +451,6 @@
 								<option selected="selected" value='5'>5점</option>
 							</select>
 						</td>
-<<<<<<< HEAD
 						<td style="text-align: left;padding-left: 10px;"><input id="RplyContent" type="text" placeholder="이곳에 댓글을 입력해주세요." style="width:500px; height: 50px; border:0; outline:0;"></td>
 						<td><input id="addRply" type="button" value="등록"></td>
 						<td><button id="allReplyView">모두보기</button></td>
@@ -570,19 +462,6 @@
 								<td style=" text-align:left;padding-left: 10px;">${ r.er_content }</td>
 								<td>${ r.us_id }</td>
 								<td style="width: 100px;">${ r.er_reg_d }</td>
-=======
-						<td><input id="RplyContent" type="text"></td>
-						<td><input id="addRply" type="button" value="등록"></td>
-						<td><button id="allReplyView">댓글 모두보기</button></td>
-					</tr>
-					<tbody id="replyTbody">
-						<c:forEach var="r" items="${ review }">
-							<tr>
-								<td>${ r.er_point }점</td>
-								<td>${ r.er_content }</td>
-								<td>${ r.us_id }</td>
-								<td style="width: 100px;"><span class="goManage">신고하기</span></td>
->>>>>>> parent of 408f50c... 오케이오케
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -596,10 +475,7 @@
 				var content = $('#RplyContent').val();
 				var estate_id = ${ EstateAgent.e_id };
 				var user = 'user5'; // ${ loginUser } 로 바꿔야함
-<<<<<<< HEAD
 				$('#RplyContent').val("");
-=======
->>>>>>> parent of 408f50c... 오케이오케
 				
 				$.ajax({
 					url:"replyAdd.search",
@@ -610,23 +486,12 @@
 						var $tbody = $('#replyTbody');
 						$tbody.html('');
 						for(var i = 0; i < data.length; i++){
-<<<<<<< HEAD
 							var $tr = $('<tr>').css('border-bottom','1px solid #c1c1c1');
 							var $td1 = $('<td>').css('text-align','center').text(data[i].er_point +"점");
 							var $td2 = $('<td>').css('text-align','left').css('padding-left','10px').text(data[i].er_content);
 							var $td3 = $('<td>').text(data[i].us_id);
 							var $td4 = $('<td>').css('width','100px').text(data[i].er_reg_d);
 							
-=======
-							var $tr = $('<tr>');
-							var $td1 = $('<td>').text(data[i].er_point +"점");
-							var $td2 = $('<td>').text(data[i].er_content);
-							var $td3 = $('<td>').text(data[i].us_id);
-							var $td4 = $('<td>').css('width','100px');
-							var $span = $('<span class="goManage">').text("신고하기");
-							
-							$td4.append($span);
->>>>>>> parent of 408f50c... 오케이오케
 							$tr.append($td1);
 							$tr.append($td2);
 							$tr.append($td3);
@@ -638,7 +503,6 @@
 			
 			});
 			
-<<<<<<< HEAD
 			var checkSize = 0;
 			$('#allReplyView').click(function(){
 				if(checkSize == 0){
@@ -649,15 +513,6 @@
 					$('#replyDiv').css('height', '404px');
 					$(this).text('모두보기');
 					checkSize = 0;
-=======
-			$('#allReplyView').click(function(){
-				if($('#replyDiv').css('height') == '400px'){
-					$('#replyDiv').css('height', 'auto');
-					$(this).text('댓글 적게보기');
-				} else {
-					$('#replyDiv').css('height', '400px');
-					$(this).text('댓글 모두보기');
->>>>>>> parent of 408f50c... 오케이오케
 				}
 			});
 		</script>
@@ -666,37 +521,12 @@
 			이 중개사의 다른방
 		</div>
 		<div style="text-align:right; margin: 10px auto; width: 1140px;">
-<<<<<<< HEAD
 			<button id="moreRoomView" style="margin-right: 26px;">방 더보기</button>
-=======
-			<button id="moreRoomView" style="margin-right: 72px;">방 더보기</button>
->>>>>>> parent of 408f50c... 오케이오케
 			<script>
 				$('#moreRoomView').click(function(){
 					$('#relativeOtherRoomInfo').css('height','auto');
 				});
 			</script>
-<<<<<<< HEAD
-=======
-		</div>
-		<div id="relativeOtherRoomInfo">
-			<c:forEach var="p" items="${ productList }">
-				<div class="productContent" onclick="location.href='${ goDetailPage }'">
-					<img alt="${ p.p_picture }" src="${ p.p_picture }">
-					<span>${ p.p_kind }</span>
-					<span>${ p.p_deal }</span>
-					<span>
-						<c:if test="${ p.p_deal == '전세' }">
-		        		${ p.p_charter }
-		        	</c:if>
-		        	<c:if test="${ p.p_deal == '월세' }">
-		        		${ p.p_deposit }/${ p.p_rent }
-		        	</c:if>
-					</span>
-					<span>${ p.p_content }</span>
-				</div>
-			</c:forEach>
->>>>>>> parent of 408f50c... 오케이오케
 		</div>
 		<div id="relativeOtherRoomInfo" style="margin-bottom: 90px;">
 			<c:forEach var="p" items="${ productList }" varStatus="status">
@@ -799,11 +629,7 @@
              
              
              var infowindow = new kakao.maps.InfoWindow({
-<<<<<<< HEAD
                  content: '<div style="color:lightslategrey;width:150px;text-align:center;padding:6px 0;">${ product.p_addr }</div>'
-=======
-                 content: '<div style="width:150px;text-align:center;padding:6px 0;">${ product.p_addr }</div>'
->>>>>>> parent of 408f50c... 오케이오케
              });
              infowindow.open(map, marker);
               // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다

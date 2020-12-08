@@ -26,26 +26,15 @@
   	select 
   	count(*)
   	from product 
-<<<<<<< HEAD
   	where P_DEL_YN = 'N' and P_REG_STATUS = 'Y'
-=======
-  	where P_DEL_YN = 'N'
->>>>>>> parent of 408f50c... 오케이오케
   	<if test='searchInput != ""'>
   		and p_addr like '%' || #{searchInput} || '%'
   	</if>
   	<if test='parkType != "무관"'>
-<<<<<<< HEAD
   		and P_PARK like #{parkType}
   	</if>
   	<if test='petType != "무관"'>
   		and P_PET like #{petType}
-=======
-  		and P_PARK like '%' || #{parkType} || '%'
-  	</if>
-  	<if test='petType != "무관"'>
-  		and P_PET '%' || #{petType} || '%'
->>>>>>> parent of 408f50c... 오케이오케
   	</if>
   	<if test='eleType != "무관"'>
   		and P_ELEVATOR like '%' || #{eleType} || '%'
@@ -70,37 +59,22 @@
   	</if>
   	and (P_CHARTER <![CDATA[>=]]> #{minCharter} and P_CHARTER <![CDATA[<=]]> #{maxCharter})
   	and (P_RENT <![CDATA[>=]]> #{minMonthly} and P_RENT <![CDATA[<=]]> #{maxMonthly})
-<<<<<<< HEAD
   	order by p_id
   </select>
   
-=======
-  </select>
->>>>>>> parent of 408f50c... 오케이오케
   <select id="selectFilterList" resultType="Product">
   	select 
   	*
   	from product 
-<<<<<<< HEAD
   	where P_DEL_YN = 'N' and P_REG_STATUS = 'Y'
-=======
-  	where P_DEL_YN = 'N'
->>>>>>> parent of 408f50c... 오케이오케
   	<if test='searchInput != ""'>
   		and p_addr like '%' || #{searchInput} || '%'
   	</if>
   	<if test='parkType != "무관"'>
-<<<<<<< HEAD
   		and P_PARK like #{parkType}
   	</if>
   	<if test='petType != "무관"'>
   		and P_PET like #{petType}
-=======
-  		and P_PARK like '%' || #{parkType} || '%'
-  	</if>
-  	<if test='petType != "무관"'>
-  		and P_PET '%' || #{petType} || '%'
->>>>>>> parent of 408f50c... 오케이오케
   	</if>
   	<if test='eleType != "무관"'>
   		and P_ELEVATOR like '%' || #{eleType} || '%'
@@ -125,10 +99,7 @@
   	</if>
   	and (P_CHARTER <![CDATA[>=]]> #{minCharter} and P_CHARTER <![CDATA[<=]]> #{maxCharter})
   	and (P_RENT <![CDATA[>=]]> #{minMonthly} and P_RENT <![CDATA[<=]]> #{maxMonthly})
-<<<<<<< HEAD
   	order by p_id desc
-=======
->>>>>>> parent of 408f50c... 오케이오케
   </select>
   
   <select id="selectProductDetail" resultType="Product">
@@ -136,7 +107,6 @@
   	*
   	from PRODUCT
   	where P_ID = #{p_id}  	
-<<<<<<< HEAD
   	order by p_id desc
   </select>
   
@@ -145,17 +115,6 @@
 	(select * from product p where p.p_id = #{p_id}) a
 	join product_application pa on a.p_id = pa.p_id
 	join estateagent e on pa.e_id = e.e_id
-=======
-  </select>
-  
-  <select id="selectAgent" resultType="EstateAgent">
-  	select
-  	E_ID, E_NAME, E_PHONE, E_CONTENT, E_ADDR, E_PICTURE, E_FIELD, E_REG_NUM,
-    E_COORD, E_C_LAT, E_C_LNG, E_POINT, E_REG_D, E_DEL_YN, US_ID
-  	from ESTATEAGENT
-  	join PRODUCT using(US_ID)
-  	where P_ID = #{p_id}
->>>>>>> parent of 408f50c... 오케이오케
   </select>
   
   <select id="selectReview" resultType="EstateAgentReview">
@@ -178,7 +137,6 @@
   </update>
   
   <select id="selectProductEstate" resultType="Product">
-<<<<<<< HEAD
   	select * from product where US_ID = #{us_id} order by p_id desc
   </select>
   
@@ -186,9 +144,6 @@
   	select * from(
 	select * from product order by p_id desc
 	) where rownum <![CDATA[<]]> 7
-=======
-  	select * from product where US_ID = #{us_id}
->>>>>>> parent of 408f50c... 오케이오케
   </select>
  
 </mapper>
