@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import ="java.util.ArrayList, mat.dong.san.board.model.vo.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%
+	ArrayList<BoardType> usedType = (ArrayList<BoardType>)request.getAttribute("usedType");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,75 +63,95 @@
                 <h3>물품 정보 수정</h3>
             </article>
         </header>
+        
+        
+        
+         
+        <form name="usedUpdate" method="post" enctype="Multipart/form-data">
         <section class="usedSell_body">
             <article class="usedSell_body_area1">
                     <div class="usedSell_cate utitle">
                         <label for="" class="usedSell_title">카테고리</label>
                     </div>
-                    <div clss="usedSell_cate">
-                        <form action="">
-                            <select name="" id="">
-                                <option value="1">가전제품</option>
-                                <option value="2">의류</option>
-                                <option value="3">화장품</option>
-                                <option value="4">악세서리</option>
-                                <option value="5">주방용품</option>
-                                <option value="6">생활용품</option>
-                            </select>
-                        </form>
+                    <div class="usedSell_cate">
+                         <select name="bCategory" id="bCategory">
+                            <c:forEach var="bcId" items="${ usedType }">
+								<option value="${ bcId.bcId }" <c:if test="${ bcId.bcId eq used.bCategory }">selected</c:if> >${ bcId.bCategory }</option>
+                            </c:forEach>
+                        </select>
                     </div>
             </article>
             <article class="usedSell_body_area1">
                 <div class="usedSell_cate utitle">
                     <label for="" class="usedSell_title">상품명</label>
                 </div>
-                <div clss="usedSell_cate">
-                    <form action="">
-                        <span><input type="text" name="" /></span>
-                        <span><label>0/50byte</label></span>
-                    </form>
+                <div class="usedSell_cate">
+                    <span><input type="text" name="bTitle" value="${ used.bTitle }"/></span>
+                </div>
+            </article>
+            <article class="usedSell_body_area1">
+                <div class="usedSell_cate utitle">
+                    <label for="" class="usedSell_title">가격</label>
+                </div>
+                <div class="usedSell_cate">
+                   <span><input type="text" name="bPrice" value="${ used.bPrice }"/></span>
+                   <span><label>0/50byte</label></span>
                 </div>
             </article>
             <article class="usedSell_body_area1">
                 <div class="usedSell_cate utitle">
                     <label for="" class="usedSell_title">사진</label>
                 </div>
-                <div clss="usedSell_cate">
-                    <form action="">
-                        <span><input type="file" /></span>
-                        <span><input type="file" /></span>
-                        <span><input type="file" /></span>
-                    </form>
+                <div class="usedSell_cate">
+                	<div id="usedSell_cate_area1">
+	                    <img id="usedSell_cate_Img1" width="120" height="100">
+                	</div>
+                	
+                	<div id="usedSell_cate_area2">
+	                    <img id="usedSell_cate_Img2" width="120" height="100">
+                	</div>
+                	
+                	<div id="usedSell_cate_area3">
+	                    <img id="usedSell_cate_Img3" width="120" height="100">
+                	</div>
+                	
+                	<div id="usedSell_cate_area4">
+	                    <img id="usedSell_cate_Img4" width="120" height="100">
+                	</div>
                 </div>
             </article>
             <article class="usedSell_body_area1">
                 <div class="usedSell_cate utitle">
                     <label for="" class="usedSell_title">내용</label>
                 </div>
-                <div clss="usedSell_cate">
-                    <form action="">
-                        <div>
-                            <textarea id="b_textA" name=""></textarea>
-                            <script>CKEDITOR.replace('b_textA');</script>
-                        </div>
-                    </form>
+                <div class="usedSell_cate">
+                     <div>
+                         <textarea id="b_textA" name="">${ used.bContent }</textarea>
+                         <script>CKEDITOR.replace('b_textA');</script>
+                     </div>
                 </div>
             </article>
             <article class="usedSell_tail">
                 <div>
-                    <input type="button" value="판매하기">
-                    <input type="button" value="목록으로">
+                    <input type="button" value="수정하기" onClick="usedUpdate();">>
+                    <input type="button" value="목록으로" onClick="history.go(-1);">
                 </div>
 
             </article>
         </section>
+        <div id="usedPictureArea">
+			<input type="file" id="usedImg1" multiple="multiple" name="uploadFile" onchange="LoadImg(this,1)">
+			<input type="file" id="usedImg2" multiple="multiple" name="uploadFile" onchange="LoadImg(this,2)">
+			<input type="file" id="usedImg3" multiple="multiple" name="uploadFile" onchange="LoadImg(this,3)">
+			<input type="file" id="usedImg4" multiple="multiple" name="uploadFile" onchange="LoadImg(this,4)">
+		</div>
+        </form>
+        
+        
+        
     </div>
     
     <script>
-        // menubar
-        $(document).ready(function(){
-           $("#menubar").load("../menubar.html");
-        });
 
     </script>
 </body>

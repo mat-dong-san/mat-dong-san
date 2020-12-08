@@ -22,13 +22,23 @@
             margin-left:200px;
         }
         #oneToOneView_innerWrapper{
-            width:1100px;
+            width:980px;
             margin:100px auto;
         }
         #oneToOneView_head{
-            border:1px solid black;
+/*             border:1px solid black; */
 
         }
+        .oneToOne_mid{
+        	border:1px solid RGB(221, 212, 221);
+            background: #f6f6f6;
+        }
+        .nBtn{
+        	border:none;
+        	color:white;
+        	background-color:#333;
+        }
+        
         #mid_flex_div{
             display: flex;
 
@@ -40,13 +50,13 @@
         }
         #oneToOneView_body{
             margin-top: 10px;
-            border: 1px solid black;
+            border-bottom: 1px solid RGB(221, 212, 221);
             height: 500px;
             margin-bottom:10px;
-            padding: 20px;
+            padding: 40px;
         }
         .oneToOneDetail_Content{
-            border: 1px solid black; 
+/*             border: 1px solid black;  */
             height:100%;   
 
         }
@@ -106,8 +116,9 @@
 			<c:param name="page" value="${ page }"/>
 		</c:url>
 		<!-- 삭제하기 폼으로 -->
-		<c:url var="bdelete" value="boardNoticeDelete.board">
-			<c:param name="deleteNoticebId" value="${ notice.bId }"/>
+		<c:url var="noticeDelete" value="noticeDelete.board">
+			<c:param name="bId" value="${ notice.bId }"/>
+			<c:param name="page" value="${ page }"/>
 		</c:url>
 		<!-- 목록으로 -->
 		<c:url var="blist" value="boardNoticeList.board">
@@ -122,17 +133,17 @@
                 </div>
                 <div class="oneToOne_mid">
                     <div>
-                        <h2>${ notice.bTitle }</h2>
+                        <h2>&nbsp;${ notice.bTitle }</h2>
                     </div>
                     <div id="mid_flex_div"> 
                         <div class="oneToOneListMid_left">
-                            <span>관리자</span>
-                            <span>${ notice.bRegD }</span>
+                            &nbsp;&nbsp;&nbsp;<span><img src="resources/images/boardIcon/bnickname.png">${ notice.usId }</span>&nbsp;&nbsp;|&nbsp; 
+                            <span><img src="resources/images/boardIcon/bdate.png">${ notice.bRegD }</span>
                         </div>
                         <div class="oneToOneListMid_right">
-                            <input type="button" id="oneToOne_goDetail" value="수정" onClick="noticeUpdate();" />
+                            <input type="button" id="oneToOne_goDetail"  class="nBtn"value="수정" onClick="noticeUpdate();" />
 <%--                            	<button id="oneToOne_goDetail" onClick="location.href='${noticeUpdate}'">수정하기</button> --%>
-                            <input id="oneToOne_goDelete" value="삭제" />
+                            <input id="oneToOne_goDelete" type="button" class="nBtn" value="삭제" onClick="noticeDelete();"/>
                         </div>
                     </div>
                 </div>
@@ -157,7 +168,15 @@
     		location.href=location.href;
     	}
     }
-    
+    function noticeDelete(){
+    	var select = confirm('삭제하시겠습니까?');
+    	if(select === true){
+    		location.href = '${ noticeDelete }';
+    		submit();
+    	}else {
+    		location.href=location.href;
+    	}
+    }
     
     
     </script>

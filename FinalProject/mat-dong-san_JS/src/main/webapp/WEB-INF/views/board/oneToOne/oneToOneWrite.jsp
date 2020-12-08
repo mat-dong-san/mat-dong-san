@@ -61,6 +61,9 @@
         <c:import url="../../common/menubar.jsp"/>
 		<c:import url="../../common/helpdeskSidebar.jsp"/>
 		<form name="oneToOneWriteForm" method="POST">
+
+		<input type="hidden" name="page" value="${ page }">
+		
         <div id="oneToOneView_innerWrapper">
             <!-- head-->
             <div id="oneToOneView_head">

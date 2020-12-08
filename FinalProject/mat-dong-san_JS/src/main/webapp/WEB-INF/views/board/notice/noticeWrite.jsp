@@ -79,6 +79,11 @@
 		<c:import url="../../common/helpdeskSidebar.jsp"/>
         
         <form  method="POST"  name="noticeWriteComfirm">
+<%--         <input type="hidden" name="page" value="${ page }"> --%>
+        
+        <c:url var="noticeWrite" value="noticeWriteConfirm.board">
+				<c:param name="page" value="${ page }"/>
+		</c:url>
         <div id="oneToOneView_innerWrapper">
             <!-- head-->
             <div id="oneToOneView_head">
@@ -120,9 +125,9 @@
 		function noticeWrite(){
 			var select = confirm("작성하시겠습니까?");
 			if(select === true){
-				document.noticeWriteComfirm.action='noticeWriteConfirm.board';
-				alert('작성완료!');
+				document.noticeWriteComfirm.action='${ noticeWrite }';
 				document.noticeWriteComfirm.submit();
+				alert('작성완료!');
 				
 			}
 		}

@@ -42,10 +42,6 @@
 
         #oneToOneView_body{
             margin-top: 10px;
-            /* border-top:1px solid black;
-            border-bottom:1px solid black; */
-/*             border-bottom: 1px solid black; */
-/* 			border: 1px solid black; */
             margin-bottom:100px;
         }
         .oneToOneView_body_table{
@@ -54,7 +50,6 @@
         table{
             width:100%;
             margin-top: 10px;
-            border: 1px solid black; 
             border-collapse: collapse;
         }
         td { 
@@ -70,9 +65,6 @@
         	width:50px;
         }
         
-       	#noticeCountDiv, #fst{
-        	width:80px;
-        }
 		td:nth-child(4){
 			width:100px;
 		}
@@ -83,10 +75,34 @@
         .oneToOneView_body_table>table>thead>tr>th{
 			padding-left: 10px;
 		}        
+		
+		 .nBtn{
+        	border:none;
+        	color:white;
+        	background-color:#333;
+        }
+		td,th { 
+        	
+            border: 1px solid RGB(221, 212, 221);
+            padding: 10px 10px 10px 10px;
+        }
         #centerAlign{
         	text-align: center;
         	padding: 10px;
+        	border:none;
         }
+        .fstLast{
+        	width: 70px;
+        	border-left:none;
+        }
+        .sec{
+        	width: 70px;
+        	border-left:none;
+        }
+        
+        
+        
+        
         
     </style>
 </head>
@@ -104,8 +120,10 @@
                 <div class="oneToOne_mid">
                     <div id="mid_flex_div"> 
                         <div class="oneToOneListMid_right">
-                            <input type="button" id="oneToOne_goDetail" onClick="oneToOneWrite();" value="작성하기"/>
-                            <input type="button" onClick="oneToOnebIdDelete();" value="삭제하기"/>
+                            <input type="button" class="nBtn"id="oneToOne_goDetail" onClick="oneToOneWrite();" value="작성하기"/>
+                            <c:if test="${ loginUser.us_id == 'admin' }">
+                            <input type="button" class="nBtn" onClick="oneToOnebIdDelete();" value="삭제하기"/>
+                        	</c:if>
                         </div>
                     </div>
                 </div>
@@ -115,13 +133,15 @@
                 <div class="oneToOneView_body_table">
                     <table>
                         <thead>
-                            <tr>
-                                <th>
-                                    <div class="oneToOneView_column">
-                                        <span><input type="checkbox" /></span>
-                                    </div>
-                                </th>
-                                <th>
+                            <tr >
+                            	<c:if test="${ loginUser.us_id == 'admin' }">
+	                                <th class="fstLast">
+	                                    <div class="oneToOneView_column" >
+	                                        <span><input type="checkbox" /></span>
+	                                    </div>
+	                                </th>
+                                </c:if>
+                                <th class="sec">
                                     <div class="oneToOneView_column">
                                         <span>번호</span>
                                     </div>
@@ -131,12 +151,12 @@
                                         <span>내용</span>
                                     </div>
                                 </th>
-                                <th>
+                                <th  style="width:100px;">
                                     <div class="oneToOneView_column">
                                         <span>등록일</span>
                                     </div>
                                 </th>
-                                <th>
+                                <th class="fstLast"style="border-right:none;">
                                     <div class="oneToOneView_column">
                                         <span>답변여부</span>
                                     </div>	
@@ -147,14 +167,15 @@
                         <tbody>
                         <c:forEach var="oneToOne" items="${ list }">
                             <tr>
-                                <td id="ck_box">
-                                    <div class="oneToOneView_column">
-                                        <span>
-                                        	<input type="checkbox" name="deleteOneToOneId" value="${ oneToOne.bId }"/>
-                                        </span>
-                                    </div>
-                                </td>
-                                <td id="fst">
+                            	<c:if test="${ loginUser.us_id == 'admin' }">
+	                                <td id="ck_box" class="fstLast">
+	                                    <div class="oneToOneView_column">
+	                                        <input type="checkbox" name="deleteOneToOneId" value="${ oneToOne.bId }"/>
+	                                    </div>
+	                                </td>
+                                </c:if>
+                                
+                                <td id="fst" class="sec">
                                     <div class="oneToOneView_column">
                                         <span>${ oneToOne.bId }</span>
                                     </div>
@@ -169,7 +190,7 @@
                                         <span>${ oneToOne.bRegD }</span>
                                     </div>
                                 </td>
-                                <td id="noticeCountDiv">
+                                <td id="noticeCountDiv" style="border-right:none;">
                                     <div class="oneToOneView_column">
                                         <span>처리중</span>
                                     </div>
@@ -179,19 +200,19 @@
                         	<tr>
 								<td id="centerAlign" colspan="5">
 									<c:if test="${ pi.currentPage <= 1 }">
-										[이전] &nbsp;
+										< &nbsp;
 									</c:if>
 									<c:if test="${ pi.currentPage > 1 }">
 										<c:url var="before" value="boardOneToOne.board">
 											<c:param name="page" value="${ pi.currentPage - 1 }"/>
 										</c:url>
-										<a href="${ before }">[이전]</a> &nbsp;
+										<a href="${ before }"> < </a> &nbsp;
 									</c:if>
 									
 <!-- 										페이지 -->
 									<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 										<c:if test="${ p eq pi.currentPage }">
-											<font color="red" size="4"><b>[${ p }]</b></font>
+											<font color="blue" size="4"><b>${ p }</b></font>
 										</c:if>
 										
 										<c:if test="${ p ne pi.currentPage }">
@@ -204,13 +225,13 @@
 								
 <!-- 									[다음] -->
 									<c:if test="${ pi.currentPage >= pi.maxPage }">
-										[다음]
+									&nbsp;	>
 									</c:if>
 									<c:if test="${ pi.currentPage < pi.maxPage }">
 										<c:url var="after" value="boardOneToOne.board">
 											<c:param name="page" value="${ pi.currentPage + 1 }"/>
 										</c:url> 
-										<a href="${ after }">[다음]</a>
+										<a href="${ after }">></a>
 									</c:if>
 								</td>
 							</tr>
@@ -233,8 +254,15 @@
 		
 		
 		function oneToOneWrite(){
- 			document.oneToOneListForm.action="goOneToOneWrite.board";
-			document.oneToOneListForm.submit();
+			var loginUser = '${ loginUser.us_id }' ;
+			console.log(loginUser);
+			if(loginUser === '' || loginUser === null){
+				alert('로그인시 이용 가능합니다.');
+			} else {
+	 			document.oneToOneListForm.action="goOneToOneWrite.board";
+				document.oneToOneListForm.submit();
+			}
+			
 		}
 		
 		function oneToOnebIdDelete() {

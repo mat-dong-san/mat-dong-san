@@ -11,6 +11,10 @@ public class Board {
 	private String bDelYN;
 	private String usId;
 	private int bCount;
+	private int bPrice;
+	// boardType - bcId외래키
+	private int bCategory;
+	private String baChName;
 	
 	public Board() {}
 	
@@ -34,7 +38,7 @@ public class Board {
 		this.bContent = bContent;
 	}
 	
-	public Board(int bId, String bTitle, String bContent, String bType, Date bRegD, String bDelYN, int bCount, String usId) {
+	public Board(int bId, String bTitle, String bContent, String bType, Date bRegD, String bDelYN,  String usId, int bCount) {
 		this.bId = bId;
 		this.bTitle = bTitle;
 		this.bContent = bContent;
@@ -44,6 +48,41 @@ public class Board {
 		this.usId = usId;
 		this.bCount = bCount;
 	}
+
+	public Board(int bId, String bTitle, String bContent, String bType, Date bRegD, String bDelYN, String usId,
+			int bCount, int bPrice, int bCategory) {
+		super();
+		this.bId = bId;
+		this.bTitle = bTitle;
+		this.bContent = bContent;
+		this.bType = bType;
+		this.bRegD = bRegD;
+		this.bDelYN = bDelYN;
+		this.usId = usId;
+		this.bCount = bCount;
+		this.bPrice = bPrice;
+		this.bCategory = bCategory;
+	}
+	
+
+
+	public Board(int bId, String bTitle, String bContent, String bType, Date bRegD, String bDelYN, String usId,
+			int bCount, int bPrice, int bCategory, String baChName) {
+		super();
+		this.bId = bId;
+		this.bTitle = bTitle;
+		this.bContent = bContent;
+		this.bType = bType;
+		this.bRegD = bRegD;
+		this.bDelYN = bDelYN;
+		this.usId = usId;
+		this.bCount = bCount;
+		this.bPrice = bPrice;
+		this.bCategory = bCategory;
+		this.baChName = baChName;
+	}
+
+
 
 	public int getbId() {
 		return bId;
@@ -110,13 +149,65 @@ public class Board {
 		this.bCount = bCount;
 	}
 
+	
+
+
+
+
+	public int getbPrice() {
+		return bPrice;
+	}
+
+
+
+	public void setbPrice(int bPrice) {
+		this.bPrice = bPrice;
+	}
+
+
+
+	public int getbCategory() {
+		return bCategory;
+	}
+
+
+
+	public void setbCategory(int bCategory) {
+		this.bCategory = bCategory;
+	}
+
+	
+
+	public String getBaChName() {
+		return baChName;
+	}
+
+
+
+	public void setBaChName(String baChName) {
+		this.baChName = baChName;
+	}
+
 
 
 	@Override
 	public String toString() {
 		return "Board [bId=" + bId + ", bTitle=" + bTitle + ", bContent=" + bContent + ", bType=" + bType + ", bRegD="
-				+ bRegD + ", bDelYN=" + bDelYN + ", usId=" + usId + ", bCount=" + bCount + "]";
+				+ bRegD + ", bDelYN=" + bDelYN + ", usId=" + usId + ", bCount=" + bCount + ", bPrice=" + bPrice
+				+ ", bCategory=" + bCategory + ", baChName=" + baChName + "]";
 	}
+
+
+
+	
+
+
+
+	
+
+
+
+	
 
 
 	
