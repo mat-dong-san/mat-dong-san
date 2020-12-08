@@ -36,4 +36,9 @@ public class ProductDAO {
 		
 		return (ArrayList)sqlSession.selectList("productMapper.selectProductList" , ms, rowBounds);
 	}
+	
+	// 검색없이 카운트 가져오기
+	public int getProductListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("productMapper.getProductListCount");
+	}
 }

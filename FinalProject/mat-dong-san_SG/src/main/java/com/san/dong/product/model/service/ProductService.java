@@ -16,4 +16,6 @@ public interface ProductService {
 	int productListCount(MemberSearch ms);
 
 	ArrayList<Product> selectProductList(MemberSearch ms, MemberPageInfo ppi);
+
+	int getProductListCount();
 }

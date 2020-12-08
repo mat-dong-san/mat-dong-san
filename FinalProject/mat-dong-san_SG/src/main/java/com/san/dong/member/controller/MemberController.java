@@ -304,6 +304,7 @@ public class MemberController {
 		System.out.println("pas: "+pas);
 		
 		int listCount = paService.getProductApplicationListCount(pas);
+		
 		System.out.println("listCount: "+listCount);
 		
 		MemberPageInfo pi = Pagination.getPageInfo(currentPage, listCount);

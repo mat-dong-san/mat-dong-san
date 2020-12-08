@@ -40,4 +40,9 @@ public class ProductServicelmpl implements ProductService {
 		return pDAO.selectProductList(sqlSession, ms, ppi);
 	}
 
+	@Override
+	public int getProductListCount() {
+		return pDAO.getProductListCount(sqlSession);
+	}
+
 }

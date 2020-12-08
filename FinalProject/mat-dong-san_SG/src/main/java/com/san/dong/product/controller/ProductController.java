@@ -1,12 +1,8 @@
 package com.san.dong.product.controller;
 
 import java.io.File;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,6 +23,7 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService pService;
+
 	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -56,13 +53,19 @@ public class ProductController {
 		System.out.println(p);
 		String renameFileName1 =  "";
 		
+		// 검색없이 리스트 카운트 가져오기
+		int listCount = pService.getProductListCount();
+		
+		System.out.println("listCount:"+listCount);
+		
 		int count = 0;
 		
 		for(MultipartFile f : p_picture) {
 			count++;
 			if(!f.isEmpty()) {
 				// saveFile() : 파일을 저장할 경로 지정
-				String renameFileName2 = saveFile(f, request ,count ,us_id, p.getP_id());
+				String renameFileName2 = saveFile(f, request ,count, us_id,listCount+1, p.getP_id());
+				System.out.println("renameFileName2"+renameFileName2);
 				/* p.setP_picture(renameFileName); */
 				if(renameFileName2 != null) {
 					/* renameFileName1[i] = renameFileName2; */
@@ -85,20 +88,22 @@ public class ProductController {
 	
 
 	// 파일을 저장할 경로 지정
-	public String saveFile(MultipartFile file, HttpServletRequest request , int count, String us_id, int p_id) {
+	public String saveFile(MultipartFile file, HttpServletRequest request , int count, String us_id, int listCount, int p_id) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
 //		System.out.println(root);
-		String savePath = root + "\\images\\" + us_id + "\\" + p_id;
+		String savePath = root + "\\images\\"+ us_id + "\\" + listCount;
 		
 		File folder = new File(savePath);
+		
 		if(!folder.exists()) {
 			folder.mkdirs();
 		}
-		String picture = "_PICTURE";
+//		String picture = "_PICTURE";
+//		
+//		SimpleDateFormat sdf = new SimpleDateFormat(count+picture);
+//		String renameFileName = sdf.format(new Date(System.currentTimeMillis())) + "." + originFileName.substring(originFileName.lastIndexOf(".") + 1);
 		
-		SimpleDateFormat sdf = new SimpleDateFormat(count+picture);
-		String originFileName = file.getOriginalFilename();
-		String renameFileName = sdf.format(new Date(System.currentTimeMillis())) + "." + originFileName.substring(originFileName.lastIndexOf(".") + 1);
+		String renameFileName = count + "_PICTURE.PNG" ;
 		String renamePath = folder + "\\" + renameFileName;
 		
 		try {
