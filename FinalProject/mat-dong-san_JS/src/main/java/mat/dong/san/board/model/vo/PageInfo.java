@@ -1,4 +1,4 @@
-package com.dong.san.board.model.vo;
+package mat.dong.san.board.model.vo;
 
 public class PageInfo {
 	private int currentPage;

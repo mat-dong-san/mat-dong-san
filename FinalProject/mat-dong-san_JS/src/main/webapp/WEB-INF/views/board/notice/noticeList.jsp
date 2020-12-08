@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,8 +12,11 @@
             margin:0;
             padding:0;
         }
-
+		body{
+            background-color:#f9fbfc;
+		}
         #oneToOneView_Wrapper{
+/*       	 	width:1100px; */
             margin-top: 100px;
             height:80%;
             margin-right: 200px;
@@ -23,7 +27,7 @@
             margin:100px auto;
         }
         #oneToOneView_head{
-            border:1px solid black;
+            border-bottom:1px solid black;
 
         }
         #mid_flex_div{
@@ -45,8 +49,7 @@
             margin-top: 10px;
             /* border-top:1px solid black;
             border-bottom:1px solid black; */
-            border: 1px solid black;
-            height: 500px;
+/*             border-bottom: 1px solid black; */
             margin-bottom:100px;
         }
         .oneToOneView_body_table{
@@ -55,7 +58,6 @@
         table{
             width:100%;
             margin-top: 10px;
-<<<<<<< HEAD
 /*             border: 1px solid black;  */
             border-collapse: collapse;
             border-left:0;
@@ -65,16 +67,10 @@
         	
             border: 1px solid RGB(221, 212, 221);
             padding: 10px 10px 10px 10px;
-=======
-        }
-        td { 
-            border-bottom: 1px solid black; 
->>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
         }
         tbody>tr th:nth-child(2){
             width:1fr;
         }
-<<<<<<< HEAD
         
         .td_date{
         	width:100px;
@@ -103,25 +99,14 @@
         	border-bottom:none;
         }
         
-=======
-
-        table>tbody>tr td:not(:nth-child(2)){
-            width:200px;
-        }
-        .oneToOneView_column{
-               text-align: left;
-        }
->>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
     </style>
 </head>
 <body>
     <div id="oneToOneView_Wrapper">
-        <div id="menubar">
-        </div>
-        
-        <div id="loaded">
-        </div>
-        <div id="oneToOneView_innerWrapper">
+        <c:import url="../../common/menubar.jsp"/>
+        <c:import url="../../common/helpdeskSidebar.jsp"/>
+       	<form method="post"name="noticeListForm">
+        <div id="oneToOneView_innerWrapper" >
             <!-- head-->
             <div id="oneToOneView_head">
                 <div class="oneToOne_top">
@@ -131,14 +116,10 @@
                     <div id="mid_flex_div"> 
                     
                         <div class="oneToOneListMid_right">
-<<<<<<< HEAD
                         	<c:if test="${ loginUser.us_id == 'admin' }">
                             	<input type="button" class="nBtn" id="oneToOne_goDetail" onClick="noticeWrite();" value="작성하기"/>
                            	 	<input type="button" class="nBtn" onClick="noticebIdDelete();" value="삭제하기"/>
                             </c:if>
-=======
-                            <button id="oneToOne_goDetail">작성하기</button>
->>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
                         </div>
                     </div>
                 </div>
@@ -152,15 +133,12 @@
                             	<c:if test="${ loginUser.us_id == 'admin' }">
                                 <th style="border-left:none; width:50px;">
                                     <div class="oneToOneView_column">
-<<<<<<< HEAD
                                         <span><input type="checkbox" /></span>
                                     </div>
                                 </th>
                                 </c:if>
                                 <th style="border-left:none;" class="fst">
                                     <div class="oneToOneView_column">
-=======
->>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
                                         <span>번호</span>
                                     </div>
                                 </th>
@@ -174,20 +152,17 @@
                                         <span>등록일</span>
                                     </div>
                                 </th>
-<<<<<<< HEAD
                                 <th style="border-right:none; width:60px;" >
                                     <div class="oneToOneView_column">
                                         <span>조회수</span>
                                     </div>	
                                 </th>
                                 
-=======
->>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
                             </tr>
                         </thead>
                         <tbody>
+                        <c:forEach var="notice" items="${ list }">
                             <tr>
-<<<<<<< HEAD
                             	<c:if test="${ loginUser.us_id == 'admin' }">
                                 <td id="ck_box" style="border-left:none;">
                                     <div class="oneToOneView_column">
@@ -200,29 +175,22 @@
                                         <span>${ notice.bId }</span>
                                     </div>
                                 </td>
-=======
->>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
                                 <td>
-                                    <div class="oneToOneView_column">
-                                        <span>번호</span>
+                                    <div class="oneToOneView_column goNoticeDetail">
+                                        <span>${ notice.bTitle }</span>
                                     </div>
                                 </td>
                                 <td class="td_date">
                                     <div class="oneToOneView_column">
-                                        <span>제목</span>
+                                        <span>${ notice.bRegD }</span>
                                     </div>
                                 </td>
-<<<<<<< HEAD
                                 <td id="noticeCountDiv" style="border-right:none;">
-=======
-                                <td>
->>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
                                     <div class="oneToOneView_column">
-                                        <span>등록일</span>
+                                        <span>${ notice.bCount }</span>
                                     </div>
                                 </td>
                             </tr>
-<<<<<<< HEAD
                         </c:forEach>
                         	<tr>
 								<td id="centerAlign" colspan="5" style="border-right:none; border-left:none;">
@@ -262,16 +230,14 @@
 									</c:if>
 								</td>
 							</tr>
-=======
->>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+        </form>
     </div>
     <script>
-<<<<<<< HEAD
 		// 디테일 이동 , 조회수 
 		$('.goNoticeDetail').click(function(){
 			var noticeId = $(this).parent().parent().children('#fst').children().children().text();
@@ -295,17 +261,6 @@
 		
 		
 		
-=======
-        $(document).ready(function(){
-            $("#loaded").load("../helpdeskSidebar.html");
-        });
-        $(document).ready(function(){
-            $("#menubar").load("../menubar.html");
-        });
-
-        // 카테고리 클릭시 이벤트 처리 
-
->>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
 
 
     </script>

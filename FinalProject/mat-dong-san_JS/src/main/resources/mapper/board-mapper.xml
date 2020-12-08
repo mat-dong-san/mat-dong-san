@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="boardMapper">
-	
-	<insert id="insertFAQ">
-		insert into board
-		values(seq_bid.nextval, #{bTitle}, #{bContent}, 'FAQ' , sysdate, default,  
-				'admin')
-	</insert>
 	<resultMap type="Board" id="boardResultSet">
 		<id column="B_ID" property="bId"/>
 		<result column="B_TITLE" property="bTitle"/>
@@ -15,7 +9,6 @@
 		<result column="B_REG_D" property="bRegD"/>
 		<result column="B_DEL_YN" property="bDelYN"/>
 		<result column="US_ID" property="usId"/>
-<<<<<<< HEAD
 		<result column="B_COUNT" property="bCount"/>
 		<result column="B_PRICE" property="bPrice"/>
 		<result column="B_C_ID" property="bCategory"/>
@@ -50,9 +43,6 @@
 		values(seq_faqId.nextval, #{bTitle}, #{bContent}, 'FAQ' , sysdate, default,  
 				'admin', default,default,default)
 	</insert>
-=======
-	</resultMap>
->>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
 
 	<select id="boardFAQListCount" resultType="_int">
 		select count(*) 
@@ -63,7 +53,7 @@
 	<select id="boardFAQList" resultMap="boardResultSet">
 		select *
 		from board
-		where b_del_yn='N'
+		where b_del_yn='N'and b_type='FAQ'
 		order by b_id desc
 	</select>
 	
@@ -74,7 +64,6 @@
 	</delete>
 	
 	
-<<<<<<< HEAD
 	<!-- FAQ업데이트 -->
 	<update id="updateFAQ" >
 		update board set b_title=#{ bTitle }, b_content=#{ bContent } ,b_reg_d=sysdate where b_id=#{ bId }
@@ -279,6 +268,4 @@
 	
 	
 	
-=======
->>>>>>> a28773123360dc8c0cde778322fc49e37931bb12
 </mapper>
